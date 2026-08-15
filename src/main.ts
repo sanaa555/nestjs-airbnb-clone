@@ -3,7 +3,7 @@ import { AppModule } from './app.module';
 import { Environment } from './common/configration/environment.interface';
 import { ConfigService } from '@nestjs/config';
 import { Logger } from '@nestjs/common';
-import { , I18nValidationPipe } from 'nestjs-i18n';
+import {  I18nValidationPipe } from 'nestjs-i18n';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
