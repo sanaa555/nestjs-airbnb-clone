@@ -26,12 +26,11 @@ export class UsersService {
         const hashedPassword=bcrypt.hashSync(body.password,10)
            
         //4- Create user and save the user to the database
-      const user=   await this.userModel.create({
+        return  await this.userModel.create({
              ...body,
                 password:hashedPassword
         })
 
-        return user;
 
       }
 
