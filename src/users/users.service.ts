@@ -22,8 +22,9 @@ export class UsersService {
          if(existingUserByPhoneNumber){
             throw new BadRequestException('User with this phone number already exists');
          }
+         
         //3- Hash password
-        const hashedPassword=bcrypt.hashSync(body.password,10)
+        const hashedPassword= bcrypt.hashSync(body.password,10)
            
         //4- Create user and save the user to the database
         return  await this.userModel.create({

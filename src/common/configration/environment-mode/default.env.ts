@@ -8,6 +8,8 @@ export const defaultEnv=():Environment=>{
     mongodbUri:process.env.MONGO_URI as string,
      jwtSecret:process.env.JWT_SECCRET as string,
     acessTokenExpireIn:process.env.ACESS_TOKEN_EXPIRE_IN as string,
+        refreshTokenExpireIn:process.env.ACESS_TOKEN_EXPIRE_IN as string,
+        type:process.env.TYPE as string,
    
 
 }

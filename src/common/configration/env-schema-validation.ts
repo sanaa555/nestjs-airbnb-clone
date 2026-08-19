@@ -6,7 +6,10 @@ export const envSchema=joi.object({
      FALLBACK_LANGUAGE:joi.string().required().default('en'),
     MONGO_URI:joi.string().required(),
     JWT_SECCRET:joi.string().required(),
-    ACESS_TOKEN_EXPIRE_IN:joi.string().default("7d")
+    ACESS_TOKEN_EXPIRE_IN:joi.string().default("7d"),
+        REFRESH_TOKEN_EXPIRE_IN:joi.string().default("15d"),
+        TYPE:joi.string().default('refresh'),
+
 })
 
 

@@ -7,13 +7,25 @@ import { LoginDto } from './dtos/login.dto';
 import { BadRequestException } from 'src/common/errors-handling/custom-exceptions/bad-request.exception';
 import { I18nService } from 'nestjs-i18n';
 import bcrypt from "bcrypt"
+import { RefreshToken } from './schemas/refresh-token';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { ConfigService } from '@nestjs/config';
+import { Environment } from 'src/common/configration/environment.interface';
+import { RefreshTokenDto } from './dtos/refersh-token.dto';
+import { ForbiddenException } from 'src/common/errors-handling/custom-exceptions/forbidden.exception';
 
 @Injectable()
 export class AuthService {
 
     constructor( private readonly userService: UsersService,
         private readonly jwtService: JwtService,
-        private readonly i18nService:I18nService
+        private readonly i18nService:I18nService,
+        
+                private readonly configService:ConfigService<Environment>,
+
+        @InjectModel(RefreshToken.name) private refreshModel: Model<RefreshToken>
+
 
     ) {}
 
@@ -63,11 +75,82 @@ export class AuthService {
         }
         private async generateTokens(userId:string){
         const accessToken=  await this.jwtService.signAsync({userId})
+        const refreshToken= await this.jwtService.signAsync({userId,type:this.configService.getOrThrow('type')},
+            {expiresIn:this.configService.getOrThrow('refreshTokenExpireIn')} )
 
-        return {accessToken}
+            // hash refersh token 
+
+            const hashedRefreshToken =  await bcrypt.hash(refreshToken,10)
+
+            // update refresh token for the userId  if not exists create it
+
+            await this.refreshModel.findOneAndUpdate(
+                {userId},
+                {refreshToken:hashedRefreshToken},
+                {returnDocument: 'after',upsert:true}
+            )
+
+        return {accessToken,refreshToken}
 
 
     }
+
+
+     async  RefreshToken (body:RefreshTokenDto){
+        //1-verify refeshToken
+            type RefreshTokenPayload ={userId:string,type:string}
+           let decodedToken:RefreshTokenPayload
+
+            try{
+                        //1-verify refeshToken
+
+                 decodedToken=  await this.jwtService.verifyAsync<RefreshTokenPayload>(body.refreshToken)
+
+           if(decodedToken.type !=='refresh'){
+            throw new BadRequestException('invalid refresh token')
+        
+           }
+
+           //3-check if refreshToken Exists
+
+          const refreshTokenDoc=  await this.refreshModel.findOne({
+            userId:decodedToken.userId
+           })
+
+           if(!refreshTokenDoc){
+        throw new ForbiddenException('invalid refresh token')
+           }
+           //4-compare refreshtoken with hashed refreshToken
+
+           const isRefreshTokenhMatched= await bcrypt.compare(body.refreshToken,refreshTokenDoc.refreshToken)
+
+
+           if(!isRefreshTokenhMatched){
+                    throw new ForbiddenException('invalid refresh token')
+           }
+            // 5-generate new tokens
+
+            return await this.generateTokens(refreshTokenDoc.userId)
+
+
+
+
+
+
+
+
+
+
+
+
+}catch{
+ throw new ForbiddenException('invalid refresh token')
+}
+
+
+            
+
+       }
 
 
 

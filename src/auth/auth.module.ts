@@ -5,6 +5,8 @@ import { UsersModule } from 'src/users/users.module';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { Environment } from 'src/common/configration/environment.interface';
+import { MongooseModule } from '@nestjs/mongoose';
+import { refreshTokenSchema, RefreshToken } from './schemas/refresh-token';
 
 @Module({
   imports: [UsersModule,
@@ -16,7 +18,13 @@ import { Environment } from 'src/common/configration/environment.interface';
       })
 
       
-    })
+    }),
+    MongooseModule.forFeature([
+      {
+        name: RefreshToken.name,schema:refreshTokenSchema
+      
+      },
+    ]),
 
     
   ],

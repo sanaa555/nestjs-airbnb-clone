@@ -3,5 +3,8 @@ export interface Environment{
     FallbackLanguage:string;
     mongodbUri:string;
      jwtSecret:string,
-    acessTokenExpireIn:string
+    acessTokenExpireIn:string,
+        refreshTokenExpireIn:string,
+        type:string
+
 }
