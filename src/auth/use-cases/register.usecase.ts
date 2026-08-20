@@ -3,6 +3,8 @@ import { CreateUserDto } from "src/users/dto/create-user.dto";
 import { RegisterDto } from "../dtos/register.dto";
 import { UsersService } from "src/users/users.service";
 import { GenerateTokensUsecase } from "./generateTokens.usecase";
+import { AuthResponseDto } from "../dtos/auth-response.dto";
+import { plainToInstance } from "class-transformer";
 
 @Injectable()
 export class RegisterUseCase{
@@ -13,7 +15,7 @@ export class RegisterUseCase{
 
     ){}
 
-async  excute(body:RegisterDto){
+async  excute(body:RegisterDto):Promise<AuthResponseDto>{
     const createUserDto:CreateUserDto={...body}
         // 1-create a new user in the database using the data from the body
       const createdUser=  await this.userService.create(createUserDto);
@@ -21,11 +23,14 @@ async  excute(body:RegisterDto){
 
         //2-generate a JWT token for the user(acess token and  refresh token)
 
-        const tokens= await this.generateTokensUsecase.excute(createdUser._id.toString())
+        const         {acessToken,refreshToken}
+= await this.generateTokensUsecase.excute(createdUser._id.toString())
 
 
 
         //3-return the token to the user
-        return tokens
+                      return plainToInstance(AuthResponseDto,{acessToken,refreshToken})
+      
+
     }
 }

@@ -8,6 +8,8 @@ import { RefreshToken } from "../schemas/refresh-token";
 import { Model } from "mongoose";
 import bcrypt from "bcrypt"
 import { GenerateTokensUsecase } from "./generateTokens.usecase";
+import { AuthResponseDto } from "../dtos/auth-response.dto";
+import { plainToInstance } from "class-transformer";
 
 
 @Injectable()
@@ -23,7 +25,7 @@ export class RefreshTokenUseCase{
     ){}
 
 
-    async  excute (body:RefreshTokenDto){
+    async  excute (body:RefreshTokenDto):Promise<AuthResponseDto>{
             //1-verify refeshToken
                 type RefreshTokenPayload ={userId:string,type:string}
                let decodedToken:RefreshTokenPayload
@@ -61,7 +63,8 @@ export class RefreshTokenUseCase{
                }
                 // 5-generate new tokens
     
-                return await this.generateTokensUsecase.excute(refreshTokenDoc.userId)
+                const {acessToken,refreshToken}= await this.generateTokensUsecase.excute(refreshTokenDoc.userId)
+                return plainToInstance(AuthResponseDto,{acessToken,refreshToken})
     
     
     

@@ -5,6 +5,8 @@ import { BadRequestException } from "src/common/errors-handling/custom-exception
 import { I18nService } from "nestjs-i18n";
 import bcrypt from "bcrypt"
 import { GenerateTokensUsecase } from "./generateTokens.usecase";
+import { AuthResponseDto } from "../dtos/auth-response.dto";
+import { plainToInstance } from "class-transformer";
 
 
 @Injectable()
@@ -19,7 +21,7 @@ export class loginUseCase{
 
     ){}
 
-    async excute (body:LoginDto){
+    async excute (body:LoginDto):Promise<AuthResponseDto>{
     
             //1-find user by email
             const user= await this.userService.findOne({email:body.email})
@@ -39,10 +41,11 @@ export class loginUseCase{
                           )     
             //3-generate token
     
-            const tokens= await this.generateTokensUsecase.excute(user._id.toString())
+            const {acessToken,refreshToken}= await this.generateTokensUsecase.excute(user._id.toString())
     
                      //4-return token
-                                     return tokens
+                                     return plainToInstance(AuthResponseDto,{acessToken,refreshToken})
+                     
     
     
     
