@@ -1,0 +1,41 @@
+import { Injectable } from "@nestjs/common";
+import { JwtService } from "@nestjs/jwt";
+import { InjectModel } from "@nestjs/mongoose";
+import { RefreshToken } from "../schemas/refresh-token";
+import { Model } from "mongoose";
+import { Environment } from "src/common/configration/environment.interface";
+import { ConfigService } from "@nestjs/config";
+import bcrypt from "bcrypt"
+
+
+@Injectable()
+export class GenerateTokensUsecase{
+    constructor(        
+        private readonly jwtService: JwtService,
+        @InjectModel(RefreshToken.name) private refreshModel: Model<RefreshToken>,
+        private readonly configService:ConfigService<Environment>,
+                
+    ){}
+
+      async excute(userId:string){
+            const accessToken=  await this.jwtService.signAsync({userId})
+            const refreshToken= await this.jwtService.signAsync({userId,type:this.configService.getOrThrow('type')},
+                {expiresIn:this.configService.getOrThrow('refreshTokenExpireIn')} )
+    
+                // hash refersh token 
+    
+                const hashedRefreshToken =  await bcrypt.hash(refreshToken,10)
+    
+                // update refresh token for the userId  if not exists create it
+    
+                await this.refreshModel.findOneAndUpdate(
+                    {userId},
+                    {refreshToken:hashedRefreshToken},
+                    {returnDocument: 'after',upsert:true}
+                )
+    
+            return {accessToken,refreshToken}
+    
+    
+        }
+}
