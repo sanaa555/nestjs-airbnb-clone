@@ -7,8 +7,9 @@ import { AcceptLanguageResolver, HeaderResolver, I18nModule, QueryResolver } fro
 import path from 'path';
 import { Environment } from './common/configration/environment.interface';
 import { CustomExceptionFilter } from './common/errors-handling/filters/custom-exception.filter';
-import { APP_FILTER } from '@nestjs/core';
+import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
 import { MongooseModule } from '@nestjs/mongoose';
+import { LoggerInterceptor } from './common/interceptors';
 @Global()
 @Module({
     imports: [
@@ -55,6 +56,10 @@ import { MongooseModule } from '@nestjs/mongoose';
     {
       provide: APP_FILTER,
       useClass: CustomExceptionFilter,
+    },
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: LoggerInterceptor,
     },
   ],
 

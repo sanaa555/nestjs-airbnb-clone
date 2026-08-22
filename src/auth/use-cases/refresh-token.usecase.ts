@@ -63,8 +63,8 @@ export class RefreshTokenUseCase{
                }
                 // 5-generate new tokens
     
-                const {acessToken,refreshToken}= await this.generateTokensUsecase.excute(refreshTokenDoc.userId)
-                return plainToInstance(AuthResponseDto,{acessToken,refreshToken})
+                const {accessToken,refreshToken}= await this.generateTokensUsecase.excute(refreshTokenDoc.userId)
+                return plainToInstance(AuthResponseDto,{accessToken,refreshToken})
     
     
     

@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, Logger } from "@nestjs/common";
 import { LoginDto } from "../dtos/login.dto";
 import { UsersService } from "src/users/users.service";
 import { BadRequestException } from "src/common/errors-handling/custom-exceptions/bad-request.exception";
@@ -12,6 +12,8 @@ import { plainToInstance } from "class-transformer";
 @Injectable()
 export class loginUseCase{
 
+        private readonly logger = new Logger(loginUseCase.name)
+
     constructor(
         private readonly userService: UsersService,
                 private readonly i18nService:I18nService,
@@ -22,7 +24,9 @@ export class loginUseCase{
     ){}
 
     async excute (body:LoginDto):Promise<AuthResponseDto>{
-    
+            
+
+          this.logger.log(` login request  for email: ${body.email}`)
             //1-find user by email
             const user= await this.userService.findOne({email:body.email})
             // if(!user) throw new BadRequestException("invalid credentials")
@@ -41,10 +45,10 @@ export class loginUseCase{
                           )     
             //3-generate token
     
-            const {acessToken,refreshToken}= await this.generateTokensUsecase.excute(user._id.toString())
+            const {accessToken,refreshToken}= await this.generateTokensUsecase.excute(user._id.toString())
     
                      //4-return token
-                                     return plainToInstance(AuthResponseDto,{acessToken,refreshToken})
+                                     return plainToInstance(AuthResponseDto,{accessToken,refreshToken})
                      
     
     
