@@ -23,13 +23,13 @@ async  excute(body:RegisterDto):Promise<AuthResponseDto>{
 
         //2-generate a JWT token for the user(acess token and  refresh token)
 
-        const         {acessToken,refreshToken}
+        const         {accessToken,refreshToken}
 = await this.generateTokensUsecase.excute(createdUser._id.toString())
 
 
 
         //3-return the token to the user
-                      return plainToInstance(AuthResponseDto,{acessToken,refreshToken})
+                      return plainToInstance(AuthResponseDto,{accessToken,refreshToken})
       
 
     }
