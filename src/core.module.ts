@@ -8,6 +8,7 @@ import path from 'path';
 import { Environment } from './common/configration/environment.interface';
 import { CustomExceptionFilter } from './common/errors-handling/filters/custom-exception.filter';
 import { APP_FILTER } from '@nestjs/core';
+import { MongooseModule } from '@nestjs/mongoose';
 @Global()
 @Module({
     imports: [
@@ -40,7 +41,15 @@ import { APP_FILTER } from '@nestjs/core';
       }),
 
     }),
+      MongooseModule.forRootAsync({
 
+  inject: [ConfigService],
+
+  useFactory: (configService: ConfigService<Environment>) => {
+   const uri=configService.getOrThrow<string>('mongodbUri')
+   return {uri} 
+  },
+}),
   ],
     providers: [
     {
