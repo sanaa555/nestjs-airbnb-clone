@@ -1,17 +1,21 @@
 import { Injectable } from '@nestjs/common';
 import { User } from './schemas/user.schema';
-import { Model, QueryFilter } from 'mongoose';
-import { InjectModel } from '@nestjs/mongoose';
+import {  QueryFilter } from 'mongoose';
+// import { InjectModel } from '@nestjs/mongoose';
 import { CreateUserDto } from './dto/create-user.dto';
 import { CreateUserUseCase } from './use-cases/create-user';
+// import { ModelNames } from 'src/common/data-access';
+import { UserRepository } from './repository/user.repository';
 
 @Injectable()
 export class UsersService {
          
       constructor(
-                readonly createUserUseCase:CreateUserUseCase
+                readonly createUserUseCase:CreateUserUseCase,
+                                readonly userRepository:UserRepository
 
-         ,@InjectModel("User") private userModel: Model<User>,
+
+      //    ,@InjectModel(ModelNames.USERS) private userModel: Model<User>,
    ) {}
 
       async create(body:CreateUserDto){
@@ -22,7 +26,7 @@ export class UsersService {
       async findOne(query:QueryFilter<User>){
 
 
-         return await this.userModel.findOne(query)
+         return await this.userRepository.findOne(query)
 
       }
 

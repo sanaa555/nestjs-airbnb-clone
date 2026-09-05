@@ -10,6 +10,8 @@ import bcrypt from "bcrypt"
 import { GenerateTokensUsecase } from "./generateTokens.usecase";
 import { AuthResponseDto } from "../dtos/auth-response.dto";
 import { plainToInstance } from "class-transformer";
+import { ModelNames } from "src/common/data-access";
+import { RefreshTokenRepository } from "../repository/refresh-token.repository";
 
 
 @Injectable()
@@ -17,7 +19,9 @@ export class RefreshTokenUseCase{
 
     constructor(
                 private readonly jwtService: JwtService,
-                        @InjectModel(RefreshToken.name) private refreshModel: Model<RefreshToken>,
+                    //     @InjectModel(ModelNames.REFRESHTOKENS) private refreshModel: Model<RefreshToken>,
+                                    private readonly refreshTokenRepository: RefreshTokenRepository,
+                    
                      private readonly generateTokensUsecase: GenerateTokensUsecase,
 
                 
@@ -46,7 +50,7 @@ export class RefreshTokenUseCase{
     
                //3-check if refreshToken Exists
     
-              const refreshTokenDoc=  await this.refreshModel.findOne({
+              const refreshTokenDoc=  await this.refreshTokenRepository.findOne({
                 userId:decodedToken.userId
                })
     

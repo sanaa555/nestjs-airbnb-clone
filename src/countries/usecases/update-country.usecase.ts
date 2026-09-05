@@ -6,21 +6,25 @@ import { UpdateCountryDto } from "../dtos/update-country.dto";
 import { BadRequestException } from "src/common/errors-handling/custom-exceptions/bad-request.exception";
 import { plainToInstance } from "class-transformer";
 import { CountryResponseDto } from "../dtos/country-response.dto";
+import { ModelNames } from "src/common/data-access";
+import { CountryRepository } from "../repository/country.repository";
 
 
 @Injectable()
 export class UpdateCountryUseCase{
 
     constructor(
-         @InjectModel(Country.name)
-                          private readonly countryModel:Model<Country>
+        //  @InjectModel(ModelNames.COUNTRIES)
+        //                   private readonly countryModel:Model<Country>
+                                      private readonly countryRepository:CountryRepository
+        
     ){}
 
 
     async  excute(body:UpdateCountryDto,countryId:string):Promise<CountryResponseDto>{
 
         //check if country exist
-        const country=await this.countryModel.findOne({
+        const country=await this.countryRepository.findOne({
             _id:countryId,
             isDeleted:{$ne:true}
         })
@@ -31,7 +35,7 @@ export class UpdateCountryUseCase{
         if(body?.name){
             
         // check if country name alrady exist
-        const existingCountry= await this.countryModel.findOne({
+        const existingCountry= await this.countryRepository.findOne({
             name:body.name,
             isDeleted:{$ne:true}
             ,
@@ -46,7 +50,7 @@ export class UpdateCountryUseCase{
 
         
 
-         const updatedCountry= await this.countryModel.findByIdAndUpdate(
+         const updatedCountry= await this.countryRepository.findByIdAndUpdate(
             countryId,
             body,
        {returnDocument: 'after'  }      )

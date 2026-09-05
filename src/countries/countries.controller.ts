@@ -5,6 +5,7 @@ import { CountryResponseDto } from './dtos/country-response.dto';
 import { CountryIdDto } from './dtos/country-id.dto';
 import { UpdateCountryDto } from './dtos/update-country.dto';
 import { FindAllDto } from './dtos/find-all.dto';
+import { PaginatedResult } from 'src/common/data-access';
 
 @Controller('countries')
 export class CountriesController {
@@ -30,7 +31,7 @@ export class CountriesController {
 
 
      @Get()
-    async findAll(@Query() query:FindAllDto):Promise <CountryResponseDto[]>{
+    async findAll(@Query() query:FindAllDto):Promise <PaginatedResult<CountryResponseDto>>{
 
         return   this.countriesService.findAll(query)
 

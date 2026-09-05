@@ -11,6 +11,8 @@ import { RegisterUseCase } from './use-cases/register.usecase';
 import { GenerateTokensUsecase } from './use-cases/generateTokens.usecase';
 import { loginUseCase } from './use-cases/login.usecase';
 import { RefreshTokenUseCase } from './use-cases/refresh-token.usecase';
+import { ModelNames } from 'src/common/data-access';
+import { RefreshTokenRepository } from './repository/refresh-token.repository';
 
 @Module({
   imports: [UsersModule,
@@ -25,14 +27,14 @@ import { RefreshTokenUseCase } from './use-cases/refresh-token.usecase';
     }),
     MongooseModule.forFeature([
       {
-        name: RefreshToken.name,schema:refreshTokenSchema
+        name: ModelNames.REFRESHTOKENS,schema:refreshTokenSchema
       
       },
     ]),
 
     
   ],
-  providers: [AuthService,RegisterUseCase,GenerateTokensUsecase,loginUseCase,RefreshTokenUseCase],
+  providers: [AuthService,RegisterUseCase,GenerateTokensUsecase,loginUseCase,RefreshTokenUseCase,RefreshTokenRepository],
   controllers: [AuthController]
 })
 export class AuthModule {}

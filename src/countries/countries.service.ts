@@ -8,6 +8,7 @@ import { FindAllCountriesUseCase } from './usecases/find-all-countries.usecase';
 import { UpdateCountryUseCase } from './usecases/update-country.usecase';
 import { UpdateCountryDto } from './dtos/update-country.dto';
 import { FindAllDto } from './dtos/find-all.dto';
+import { PaginatedResult } from 'src/common/data-access';
 
 @Injectable()
 export class CountriesService {
@@ -33,7 +34,7 @@ export class CountriesService {
         return   this.findCountryByIdUseCase.excute(id)
     }
 
-    async findAll(query:FindAllDto):Promise<CountryResponseDto[]>{
+    async findAll(query:FindAllDto):Promise<PaginatedResult<CountryResponseDto>>{
         return  this.findAllCountriesUseCase.excute(query)
     }
 

@@ -18,4 +18,8 @@ export class FindAllDto{
 
     @IsOptional()
     limit?:number
+
+    
+    @IsOptional()
+    ignoreLimit?:boolean
 }
