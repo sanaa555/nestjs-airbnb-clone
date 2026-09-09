@@ -15,6 +15,7 @@ import { CountryRepository } from './repository/country.repository';
     imports: [MongooseModule.forFeature([{ name: ModelNames.COUNTRIES, schema: CountrySchema }])],
 
   controllers: [CountriesController],
-  providers: [CountriesService,CreateCountryUseCase,FindCountryByIdUseCase,FindAllCountriesUseCase,SoftDeleteUseCase,UpdateCountryUseCase,CountryRepository]
+  providers: [CountriesService,CreateCountryUseCase,FindCountryByIdUseCase,FindAllCountriesUseCase,SoftDeleteUseCase,UpdateCountryUseCase,CountryRepository],
+  exports:[CountriesService]
 })
 export class CountriesModule {}

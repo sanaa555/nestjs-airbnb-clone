@@ -41,18 +41,23 @@ export class FindAllCountriesUseCase{
         const result= await this.countryRepository.findPaginated(matchQuery,{
             page:query?.page,
             limit:query?.limit,
-              ignoreLimit:query?.ignoreLimit})
+              ignoreLimit:query?.ignoreLimit,
+              lean:true
+            })
 
-              const countries=  plainToInstance(CountryResponseDto,result.data.map((doc:HydratedDocument<Country>)=>doc.toObject()),
-            )
+                      return plainToInstance(PaginatedResult<CountryResponseDto>,result)
+              
 
-              return new PaginatedResult(
-                countries,
-                result.totalCount,
-                 result.page,
-                 result.limit,
+            //   const countries=  plainToInstance(CountryResponseDto,result.data.map((doc:HydratedDocument<Country>)=>doc.toObject()),
+            // )
 
-              )
+            //   return new PaginatedResult(
+            //     countries,
+            //     result.totalCount,
+            //      result.page,
+            //      result.limit,
+
+            //   )
 
     
 
