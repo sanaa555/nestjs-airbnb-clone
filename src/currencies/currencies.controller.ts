@@ -20,7 +20,7 @@ export class CurrenciesController {
     }
 
     @Get('/:id')
-        async getCountryById(@Param() param:CurrencyIdDto):Promise <CurrencyResponseDto>{
+        async getCurrencyById(@Param() param:CurrencyIdDto):Promise <CurrencyResponseDto>{
     
             return   this.currenciesService.getCurrencyById(param.id)
     
@@ -45,7 +45,7 @@ export class CurrenciesController {
     
     
         @Patch('/:id')
-        async updateCountryById(@Param() param:CurrencyIdDto,@Body() body:UpdateCurrencyDto):Promise <CurrencyResponseDto>{
+        async updateCurrencyById(@Param() param:CurrencyIdDto,@Body() body:UpdateCurrencyDto):Promise <CurrencyResponseDto>{
     
             return   this.currenciesService.updateById(param.id,body)
         }
