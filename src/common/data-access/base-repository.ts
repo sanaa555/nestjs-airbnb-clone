@@ -39,6 +39,7 @@ export interface DeleteManyOptions {
 
 export interface FindOneOptions {
   session?: ClientSession;
+
 }
 
 export interface FindOneAndDeleteOptions {
@@ -100,9 +101,14 @@ export class BaseRepository<T> {
   async findOne(
     filterQuery?: Record<string, unknown>,
     options?: FindOneOptions,
+
+
+    
   ) {
     const document = await this.model.findOne(filterQuery, undefined, {
       session: options?.session,
+              lean: true
+
     });
 
     return document;
