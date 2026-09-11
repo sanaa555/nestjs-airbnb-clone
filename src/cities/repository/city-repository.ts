@@ -2,8 +2,9 @@ import { InjectModel } from "@nestjs/mongoose";
 import { HydratedDocument, Model } from "mongoose";
 import { BaseRepository, ModelNames } from "src/common/data-access";
 import { City } from "../schema/city.schema";
+import { Injectable } from "@nestjs/common";
 
-
+@Injectable()
 export class CityRepository extends BaseRepository<City>{
     constructor(
         @InjectModel(ModelNames.CITIES)

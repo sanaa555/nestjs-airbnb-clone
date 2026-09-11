@@ -6,5 +6,6 @@ export enum ModelNames {
     REFRESHTOKENS='refresh-tokens',
     CITIES='cities',
     Curriencies='curriencies',
-    UNIT_CATEGORIES='unit-categories'
+    UNIT_CATEGORIES='unit-categories',
+    APP_SETTINGS='app-settings'
 }
