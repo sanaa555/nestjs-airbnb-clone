@@ -48,6 +48,7 @@ import { LoggerInterceptor } from './common/interceptors';
 
   useFactory: (configService: ConfigService<Environment>) => {
    const uri=configService.getOrThrow<string>('mongodbUri')
+
    return {uri} 
   },
 }),
