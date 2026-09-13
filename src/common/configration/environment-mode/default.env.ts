@@ -10,6 +10,12 @@ export const defaultEnv=():Environment=>{
     acessTokenExpireIn:process.env.ACESS_TOKEN_EXPIRE_IN as string,
         refreshTokenExpireIn:process.env.ACESS_TOKEN_EXPIRE_IN as string,
         type:process.env.TYPE as string,
+        systemAdmin:{
+            name:process.env.SYSTEM_ADMIN_NAME as string,
+            email:process.env.SYSTEM_ADMIN_EMAIL as string,
+            password:process.env.SYSTEM_ADMIN_PASSWORD as string,
+
+        }
    
 
 }

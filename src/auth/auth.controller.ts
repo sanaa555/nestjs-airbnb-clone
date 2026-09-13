@@ -8,6 +8,7 @@ import { SignupSwagger } from './swagger/register.swagger';
 import { API_TAGS } from 'src/common/swagger';
 import { LoginSwagger } from './swagger/login.swagger';
 import { RefreshTokenSwagger } from './swagger/refresh-token.swagger';
+import { AuthResponseDto } from './dtos/auth-response.dto';
 
 @ApiTags(API_TAGS.AUTH)
 @Controller('auth')
@@ -17,7 +18,7 @@ export class AuthController {
     constructor(private readonly authService: AuthService) {}
    @SignupSwagger()
     @Post('register')
-    async register(@Body() body: RegisterDto) {
+    async register(@Body() body: RegisterDto):Promise<AuthResponseDto> {
        return    await this.authService.register(body);
 
 
@@ -26,7 +27,7 @@ export class AuthController {
 
    @LoginSwagger()
     @Post('login')
-    async login(@Body() body: LoginDto) {
+    async login(@Body() body: LoginDto):Promise<AuthResponseDto> {
 
        return    await this.authService.login(body);
 
@@ -38,7 +39,7 @@ export class AuthController {
   
     @RefreshTokenSwagger()
     @Post('refresh-token')
-    async refreshToken(@Body() body: RefreshTokenDto) {
+    async refreshToken(@Body() body: RefreshTokenDto) :Promise<AuthResponseDto>{
        return    await this.authService.RefreshToken(body);
 
 

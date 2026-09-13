@@ -12,6 +12,7 @@ import { AuthResponseDto } from "../dtos/auth-response.dto";
 import { plainToInstance } from "class-transformer";
 import { ModelNames } from "src/common/data-access";
 import { RefreshTokenRepository } from "../repository/refresh-token.repository";
+import { Roles } from "src/common/constants";
 
 
 @Injectable()
@@ -31,7 +32,7 @@ export class RefreshTokenUseCase{
 
     async  excute (body:RefreshTokenDto):Promise<AuthResponseDto>{
             //1-verify refeshToken
-                type RefreshTokenPayload ={userId:string,type:string}
+                type RefreshTokenPayload ={payload:{id:string,role:string},type:string}
                let decodedToken:RefreshTokenPayload
     
                 try{
@@ -51,7 +52,7 @@ export class RefreshTokenUseCase{
                //3-check if refreshToken Exists
     
               const refreshTokenDoc=  await this.refreshTokenRepository.findOne({
-                userId:decodedToken.userId
+                userId:decodedToken.payload.id
                })
     
                if(!refreshTokenDoc){
@@ -67,7 +68,7 @@ export class RefreshTokenUseCase{
                }
                 // 5-generate new tokens
     
-                const {accessToken,refreshToken}= await this.generateTokensUsecase.excute(refreshTokenDoc.userId)
+                const {accessToken,refreshToken}= await this.generateTokensUsecase.excute({id:refreshTokenDoc.userId,role:decodedToken.payload.role as Roles})
                 return plainToInstance(AuthResponseDto,{accessToken,refreshToken})
     
     
