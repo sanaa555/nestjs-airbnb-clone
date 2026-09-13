@@ -6,12 +6,21 @@ import { UnitCategoryResponseDto } from './dtos/unit-category-response.dto';
 import { UnitCategoryIdDto } from './dtos/unit-category-id.dto';
 import { UpdateUnitCategoryDto } from './dtos/update-unit-category.dto';
 import { UnitCategoriesService } from './unit-categories.service';
+import { ApiTags } from '@nestjs/swagger';
+import { API_TAGS } from 'src/common/swagger';
+import { CreateUnitCategorySwagger } from './swagger/create-unit-category.swagger';
+import { DeleteUnitCategorySwagger } from './swagger/delete-unit-category.swagger';
+import { FindAllUnitCategoriesSwagger } from './swagger/find-all-unit-categories.swagger';
+import { FindUnitCategoryByIdSwagger } from './swagger/find-unit-category-by-id.swagger';
+import { UpdateUnitCategorySwagger } from './swagger/update-unit-category.swagger';
 
+@ApiTags(API_TAGS.UNIT_CATEGORIES)
 @Controller('unit-categories')
 export class UnitCategoriesController {
   constructor(
     private readonly unitCategoriesService:UnitCategoriesService
   ){}
+    @CreateUnitCategorySwagger()
     @Post()
     async createUnitCategory(@Body() body:CreateUnitCategoryDto):Promise<UnitCategoryResponseDto>{
 
@@ -19,6 +28,7 @@ export class UnitCategoriesController {
 
     }
 
+    @FindUnitCategoryByIdSwagger()
     @Get('/:id')
         async getUnitCategoryById(@Param() param:UnitCategoryIdDto):Promise <UnitCategoryResponseDto>{
     
@@ -27,6 +37,7 @@ export class UnitCategoriesController {
         }
     
     
+         @FindAllUnitCategoriesSwagger()
          @Get()
         async findAll(@Query() query:FindAllUnitCategories):Promise <PaginatedResult<UnitCategoryResponseDto>>{
     
@@ -35,6 +46,7 @@ export class UnitCategoriesController {
         }
     
     
+        @DeleteUnitCategorySwagger()
         @Delete('/:id')
         @HttpCode(HttpStatus.NO_CONTENT)
         async deleteUnitCategoryById(@Param() param:UnitCategoryIdDto):Promise <void>{
@@ -44,6 +56,7 @@ export class UnitCategoriesController {
         }
     
     
+        @UpdateUnitCategorySwagger()
         @Patch('/:id')
         async updateUnitCategoryById(@Param() param:UnitCategoryIdDto,@Body() body:UpdateUnitCategoryDto):Promise <UnitCategoryResponseDto>{
     

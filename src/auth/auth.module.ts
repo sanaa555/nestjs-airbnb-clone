@@ -13,9 +13,12 @@ import { loginUseCase } from './use-cases/login.usecase';
 import { RefreshTokenUseCase } from './use-cases/refresh-token.usecase';
 import { ModelNames } from 'src/common/data-access';
 import { RefreshTokenRepository } from './repository/refresh-token.repository';
+import { loginAsUserUseCase } from './use-cases/login-as-user.usecase';
+import { SystemAdminsModule } from 'src/system-admins/system-admins.module';
+import { LoginAsSystemAdminUseCase } from './use-cases/login-as-system-admin.usecase';
 
 @Module({
-  imports: [UsersModule,
+  imports: [UsersModule,SystemAdminsModule,
     JwtModule.registerAsync({
       inject:[ConfigService],
       useFactory:(configService:ConfigService<Environment>)=>({
@@ -34,7 +37,7 @@ import { RefreshTokenRepository } from './repository/refresh-token.repository';
 
     
   ],
-  providers: [AuthService,RegisterUseCase,GenerateTokensUsecase,loginUseCase,RefreshTokenUseCase,RefreshTokenRepository],
+  providers: [AuthService,RegisterUseCase,GenerateTokensUsecase,loginUseCase,RefreshTokenUseCase,RefreshTokenRepository,loginAsUserUseCase,LoginAsSystemAdminUseCase],
   controllers: [AuthController]
 })
 export class AuthModule {}

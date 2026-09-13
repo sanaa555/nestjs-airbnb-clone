@@ -7,5 +7,6 @@ export enum ModelNames {
     CITIES='cities',
     Curriencies='curriencies',
     UNIT_CATEGORIES='unit-categories',
-    APP_SETTINGS='app-settings'
+    APP_SETTINGS='app-settings',
+    SYSTEM_ADMINS='system-admins'
 }

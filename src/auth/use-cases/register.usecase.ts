@@ -5,6 +5,7 @@ import { UsersService } from "src/users/users.service";
 import { GenerateTokensUsecase } from "./generateTokens.usecase";
 import { AuthResponseDto } from "../dtos/auth-response.dto";
 import { plainToInstance } from "class-transformer";
+import { Roles } from "src/common/constants";
 
 @Injectable()
 export class RegisterUseCase{
@@ -24,7 +25,9 @@ async  excute(body:RegisterDto):Promise<AuthResponseDto>{
         //2-generate a JWT token for the user(acess token and  refresh token)
 
         const         {accessToken,refreshToken}
-= await this.generateTokensUsecase.excute(createdUser._id.toString())
+= await this.generateTokensUsecase.excute({id:createdUser._id.toString(),
+    role:Roles.USER
+})
 
 
 

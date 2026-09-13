@@ -1,57 +1,35 @@
 import { Injectable, Logger } from "@nestjs/common";
 import { LoginDto } from "../dtos/login.dto";
-import { UsersService } from "src/users/users.service";
-import { BadRequestException } from "src/common/errors-handling/custom-exceptions/bad-request.exception";
-import { I18nService } from "nestjs-i18n";
-import bcrypt from "bcrypt"
-import { GenerateTokensUsecase } from "./generateTokens.usecase";
 import { AuthResponseDto } from "../dtos/auth-response.dto";
-import { plainToInstance } from "class-transformer";
+import { Roles } from "src/common/constants";
+import { loginAsUserUseCase } from "./login-as-user.usecase";
+import { LoginAsSystemAdminUseCase } from "./login-as-system-admin.usecase";
 
 
 @Injectable()
 export class loginUseCase{
 
-        private readonly logger = new Logger(loginUseCase.name)
 
     constructor(
-        private readonly userService: UsersService,
-                private readonly i18nService:I18nService,
-                private readonly generateTokensUsecase:GenerateTokensUsecase,
-                
-        
+        private readonly loginAsUserUseCase:loginAsUserUseCase,
+        private readonly loginAsSystemAdminUseCase:LoginAsSystemAdminUseCase,
 
     ){}
 
     async excute (body:LoginDto):Promise<AuthResponseDto>{
+
+        if(body.role.includes(Roles.USER)){
+           
+              return  this.loginAsUserUseCase.excute(body)
+
+        }
+
+        // login as systemAdmin
+                      return  this.loginAsSystemAdminUseCase.excute(body)
+
             
 
-          this.logger.log(` login request  for email: ${body.email}`)
-            //1-find user by email
-            const user= await this.userService.findOne({email:body.email})
-            // if(!user) throw new BadRequestException("invalid credentials")
-                    if(!user) throw new BadRequestException(
-                         this.i18nService.translate( "auth.INVALID_CREDENTIALS")
-                       )
-    
-            //2-compare password
-            const isPasswordMatched= await bcrypt.compare(
-               body.password,
-                user.password,
-    
-                )
-               if(!isPasswordMatched) throw new BadRequestException(
-                         this.i18nService.translate( "auth.INVALID_CREDENTIALS")
-                          )     
-            //3-generate token
-    
-            const {accessToken,refreshToken}= await this.generateTokensUsecase.excute(user._id.toString())
-    
-                     //4-return token
-                                     return plainToInstance(AuthResponseDto,{accessToken,refreshToken})
-                     
-    
-    
+            
     
             }
          
