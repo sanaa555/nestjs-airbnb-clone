@@ -7,9 +7,10 @@ import { AcceptLanguageResolver, HeaderResolver, I18nModule, QueryResolver } fro
 import path from 'path';
 import { Environment } from './common/configration/environment.interface';
 import { CustomExceptionFilter } from './common/errors-handling/filters/custom-exception.filter';
-import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
+import { APP_FILTER, APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { MongooseModule } from '@nestjs/mongoose';
 import { LoggerInterceptor } from './common/interceptors';
+import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
 @Global()
 @Module({
     imports: [
@@ -62,7 +63,7 @@ import { LoggerInterceptor } from './common/interceptors';
       provide: APP_INTERCEPTOR,
       useClass: LoggerInterceptor,
     },
-  ],
+     ],
 
 })
 export class CoreModule {}

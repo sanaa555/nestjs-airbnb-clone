@@ -13,6 +13,8 @@ import { DeleteCurrencySwagger } from './swagger/delete-currency.swagger';
 import { FindAllCurrenciesSwagger } from './swagger/find-all-currencies.swagger';
 import { FindCurrencyByIdSwagger } from './swagger/find-currency-by-id.swagger';
 import { UpdateCurrencySwagger } from './swagger/update-currency.swagger';
+import { Authorize } from 'src/auth/decorators/roles.decorator';
+import { Roles } from 'src/common/constants';
 
 @ApiTags(API_TAGS.CURRENCIES)
 @Controller('currencies')
@@ -21,6 +23,7 @@ export class CurrenciesController {
     private readonly currenciesService:CurrenciesService
   ){}
     @CreateCurrencySwagger()
+    @Authorize(Roles.SYETEM_ADMIN)
     @Post()
     async createCurrency(@Body() body:CreateCurrencyDto):Promise<CurrencyResponseDto>{
 
@@ -47,6 +50,8 @@ export class CurrenciesController {
     
     
         @DeleteCurrencySwagger()
+
+        @Authorize(Roles.SYETEM_ADMIN)
         @Delete('/:id')
         @HttpCode(HttpStatus.NO_CONTENT)
         async deleteCurrencyById(@Param() param:CurrencyIdDto):Promise <void>{
@@ -57,6 +62,7 @@ export class CurrenciesController {
     
     
         @UpdateCurrencySwagger()
+        @Authorize(Roles.SYETEM_ADMIN)
         @Patch('/:id')
         async updateCurrencyById(@Param() param:CurrencyIdDto,@Body() body:UpdateCurrencyDto):Promise <CurrencyResponseDto>{
     

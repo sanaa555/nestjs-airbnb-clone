@@ -7,6 +7,8 @@ import * as bcrypt from 'bcrypt';
 import { BadRequestException } from "src/common/errors-handling/custom-exceptions/bad-request.exception";
 import { ModelNames } from "src/common/data-access";
 import { UserRepository } from "../repository/user.repository";
+import { plainToInstance } from "class-transformer";
+import { UserResponseDto } from "../dto/user-response-dto";
 
 
 
@@ -19,7 +21,7 @@ export class CreateUserUseCase{
       private readonly userRepository:UserRepository
    ){}
 
-    async excute(body:CreateUserDto){
+    async excute(body:CreateUserDto):Promise<UserResponseDto>{
             //1- Check if user with the same email already exists
     
              const existingUserByEmail = await this.userRepository.findOne({ email: body.email });
@@ -36,10 +38,12 @@ export class CreateUserUseCase{
             const hashedPassword= bcrypt.hashSync(body.password,10)
                
             //4- Create user and save the user to the database
-            return  await this.userRepository.create({
+            const user=  await this.userRepository.create({
                  ...body,
                     password:hashedPassword
             })
+
+           return  plainToInstance(UserResponseDto,user)
     
     
           }

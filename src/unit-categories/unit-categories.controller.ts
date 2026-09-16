@@ -13,6 +13,8 @@ import { DeleteUnitCategorySwagger } from './swagger/delete-unit-category.swagge
 import { FindAllUnitCategoriesSwagger } from './swagger/find-all-unit-categories.swagger';
 import { FindUnitCategoryByIdSwagger } from './swagger/find-unit-category-by-id.swagger';
 import { UpdateUnitCategorySwagger } from './swagger/update-unit-category.swagger';
+import { Authorize } from 'src/auth/decorators/roles.decorator';
+import { Roles } from 'src/common/constants';
 
 @ApiTags(API_TAGS.UNIT_CATEGORIES)
 @Controller('unit-categories')
@@ -21,7 +23,8 @@ export class UnitCategoriesController {
     private readonly unitCategoriesService:UnitCategoriesService
   ){}
     @CreateUnitCategorySwagger()
-    @Post()
+     @Authorize(Roles.SYETEM_ADMIN)
+     @Post()
     async createUnitCategory(@Body() body:CreateUnitCategoryDto):Promise<UnitCategoryResponseDto>{
 
         return this.unitCategoriesService.create(body)
@@ -47,6 +50,7 @@ export class UnitCategoriesController {
     
     
         @DeleteUnitCategorySwagger()
+        @Authorize(Roles.SYETEM_ADMIN)
         @Delete('/:id')
         @HttpCode(HttpStatus.NO_CONTENT)
         async deleteUnitCategoryById(@Param() param:UnitCategoryIdDto):Promise <void>{
@@ -57,6 +61,7 @@ export class UnitCategoriesController {
     
     
         @UpdateUnitCategorySwagger()
+        @Authorize(Roles.SYETEM_ADMIN)
         @Patch('/:id')
         async updateUnitCategoryById(@Param() param:UnitCategoryIdDto,@Body() body:UpdateUnitCategoryDto):Promise <UnitCategoryResponseDto>{
     

@@ -24,7 +24,7 @@ export class FindCityByIdUseCase{
 
         if(!city) throw new BadRequestException('city not found')
 
-            return plainToInstance(CityResponseDto,city.toObject())
+            return plainToInstance(CityResponseDto,city)
 
 
     }

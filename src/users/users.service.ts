@@ -6,6 +6,8 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { CreateUserUseCase } from './use-cases/create-user';
 // import { ModelNames } from 'src/common/data-access';
 import { UserRepository } from './repository/user.repository';
+import { UserResponseDto } from './dto/user-response-dto';
+import { plainToInstance } from 'class-transformer';
 
 @Injectable()
 export class UsersService {
@@ -18,15 +20,19 @@ export class UsersService {
       //    ,@InjectModel(ModelNames.USERS) private userModel: Model<User>,
    ) {}
 
-      async create(body:CreateUserDto){
-      return this.createUserUseCase.excute(body)
+      async create(body:CreateUserDto):Promise<UserResponseDto>{
+       
+      return await this.createUserUseCase.excute(body)
+
 
       }
 
-      async findOne(query:QueryFilter<User>){
+      async findOne(query:QueryFilter<User>):Promise<UserResponseDto>{
+        
+               
+         const user= await this.userRepository.findOne(query)
 
-
-         return await this.userRepository.findOne(query)
+         return plainToInstance(UserResponseDto,user)
 
       }
 

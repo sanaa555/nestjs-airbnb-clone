@@ -13,6 +13,8 @@ import { DeleteCountrySwagger } from './swagger/delete-country.swagger';
 import { FindAllCountriesSwagger } from './swagger/find-all-countries.swagger';
 import { FindCountryByIdSwagger } from './swagger/find-country-by-id.swagger';
 import { UpdateCountrySwagger } from './swagger/update-country.swagger';
+import { Authorize } from 'src/auth/decorators/roles.decorator';
+import { Roles } from 'src/common/constants';
 
 @ApiTags(API_TAGS.COUNTRIES)
 @Controller('countries')
@@ -22,9 +24,9 @@ export class CountriesController {
         
 
     ){}
-
     @CreateCountrySwagger()
     @Post()
+     @Authorize(Roles.SYETEM_ADMIN)
     async create(@Body() body:CreateCountryDto):Promise <CountryResponseDto>{
 
         return this.countriesService.create(body)
@@ -48,9 +50,9 @@ export class CountriesController {
 
     }
 
-
     @DeleteCountrySwagger()
     @Delete('/:id')
+    @Authorize(Roles.SYETEM_ADMIN)
     @HttpCode(HttpStatus.NO_CONTENT)
     async deleteCountryById(@Param() param:CountryIdDto):Promise <void>{
 
@@ -58,9 +60,9 @@ export class CountriesController {
 
     }
 
-
     @UpdateCountrySwagger()
     @Patch('/:id')
+    @Authorize(Roles.SYETEM_ADMIN)
     async updateCountryById(@Body() body:UpdateCountryDto,@Param() param:CountryIdDto):Promise <CountryResponseDto>{
 
         return   this.countriesService.updateById(body,param.id)

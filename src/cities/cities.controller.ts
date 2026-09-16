@@ -13,6 +13,8 @@ import { DeleteCitySwagger } from './swagger/delete-city.swagger';
 import { FindAllCitiesSwagger } from './swagger/find-all-cities.swagger';
 import { FindCityByIdSwagger } from './swagger/find-city-by-id.swagger';
 import { UpdateCitySwagger } from './swagger/update-city.swagger';
+import { Authorize } from 'src/auth/decorators/roles.decorator';
+import { Roles } from 'src/common/constants';
 
 @ApiTags(API_TAGS.CITIES)
 @Controller('cities')
@@ -23,6 +25,7 @@ export class CitiesController {
     ){}
 
     @CreateCitySwagger()
+     @Authorize(Roles.SYETEM_ADMIN)
     @Post()
   async  create(@Body() body:CreateCityDto):Promise<CityResponseDto>{
     return  this.citiesService.createCity(body)
@@ -42,15 +45,16 @@ export class CitiesController {
     }
 
     @UpdateCitySwagger()
+    @Authorize(Roles.SYETEM_ADMIN)
     @Patch('/:id')
     async update(@Param() param:CityIdDto,@Body() body:UpdateCityDto):Promise<CityResponseDto>{
        return this.citiesService.update(param.id,body)
     }
 
     @DeleteCitySwagger()
+    @Authorize(Roles.SYETEM_ADMIN)
     @Delete('/:id')
-        @HttpCode(HttpStatus.NO_CONTENT)
-
+    @HttpCode(HttpStatus.NO_CONTENT)
     async delete(@Param() param:CityIdDto):Promise<void>{
 
       return this.citiesService.deleteById(param.id)

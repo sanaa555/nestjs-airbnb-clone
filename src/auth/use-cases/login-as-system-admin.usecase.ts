@@ -25,7 +25,7 @@ export class LoginAsSystemAdminUseCase{
 
    //if exist compare password
 
-   const isPasswordMatched= bcrypt.compare(
+   const isPasswordMatched= await bcrypt.compare(
     body.password,
     systemAdmin.password
    )

@@ -6,6 +6,8 @@ import { ApiTags } from '@nestjs/swagger';
 import { API_TAGS } from 'src/common/swagger';
 import { FindAppSettingsSwagger } from './swagger/find-app-settings.swagger';
 import { UpsertAppSettingsSwagger } from './swagger/upsert-app-settings.swagger';
+import { Authorize } from 'src/auth/decorators/roles.decorator';
+import { Roles } from 'src/common/constants';
 
 @ApiTags(API_TAGS.APP_SETTINGS)
 @Controller('app-settings')
@@ -15,6 +17,7 @@ export class AppSettingsController {
     ){}
 
     @UpsertAppSettingsSwagger()
+  @Authorize(Roles.SYETEM_ADMIN)
     @Put()
     async upsertAppSettings(@Body() body:UpsertAppSettingDto):Promise<AppSettingsResponseDto>{
         return this.appSettingsService.upsert(body)
