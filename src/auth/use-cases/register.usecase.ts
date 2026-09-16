@@ -17,23 +17,22 @@ export class RegisterUseCase{
     ){}
 
 async  excute(body:RegisterDto):Promise<AuthResponseDto>{
+    
     const createUserDto:CreateUserDto={...body}
         // 1-create a new user in the database using the data from the body
       const createdUser=  await this.userService.create(createUserDto);
 
 
         //2-generate a JWT token for the user(acess token and  refresh token)
-
-        const         {accessToken,refreshToken}
-= await this.generateTokensUsecase.excute({id:createdUser._id.toString(),
+const {accessToken,refreshToken}= await this.generateTokensUsecase.excute({id:createdUser._id.toString(),
     role:Roles.USER
 })
 
 
 
         //3-return the token to the user
-                      return plainToInstance(AuthResponseDto,{accessToken,refreshToken})
-      
+         return plainToInstance(AuthResponseDto,{accessToken,refreshToken})
+
 
     }
 }

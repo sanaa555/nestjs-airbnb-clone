@@ -2,11 +2,11 @@ import { Module } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { UsersModule } from 'src/users/users.module';
-import { JwtModule } from '@nestjs/jwt';
+import { JwtModule, JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { Environment } from 'src/common/configration/environment.interface';
 import { MongooseModule } from '@nestjs/mongoose';
-import { refreshTokenSchema, RefreshToken } from './schemas/refresh-token';
+import { refreshTokenSchema } from './schemas/refresh-token';
 import { RegisterUseCase } from './use-cases/register.usecase';
 import { GenerateTokensUsecase } from './use-cases/generateTokens.usecase';
 import { loginUseCase } from './use-cases/login.usecase';
@@ -38,6 +38,7 @@ import { LoginAsSystemAdminUseCase } from './use-cases/login-as-system-admin.use
     
   ],
   providers: [AuthService,RegisterUseCase,GenerateTokensUsecase,loginUseCase,RefreshTokenUseCase,RefreshTokenRepository,loginAsUserUseCase,LoginAsSystemAdminUseCase],
-  controllers: [AuthController]
+  controllers: [AuthController],
+  exports:[JwtModule,UsersModule,SystemAdminsModule]
 })
 export class AuthModule {}

@@ -1,6 +1,7 @@
 
 
 import { ApiHideProperty, ApiProperty } from "@nestjs/swagger";
+import { Exclude } from "class-transformer";
 
 export class SystemAdminResponseDto{
    
@@ -13,6 +14,7 @@ export class SystemAdminResponseDto{
     email:string;
     
     @ApiHideProperty()
+    // @Exclude()
     password:string;
 
     @ApiProperty({ example: true })

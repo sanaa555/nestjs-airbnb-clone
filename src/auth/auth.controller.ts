@@ -9,9 +9,11 @@ import { API_TAGS } from 'src/common/swagger';
 import { LoginSwagger } from './swagger/login.swagger';
 import { RefreshTokenSwagger } from './swagger/refresh-token.swagger';
 import { AuthResponseDto } from './dtos/auth-response.dto';
+import { Public } from './decorators/public.decorator';
 
 @ApiTags(API_TAGS.AUTH)
 @Controller('auth')
+@Public()
 export class AuthController {
 
 
@@ -24,7 +26,7 @@ export class AuthController {
 
     }
 
-
+   
    @LoginSwagger()
     @Post('login')
     async login(@Body() body: LoginDto):Promise<AuthResponseDto> {
