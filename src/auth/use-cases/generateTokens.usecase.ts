@@ -25,8 +25,8 @@ export class GenerateTokensUsecase{
     //   async excute(userId:string){
            async excute(payload:JwtPayload){
 
-            const accessToken=  await this.jwtService.signAsync({payload})
-            const refreshToken= await this.jwtService.signAsync({payload,type:this.configService.getOrThrow('type')},
+            const accessToken=  await this.jwtService.signAsync(payload)
+            const refreshToken= await this.jwtService.signAsync({...payload,type:this.configService.getOrThrow('type')},
                 {expiresIn:this.configService.getOrThrow('refreshTokenExpireIn')} )
     
                 // hash refersh token 

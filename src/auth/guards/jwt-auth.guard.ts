@@ -11,9 +11,9 @@ import { SystemAdminResponseDto } from 'src/system-admins/dtos/system-dmin-respo
 import { Iprincipal } from '../interfaces/principal.interface';
 import { Reflector } from '@nestjs/core';
 import { IS_PUBLIC_KEY } from '../decorators/public.decorator';
-
-type RequestWithUser= Request &{
-         user:Iprincipal
+ 
+ export type RequestWithUser= Request &{
+         principale:Iprincipal
 }
 
 @Injectable()
@@ -48,10 +48,11 @@ export class JwtAuthGuard implements CanActivate {
   try{
         //3-if token is valid
        const payload:JwtPayload=   this.jwtService.verify(token)
+
            //4-build the user object 
    const currentAccount :Iprincipal=   await this.buildCurrentUser(payload)
       //5- attach user object to the request 
-       request.user=currentAccount
+       request.principale=currentAccount
   }catch(error){
       this.logger.error(error)
       throw new UnAuthorizedException('invalid token')
