@@ -1,3 +1,4 @@
+import { Roles } from "src/common/constants"
 
   
 export interface currentUserData{
@@ -8,6 +9,6 @@ export interface currentUserData{
 
 export interface Iprincipal {
     user:currentUserData
-    role:string
+    role:Roles
 
 }

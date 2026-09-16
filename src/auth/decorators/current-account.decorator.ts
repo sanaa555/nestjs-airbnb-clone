@@ -3,6 +3,7 @@
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
 import { RequestWithUser } from '../guards/jwt-auth.guard';
 import { currentUserData, Iprincipal } from '../interfaces/principal.interface';
+import { Roles } from 'src/common/constants';
 
 export const CurrentAccount = createParamDecorator((data:unknown,context:ExecutionContext)=>{
     const request=context.switchToHttp().getRequest<RequestWithUser>()
@@ -19,7 +20,7 @@ export class Principale implements Iprincipal{
 
     constructor(
       public  user:currentUserData,
-      public  role:string
+      public  role:Roles
     ){}
 
 }
