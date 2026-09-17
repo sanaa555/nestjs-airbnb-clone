@@ -27,7 +27,7 @@ export class FindCountryByIdUseCase{
         })
         if(!country) throw new NotFoundException('country not found')
 
-            return plainToInstance(CountryResponseDto,country.toObject())
+            return plainToInstance(CountryResponseDto,country)
      
 
     }
