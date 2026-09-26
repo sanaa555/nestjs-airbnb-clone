@@ -1,0 +1,17 @@
+$kind: http-request
+url: "{{URL}}/currencies"
+method: GET
+headers:
+  Authorization: Bearer {{token}}
+queryParams:
+  - key: name
+    value: EGY
+    disabled: true
+  - key: currencyCode
+    value: USD
+    disabled: true
+body:
+  type: json
+  content: ""
+settings: {}
+order: 5000

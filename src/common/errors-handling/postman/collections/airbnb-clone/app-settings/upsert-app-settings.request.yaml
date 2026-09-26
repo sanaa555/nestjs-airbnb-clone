@@ -1,0 +1,18 @@
+$kind: http-request
+url: "{{URL}}/app-settings"
+method: PUT
+headers:
+  Authorization: Bearer {{token}}
+body:
+  type: json
+  content: "{\r
+
+    \    \"vatRate\":14,\r
+
+    \    \"minPrice\":100\r
+
+    \r
+
+    }"
+settings: {}
+order: 1000

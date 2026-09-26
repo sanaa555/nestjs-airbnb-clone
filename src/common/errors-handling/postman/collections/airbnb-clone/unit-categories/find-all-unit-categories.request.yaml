@@ -1,0 +1,14 @@
+$kind: http-request
+url: "{{URL}}/unit-categories"
+method: GET
+headers:
+  Authorization: Bearer {{token}}
+queryParams:
+  - key: name
+    value: flat
+    disabled: true
+body:
+  type: json
+  content: ""
+settings: {}
+order: 5000

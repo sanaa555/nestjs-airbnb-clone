@@ -1,0 +1,16 @@
+$kind: http-request
+url: "{{URL}}/currencies/6aa21fcb78ad68568d04a482"
+method: PATCH
+headers:
+  Authorization: Bearer {{token}}
+body:
+  type: json
+  content: "{\r
+
+    \r
+
+    \    \"name\":\"Egypttion pounds\"\r
+
+    }"
+settings: {}
+order: 4000

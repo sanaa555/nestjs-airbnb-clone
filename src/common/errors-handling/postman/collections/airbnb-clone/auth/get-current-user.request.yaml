@@ -1,0 +1,20 @@
+$kind: http-request
+url: "{{URL}}/auth/me"
+method: GET
+headers:
+  Authorization: Bearer {{token}}
+body:
+  type: text
+  content: "{\r
+
+    \r
+
+    \    \"email\":\"jud@gmail.com\",\r
+
+    \    \"password\":\"jud@123\",\r
+
+    \    \"role\":\"user\"\r
+
+    }"
+settings: {}
+order: 5000

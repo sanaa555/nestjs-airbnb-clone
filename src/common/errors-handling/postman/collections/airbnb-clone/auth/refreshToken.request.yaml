@@ -1,0 +1,24 @@
+$kind: http-request
+url: "{{URL}}/auth/refresh-token"
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \"refreshToken\":\"{{json_web_token_1cd5}}\"\r
+
+    }"
+scripts:
+  - type: afterResponse
+    code: "let jsonData = pm.response.json();\r
+
+      \r
+
+      pm.environment.set(\"token\", jsonData.data.accessToken);\r
+
+      \r
+
+      console.log(pm.environment.get(\"token\"));"
+    language: text/javascript
+settings: {}
+order: 4000

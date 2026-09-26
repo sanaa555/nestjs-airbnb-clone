@@ -1,0 +1,16 @@
+$kind: http-request
+url: "{{URL}}{/countries"
+method: POST
+headers:
+  Authorization: Bearer {{token}}
+body:
+  type: json
+  content: "{\r
+
+    \    \"name\":\"canada\",\r
+
+    \    \"countryCode\":\"CAN\"\r
+
+    }"
+settings: {}
+order: 1000

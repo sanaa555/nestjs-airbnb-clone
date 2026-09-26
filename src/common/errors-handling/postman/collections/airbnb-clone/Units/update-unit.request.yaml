@@ -1,0 +1,15 @@
+$kind: http-request
+url: "{{URL}}/units/6ab74eacefbaf26d863077f1"
+method: PATCH
+headers:
+  Authorization: Bearer {{token}}
+body:
+  type: json
+  content: "{\r
+
+    \  \"country\": \"6a9e5f8cd6aaa015cc5af953\",\r
+
+    \  \"city\": \"6aa09c4cd0ba6df7f2db39ec\"\r
+
+    }"
+order: 1230

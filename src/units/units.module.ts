@@ -4,12 +4,23 @@ import { UnitsService } from './units.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ModelNames } from 'src/common/data-access';
 import { UnitSchema } from './schema/unit.schema';
+import { UnitRepository } from './repositories/unit.repository';
+import { SystemAdminsModule } from 'src/system-admins/system-admins.module';
+import { CitiesModule } from 'src/cities/cities.module';
+import { CountriesModule } from 'src/countries/countries.module';
+import { UnitCategoriesModule } from 'src/unit-categories/unit-categories.module';
+import { UnitValidationUsecase } from './usecases/unit-validation.usecase';
+import { CreateUnitUsecase } from './usecases/create-unit.usecase';
+import { AppSettingsModule } from 'src/app-settings/app-settings.module';
+import { CheckUnitAuthUsecase } from './usecases/check-unit-auth.usecase';
+import { UpdateUnitUsecase } from './usecases/update-unit.usecase';
+import { FindoneUnitUsecase } from './usecases/find-one.usecase';
 
 @Module({
 
-    imports:[MongooseModule.forFeature([{ name: ModelNames.UNITS, schema: UnitSchema }])],
+    imports:[MongooseModule.forFeature([{ name: ModelNames.UNITS, schema: UnitSchema }]),SystemAdminsModule,CitiesModule,CountriesModule,UnitCategoriesModule,AppSettingsModule],
   
   controllers: [UnitsController],
-  providers: [UnitsService]
+  providers: [UnitsService,UnitRepository,UnitValidationUsecase,CreateUnitUsecase,CheckUnitAuthUsecase,UpdateUnitUsecase,FindoneUnitUsecase]
 })
 export class UnitsModule {}

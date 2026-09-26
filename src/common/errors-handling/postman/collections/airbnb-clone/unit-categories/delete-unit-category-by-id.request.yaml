@@ -1,0 +1,7 @@
+$kind: http-request
+url: "{{URL}}/unit-categories/6aa328d4847184ee59310d1d"
+method: DELETE
+headers:
+  Authorization: Bearer {{token}}
+settings: {}
+order: 3000

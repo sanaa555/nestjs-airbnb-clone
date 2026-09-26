@@ -1,0 +1,16 @@
+$kind: http-request
+url: "{{URL}}/cities"
+method: POST
+headers:
+  Authorization: Bearer {{token}}
+body:
+  type: json
+  content: "{\r
+
+    \    \"name\":\"اربيل\",\r
+
+    \    \"country\":\"6aa0a16ad0ba6df7f2db39f3\"\r
+
+    }"
+settings: {}
+order: 1000

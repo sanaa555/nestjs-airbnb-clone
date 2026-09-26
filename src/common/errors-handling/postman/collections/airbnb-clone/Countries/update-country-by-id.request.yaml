@@ -1,0 +1,10 @@
+$kind: http-request
+url: "{{URL}}/countries/6a8d79f246dd54cedbf3c0b2"
+method: PATCH
+headers:
+  Authorization: Bearer {{token}}
+body:
+  type: json
+  content: "{\r\n\r\n    \"name\":\"Egypt\"\r\n}"
+settings: {}
+order: 4000

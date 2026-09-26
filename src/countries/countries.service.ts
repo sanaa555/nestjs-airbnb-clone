@@ -9,6 +9,9 @@ import { UpdateCountryUseCase } from './usecases/update-country.usecase';
 import { UpdateCountryDto } from './dtos/update-country.dto';
 import { FindAllDto } from './dtos/find-all.dto';
 import { PaginatedResult } from 'src/common/data-access';
+import { FindOneUsecase } from './usecases/find-one-country.usecase';
+import { Country } from './schema/country.schema';
+import { QueryFilter } from 'mongoose';
 
 @Injectable()
 export class CountriesService {
@@ -21,6 +24,7 @@ export class CountriesService {
 
             private readonly softDeleteUseCase:SoftDeleteUseCase,
             private readonly updateCountryUseCase:UpdateCountryUseCase,
+            private readonly FindOneUsecase:FindOneUsecase
 
 
 
@@ -47,6 +51,10 @@ export class CountriesService {
 
     async updateById(body:UpdateCountryDto,id:string):Promise<CountryResponseDto>{
         return  this.updateCountryUseCase.excute(body,id)
+    }
+
+    async findOne(query:QueryFilter<Country>):Promise<CountryResponseDto>{
+         return this.FindOneUsecase.excute(query)
     }
 
 

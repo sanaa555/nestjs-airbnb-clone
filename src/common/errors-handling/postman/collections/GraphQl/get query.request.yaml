@@ -1,0 +1,17 @@
+$kind: http-request
+url: http://localhost:3000/graphql
+method: POST
+body:
+  type: graphql
+  content:
+    query: "{\r
+
+      \    products{\r
+
+      \        name\r
+
+      \    }\r
+
+      }"
+settings: {}
+order: 1000
