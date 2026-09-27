@@ -1,4 +1,4 @@
-import { Body, Controller, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Post, Query } from '@nestjs/common';
 import { CreateUnitDto } from './dtos/create-unit.dto';
 import { UnitResponseDto } from './dtos/unit-response.dto';
 import { CurrentAccount, Principale } from 'src/auth/decorators/current-account.decorator';
@@ -7,6 +7,9 @@ import { Authorize } from 'src/auth/decorators/roles.decorator';
 import { Roles } from 'src/common/constants';
 import { UpdateUnitDto } from './dtos/update-unit.dto ';
 import { UnitIdDto } from './dtos/unit-id.dto';
+import { Public } from 'src/auth/decorators/public.decorator';
+import { PaginatedResult } from 'src/common/data-access';
+import { FindAllDto } from './dtos/find-all-units.dto';
 
 @Controller('units')
 export class UnitsController {
@@ -30,5 +33,15 @@ export class UnitsController {
             return this.unitsService.update(Param.id,body,principale.user)
 
          }
+    @Public()
+    @Get()
+    async findAll(@Query() query:FindAllDto):Promise<PaginatedResult<UnitResponseDto>>{
+        return this.unitsService.findAll(query)
 
+    }
+     @Public()
+    @Get(':id')
+     async findById ( @Param()param:UnitIdDto):Promise<UnitResponseDto>{
+         return this.unitsService.findById(param.id)
+     }
 }
