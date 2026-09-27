@@ -17,12 +17,13 @@ import { UpdateUnitUsecase } from './usecases/update-unit.usecase';
 import { FindoneUnitUsecase } from './usecases/find-one.usecase';
 import { FindAllUnitsUsacase } from './usecases/find-all-units.usecase';
 import { FindUnitByIdUsecase } from './usecases/find-unit-by-id.usecase';
+import { FindAllUnitsByUserUsacase } from './usecases/find-all-units-by-user].usecase copy';
 
 @Module({
 
     imports:[MongooseModule.forFeature([{ name: ModelNames.UNITS, schema: UnitSchema }]),SystemAdminsModule,CitiesModule,CountriesModule,UnitCategoriesModule,AppSettingsModule],
   
   controllers: [UnitsController],
-  providers: [UnitsService,UnitRepository,UnitValidationUsecase,CreateUnitUsecase,CheckUnitAuthUsecase,UpdateUnitUsecase,FindoneUnitUsecase,FindAllUnitsUsacase,FindUnitByIdUsecase]
+  providers: [UnitsService,UnitRepository,UnitValidationUsecase,CreateUnitUsecase,CheckUnitAuthUsecase,UpdateUnitUsecase,FindoneUnitUsecase,FindAllUnitsUsacase,FindUnitByIdUsecase,FindAllUnitsByUserUsacase]
 })
 export class UnitsModule {}

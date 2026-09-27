@@ -9,6 +9,7 @@ import { FindAllDto } from './dtos/find-all-units.dto';
 import { PaginatedResult } from 'src/common/data-access';
 import { FindAllUnitsUsacase } from './usecases/find-all-units.usecase';
 import { FindUnitByIdUsecase } from './usecases/find-unit-by-id.usecase';
+import { FindAllUnitsByUserUsacase } from './usecases/find-all-units-by-user].usecase copy';
 
 @Injectable()
 export class UnitsService {
@@ -17,7 +18,8 @@ export class UnitsService {
         private readonly createUnitUsecase:CreateUnitUsecase,
         private readonly updateUnitUsecase:UpdateUnitUsecase,
         private readonly findAllUnitsUsacase:FindAllUnitsUsacase,
-        private readonly findUnitByIdUsecase:FindUnitByIdUsecase
+        private readonly findUnitByIdUsecase:FindUnitByIdUsecase,
+        private readonly findAllUnitsByUserUsacase:FindAllUnitsByUserUsacase
     ){}
 
 
@@ -39,6 +41,11 @@ export class UnitsService {
 
         async  findById(id:string):Promise<UnitResponseDto>{
                return await this.findUnitByIdUsecase.excute(id)
+        }
+
+        async findAllByUser(query:FindAllDto,currentUser:currentUserData):Promise<PaginatedResult<UnitResponseDto>>{
+             
+            return await this.findAllUnitsByUserUsacase.excute(query,currentUser)
         }
 
     

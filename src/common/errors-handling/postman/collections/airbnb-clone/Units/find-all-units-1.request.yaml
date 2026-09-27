@@ -1,0 +1,47 @@
+$kind: http-request
+name: find-all-units
+url: "{{URL}}/units"
+method: GET
+headers:
+  Authorization: Bearer {{token}}
+body:
+  type: json
+  content: "{\r
+
+    \  \"title\": \"Modern Villa Arabi\",\r
+
+    \  \"description\": \"A spacious modern villa with a private garden and
+    comfortable rooms.\",\r
+
+    \  \"address\": \"10 Pyramids Road, Arabi\",\r
+
+    \  \"photos\": [\r
+
+    \    \"https://example.com/images/villa-1.jpg\",\r
+
+    \    \"https://example.com/images/villa-2.jpg\"\r
+
+    \  ],\r
+
+    \  \"costPerDay\": 2500,\r
+
+    \  \"country\": \"6aa0a16ad0ba6df7f2db39f3\",\r
+
+    \  \"city\": \"6aa0a34ad0ba6df7f2db3a02\",\r
+
+    \  \"unitCategory\": \"6aa3292b847184ee59310d22\",\r
+
+    \  \"roomsCount\": 4,\r
+
+    \  \"adultsCount\": 6,\r
+
+    \  \"kidsCount\": 2,\r
+
+    \  \"hasInternetService\": true,\r
+
+    \  \"hasKitchen\": true,\r
+
+    \  \"hasPrivateGarage\": true\r
+
+    }"
+order: 3076

@@ -39,9 +39,19 @@ export class UnitsController {
         return this.unitsService.findAll(query)
 
     }
+
+    @Authorize(Roles.USER)
+     @Get('/my-units')
+     async findAllByUser(@Query() query:FindAllDto,@CurrentAccount() principale:Principale):Promise<PaginatedResult<UnitResponseDto>>{
+
+        return this.unitsService.findAllByUser(query,principale.user)
+     }
+
      @Public()
-    @Get(':id')
+    @Get('/:id')
      async findById ( @Param()param:UnitIdDto):Promise<UnitResponseDto>{
          return this.unitsService.findById(param.id)
      }
+
+     
 }
