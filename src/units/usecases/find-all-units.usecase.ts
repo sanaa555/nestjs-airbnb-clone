@@ -15,7 +15,8 @@ export class FindAllUnitsUsacase{
 
     async excute(query:FindAllDto):Promise<PaginatedResult<UnitResponseDto>>{
         const matchquery:QueryFilter<Unit>={
-            isDeleted:{$ne:true}
+            isDeleted:{$ne:true},
+            isActive:true
         }
 
         if(query?.title) matchquery.title={$regex:query.title,$options:'i'}

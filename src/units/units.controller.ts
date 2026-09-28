@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Patch, Post, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Patch, Post, Query } from '@nestjs/common';
 import { CreateUnitDto } from './dtos/create-unit.dto';
 import { UnitResponseDto } from './dtos/unit-response.dto';
 import { CurrentAccount, Principale } from 'src/auth/decorators/current-account.decorator';
@@ -52,6 +52,33 @@ export class UnitsController {
      async findById ( @Param()param:UnitIdDto):Promise<UnitResponseDto>{
          return this.unitsService.findById(param.id)
      }
+
+     @Authorize(Roles.USER)
+     @HttpCode(HttpStatus.NO_CONTENT)
+     @Delete("/:id")
+     async softdelete(@Param() param:UnitIdDto,@CurrentAccount() principale:Principale):Promise<void>{
+         
+        return this.unitsService.softDelete(param.id,principale.user)
+
+     }
+    
+      @Authorize(Roles.USER)
+        @Patch('/:id/active')
+     async activate(@Param() param:UnitIdDto,@CurrentAccount() principale:Principale):Promise<UnitResponseDto>{
+
+        return this.unitsService.activate(param.id,principale.user)
+
+     }
+
+     
+        @Authorize(Roles.USER)
+        @Patch('/:id/deactive')
+     async deactivate(@Param() param:UnitIdDto,@CurrentAccount() principale:Principale):Promise<UnitResponseDto>{
+
+        return this.unitsService.deactivate(param.id,principale.user)
+
+     }
+
 
      
 }

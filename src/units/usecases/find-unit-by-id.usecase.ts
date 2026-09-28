@@ -3,6 +3,7 @@ import { UnitResponseDto } from "../dtos/unit-response.dto";
 import { UnitRepository } from "../repositories/unit.repository";
 import { plainToInstance } from "class-transformer";
 import { BadRequestException } from "src/common/errors-handling/custom-exceptions/bad-request.exception";
+import { currentUserData } from "src/auth/interfaces/principal.interface";
 
 @Injectable()
 export class FindUnitByIdUsecase{
@@ -14,7 +15,9 @@ export class FindUnitByIdUsecase{
      
         const unit = await this.unitRepository.findOne({
             _id:id,
-            isDeleted:false
+            isDeleted:false,
+              isActive: true
+
         })
 
         if(!unit) throw new BadRequestException(`unit with id${id} not exist`)

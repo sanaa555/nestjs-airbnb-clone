@@ -24,7 +24,7 @@ export class UpdateUnitUsecase{
               //get unit
            const unit= await this.findoneUnitUsecase.excute({_id:id })
 
-            this.checkUnitAuthUsecase.excute(unit.user.toString(),currentUser)
+               this.checkUnitAuthUsecase.excute(unit.user.toString(),currentUser)
         
         //2-the same validation for creat unit
            await this.unitValidationUsecase.excute(body,unit)

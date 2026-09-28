@@ -10,6 +10,9 @@ import { PaginatedResult } from 'src/common/data-access';
 import { FindAllUnitsUsacase } from './usecases/find-all-units.usecase';
 import { FindUnitByIdUsecase } from './usecases/find-unit-by-id.usecase';
 import { FindAllUnitsByUserUsacase } from './usecases/find-all-units-by-user].usecase copy';
+import { DeleteUnitUseCase } from './usecases/soft-delete-unit.usecase';
+import { ActivateUnitUseCase } from './usecases/activate-unit.usecase ';
+import { DeActivateUnitUseCase } from './usecases/deactivate-unit.usecase ';
 
 @Injectable()
 export class UnitsService {
@@ -19,7 +22,11 @@ export class UnitsService {
         private readonly updateUnitUsecase:UpdateUnitUsecase,
         private readonly findAllUnitsUsacase:FindAllUnitsUsacase,
         private readonly findUnitByIdUsecase:FindUnitByIdUsecase,
-        private readonly findAllUnitsByUserUsacase:FindAllUnitsByUserUsacase
+        private readonly findAllUnitsByUserUsacase:FindAllUnitsByUserUsacase,
+        private readonly deleteUnitUseCase:DeleteUnitUseCase,
+        private readonly activateUnitUseCase:ActivateUnitUseCase,
+        private readonly deActivateUnitUseCase:DeActivateUnitUseCase,
+
     ){}
 
 
@@ -47,6 +54,24 @@ export class UnitsService {
              
             return await this.findAllUnitsByUserUsacase.excute(query,currentUser)
         }
+            async softDelete(unitId:string,currentUser:currentUserData):Promise<void>{
+                 
+                return this.deleteUnitUseCase.excute(unitId,currentUser)
+            }
+
+         
+            async activate(unitId:string,currentUser:currentUserData):Promise<UnitResponseDto>{
+
+                return this.activateUnitUseCase.excute(unitId,currentUser)
+
+            }
+
+                        async deactivate(unitId:string,currentUser:currentUserData):Promise<UnitResponseDto>{
+
+                return this.deActivateUnitUseCase.excute(unitId,currentUser)
+
+            }
+
 
     
 }

@@ -34,6 +34,10 @@ export class UnitResponseDto{
      hasKitchen:boolean;
     
     hasPrivateGarage:boolean;
+    
+    isActive:boolean;
+    
+    isDeleted:boolean;
 
     
 } 

@@ -33,8 +33,6 @@ export class CreateUnitDto{
     @IsMongoId()
     unitCategory:string
 
-  @IsNotEmpty()
-    user:string
 
 
     @IsNotEmpty() 

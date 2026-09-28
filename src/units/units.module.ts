@@ -18,12 +18,15 @@ import { FindoneUnitUsecase } from './usecases/find-one.usecase';
 import { FindAllUnitsUsacase } from './usecases/find-all-units.usecase';
 import { FindUnitByIdUsecase } from './usecases/find-unit-by-id.usecase';
 import { FindAllUnitsByUserUsacase } from './usecases/find-all-units-by-user].usecase copy';
+import { DeleteUnitUseCase } from './usecases/soft-delete-unit.usecase';
+import { DeActivateUnitUseCase } from './usecases/deactivate-unit.usecase ';
+import { ActivateUnitUseCase } from './usecases/activate-unit.usecase ';
 
 @Module({
 
     imports:[MongooseModule.forFeature([{ name: ModelNames.UNITS, schema: UnitSchema }]),SystemAdminsModule,CitiesModule,CountriesModule,UnitCategoriesModule,AppSettingsModule],
   
   controllers: [UnitsController],
-  providers: [UnitsService,UnitRepository,UnitValidationUsecase,CreateUnitUsecase,CheckUnitAuthUsecase,UpdateUnitUsecase,FindoneUnitUsecase,FindAllUnitsUsacase,FindUnitByIdUsecase,FindAllUnitsByUserUsacase]
+  providers: [UnitsService,UnitRepository,UnitValidationUsecase,CreateUnitUsecase,CheckUnitAuthUsecase,UpdateUnitUsecase,FindoneUnitUsecase,FindAllUnitsUsacase,FindUnitByIdUsecase,FindAllUnitsByUserUsacase,DeleteUnitUseCase,DeActivateUnitUseCase,ActivateUnitUseCase]
 })
 export class UnitsModule {}

@@ -1,16 +1,13 @@
 $kind: http-request
-url: "{{URL}}/units/6ab74971f7474a28d4c64bb3"
+url: "{{URL}}/units/6aba89cf2029e97383ccccf9"
 method: GET
-headers:
-  Authorization: Bearer {{token}}
 body:
   type: json
   content: "{\r
 
     \  \"title\": \"Modern Villa Arabi\",\r
 
-    \  \"description\": \"A spacious modern villa with a private garden and
-    comfortable rooms.\",\r
+    \  \"description\": \"A spacious modern villa with a private garden and comfortable rooms.\",\r
 
     \  \"address\": \"10 Pyramids Road, Arabi\",\r
 
@@ -43,4 +40,4 @@ body:
     \  \"hasPrivateGarage\": true\r
 
     }"
-order: 2000
+order: 5000

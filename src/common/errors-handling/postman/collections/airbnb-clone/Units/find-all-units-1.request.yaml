@@ -2,8 +2,6 @@ $kind: http-request
 name: find-all-units
 url: "{{URL}}/units"
 method: GET
-headers:
-  Authorization: Bearer {{token}}
 body:
   type: json
   content: "{\r
@@ -44,4 +42,4 @@ body:
     \  \"hasPrivateGarage\": true\r
 
     }"
-order: 3076
+order: 6000
