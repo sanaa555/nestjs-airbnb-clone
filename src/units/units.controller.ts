@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Patch, Post, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Patch, Post, Query, UploadedFiles, UseInterceptors } from '@nestjs/common';
 import { CreateUnitDto } from './dtos/create-unit.dto';
 import { UnitResponseDto } from './dtos/unit-response.dto';
 import { CurrentAccount, Principale } from 'src/auth/decorators/current-account.decorator';
@@ -10,18 +10,33 @@ import { UnitIdDto } from './dtos/unit-id.dto';
 import { Public } from 'src/auth/decorators/public.decorator';
 import { PaginatedResult } from 'src/common/data-access';
 import { FindAllDto } from './dtos/find-all-units.dto';
+import { FilesInterceptor } from '@nestjs/platform-express';
+import { maxFileSize } from 'src/common/files/constants/file-count.constant';
+import { createParseFilePipe } from 'src/common/files/validators/files-validation-factory';
+import { FilesUploadService } from 'src/files-upload/files-upload.service';
+
+type MulterFile=Express.Multer.File
 
 @Controller('units')
 export class UnitsController {
 
     constructor(
-                private readonly unitsService :UnitsService
+                private readonly unitsService :UnitsService,
+               private readonly filesUploadService :FilesUploadService
 
     ){}
  
      @Authorize(Roles.USER)
     @Post()
-    async create(@Body() body:CreateUnitDto,@CurrentAccount() principale: Principale): Promise<UnitResponseDto>{
+        @UseInterceptors(FilesInterceptor('photos',maxFileSize.UNITS_IMAGES))
+
+    async create( @UploadedFiles( createParseFilePipe('2MB',['jpg','png']))    photos: MulterFile[],
+      @Body() body:CreateUnitDto,@CurrentAccount() principale: Principale,
+
+
+   ): Promise<UnitResponseDto>{
+       // upload images s3- return list [url,url,url]
+       //body.photos=[url,url,url]
         return this.unitsService.create(body,principale.user)
          
 

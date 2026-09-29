@@ -14,8 +14,9 @@ import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
 import { RolesGuard } from './auth/guards/roles.guard';
 import { TransformResponseInterceptor } from './common/interceptors/transform-response.interceptor';
 import { UnitsModule } from './units/units.module';
+import { FilesUploadModule } from './files-upload/files-upload.module';
 @Module({
-  imports: [CoreModule, UsersModule, AuthModule, CountriesModule, CitiesModule, CurrenciesModule,UnitCategoriesModule, AppSettingsModule, SystemAdminsModule, UnitsModule ],
+  imports: [CoreModule, UsersModule, AuthModule, CountriesModule, CitiesModule, CurrenciesModule,UnitCategoriesModule, AppSettingsModule, SystemAdminsModule, UnitsModule, FilesUploadModule ],
 
   controllers: [],
 

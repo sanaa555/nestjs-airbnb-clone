@@ -21,10 +21,11 @@ import { FindAllUnitsByUserUsacase } from './usecases/find-all-units-by-user].us
 import { DeleteUnitUseCase } from './usecases/soft-delete-unit.usecase';
 import { DeActivateUnitUseCase } from './usecases/deactivate-unit.usecase ';
 import { ActivateUnitUseCase } from './usecases/activate-unit.usecase ';
+import { FilesUploadModule } from 'src/files-upload/files-upload.module';
 
 @Module({
 
-    imports:[MongooseModule.forFeature([{ name: ModelNames.UNITS, schema: UnitSchema }]),SystemAdminsModule,CitiesModule,CountriesModule,UnitCategoriesModule,AppSettingsModule],
+    imports:[MongooseModule.forFeature([{ name: ModelNames.UNITS, schema: UnitSchema }]),SystemAdminsModule,CitiesModule,CountriesModule,UnitCategoriesModule,AppSettingsModule,FilesUploadModule],
   
   controllers: [UnitsController],
   providers: [UnitsService,UnitRepository,UnitValidationUsecase,CreateUnitUsecase,CheckUnitAuthUsecase,UpdateUnitUsecase,FindoneUnitUsecase,FindAllUnitsUsacase,FindUnitByIdUsecase,FindAllUnitsByUserUsacase,DeleteUnitUseCase,DeActivateUnitUseCase,ActivateUnitUseCase]
