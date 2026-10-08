@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { UploadSingleFileUsecase } from './usecases/upload-single-file.usecase';
 import { UploadMultipleFilesUsecase } from './usecases/upload-multiple-files.usecase';
 import { DeleteFileByUrlUsecase } from './usecases/delete-file-by-url.usecase';
+import { MulterFile } from './types/multer-file.type';
 
 @Injectable()
 export class FilesUploadService {
@@ -12,7 +13,8 @@ export class FilesUploadService {
 
     ){}
 
-    uploadSingleFile(){
+   async uploadSingleFile(file:MulterFile):Promise<string>{
+        return this.uploadSingleFileUsecase.excute(file)
 
     }
     uploadMultipleFile(){

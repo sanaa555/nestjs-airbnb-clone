@@ -1,4 +1,5 @@
-import { IsMongoId, IsNotEmpty, IsString, MaxLength, Min, MinLength } from "class-validator";
+import { Type } from "class-transformer";
+import { IsMongoId, IsNotEmpty, IsNumber, IsOptional, IsString, MaxLength, Min, MinLength } from "class-validator";
 
 
 export class CreateUnitDto{
@@ -14,12 +15,15 @@ export class CreateUnitDto{
     @IsNotEmpty()
     address:string;
 
-    @IsNotEmpty()
-    photos:string[];
+    @IsOptional()
+    photos?:string[];
 
      @IsNotEmpty()
+       @Type(() => Number)
+     @IsNumber()
      @Min(1)
     costPerDay:number;
+
 
     @IsNotEmpty()
     @IsMongoId()

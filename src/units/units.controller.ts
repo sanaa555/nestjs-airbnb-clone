@@ -14,8 +14,8 @@ import { FilesInterceptor } from '@nestjs/platform-express';
 import { maxFileSize } from 'src/common/files/constants/file-count.constant';
 import { createParseFilePipe } from 'src/common/files/validators/files-validation-factory';
 import { FilesUploadService } from 'src/files-upload/files-upload.service';
+import { MulterFile } from 'src/files-upload/types/multer-file.type';
 
-type MulterFile=Express.Multer.File
 
 @Controller('units')
 export class UnitsController {
@@ -31,12 +31,13 @@ export class UnitsController {
         @UseInterceptors(FilesInterceptor('photos',maxFileSize.UNITS_IMAGES))
 
     async create( @UploadedFiles( createParseFilePipe('2MB',['jpg','png']))    photos: MulterFile[],
-      @Body() body:CreateUnitDto,@CurrentAccount() principale: Principale,
-
-
-   ): Promise<UnitResponseDto>{
+      @Body() body:CreateUnitDto,
+      @CurrentAccount() principale: Principale, ): Promise<UnitResponseDto>{
        // upload images s3- return list [url,url,url]
+             const firstPhoto=photos[0]
+             const uploadedPhotoUrl= await this.filesUploadService.uploadSingleFile(firstPhoto)
        //body.photos=[url,url,url]
+       body.photos=[uploadedPhotoUrl]
         return this.unitsService.create(body,principale.user)
          
 

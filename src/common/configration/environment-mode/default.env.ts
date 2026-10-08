@@ -15,7 +15,14 @@ export const defaultEnv=():Environment=>{
             email:process.env.SYSTEM_ADMIN_EMAIL as string,
             password:process.env.SYSTEM_ADMIN_PASSWORD as string,
 
+        },
+        awsS3:{
+            bucketName:process.env.AWS_S3_BUCKET_NAME as string,
+            region:process.env.AWS_S3_REGION as string,
+            accessKeyId:process.env.AWS_S3_ACCESS_KEY_ID as string,
+            secretAccessKey:process.env.AWS_S3_SECRET_KEY as string,
         }
+
    
 
 }
