@@ -17,7 +17,8 @@ export class FilesUploadService {
         return this.uploadSingleFileUsecase.excute(file)
 
     }
-    uploadMultipleFile(){
+   async uploadMultipleFile(files:MulterFile[]):Promise<string[]>{
+    return this.uploadMultipleFilesUsecase.excute(files)
 
     }
     DeleteFileByUrl(){

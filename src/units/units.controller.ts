@@ -34,10 +34,8 @@ export class UnitsController {
       @Body() body:CreateUnitDto,
       @CurrentAccount() principale: Principale, ): Promise<UnitResponseDto>{
        // upload images s3- return list [url,url,url]
-             const firstPhoto=photos[0]
-             const uploadedPhotoUrl= await this.filesUploadService.uploadSingleFile(firstPhoto)
        //body.photos=[url,url,url]
-       body.photos=[uploadedPhotoUrl]
+        body.photos= await this.filesUploadService.uploadMultipleFile(photos)
         return this.unitsService.create(body,principale.user)
          
 

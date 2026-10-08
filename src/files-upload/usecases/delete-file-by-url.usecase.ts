@@ -9,7 +9,7 @@ export class DeleteFileByUrlUsecase{
     
         async excute(){
             
-            return await this.s3FileStorageService.DeleteFileByUrl()
+            // return await this.s3FileStorageService.DeleteFileByUrl()
         }
     
 }
