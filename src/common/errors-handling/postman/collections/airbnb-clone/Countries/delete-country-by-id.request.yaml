@@ -1,0 +1,9 @@
+$kind: http-request
+url: "{{URL}}/6aa09454a17b3d85bdd12b9a?"
+method: DELETE
+headers:
+  Authorization: Bearer {{token}}
+queryParams:
+  "": null
+settings: {}
+order: 3000

@@ -1,0 +1,1 @@
+export type NonEmptyArrary<T>=[T,...T[]]//tuple

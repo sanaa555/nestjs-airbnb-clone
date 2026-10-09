@@ -1,0 +1,7 @@
+$kind: http-request
+url: "{{URL}}/currencies/6aa22148f2b06b7b4ecc2e9e"
+method: DELETE
+headers:
+  Authorization: Bearer {{token}}
+settings: {}
+order: 3000

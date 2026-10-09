@@ -11,11 +11,13 @@ import { CityRepository } from './repository/city-repository';
 import { FindCityByIdUseCase } from './use-cases/find-city-by-id.usecase';
 import { UpdateCityUseCase } from './use-cases/update-city.usecase';
 import { DeleteCityUseCase } from './use-cases/soft-delete-city.usecase';
+import { FindOneCityUsecase } from './use-cases/find-one-city.usecase';
 
 @Module({
 
   imports:[MongooseModule.forFeature([{ name: ModelNames.CITIES, schema: CitySchema }]),CountriesModule],
-  providers: [CitiesService,CreateCityUseCase,FindAllCitiesUseCase,CityRepository,FindCityByIdUseCase,UpdateCityUseCase,DeleteCityUseCase],
-  controllers: [CitiesController]
+  providers: [CitiesService,CreateCityUseCase,FindAllCitiesUseCase,CityRepository,FindCityByIdUseCase,UpdateCityUseCase,DeleteCityUseCase,FindOneCityUsecase],
+  controllers: [CitiesController],
+  exports:[CitiesService]
 })
 export class CitiesModule {}

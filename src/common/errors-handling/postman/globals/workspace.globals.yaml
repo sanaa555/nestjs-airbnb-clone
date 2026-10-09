@@ -1,0 +1,14 @@
+name: Globals
+values:
+  - key: Global-domain
+    value: ""
+    enabled: true
+  - key: ""
+    value: ""
+    enabled: true
+  - key: authorization
+    value: ""
+    enabled: true
+  - key: authorization
+    value: ""
+    enabled: true

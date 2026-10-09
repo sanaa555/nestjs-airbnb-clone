@@ -1,0 +1,7 @@
+$kind: http-request
+url: "{{URL}}/currencies/6aa21fcb78ad68568d04a482"
+method: GET
+headers:
+  Authorization: Bearer {{token}}
+settings: {}
+order: 2000

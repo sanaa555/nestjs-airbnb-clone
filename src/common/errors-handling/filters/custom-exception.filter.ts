@@ -31,9 +31,13 @@ export class CustomExceptionFilter implements ExceptionFilter {
                     return response.status(400).send({
                         errors:formattedErrors
                     })
-                  }
+                  } 
+
+
 
                    // unknown exception
+                    console.error(' REAL ERROR:', exception);
+
 
             response.status(500).json({
                 errors:[{

@@ -1,0 +1,19 @@
+$kind: http-request
+url: http://localhost:3001/files-upload/multiple?
+method: POST
+queryParams:
+  "": null
+body:
+  type: formdata
+  content:
+    - type: file
+      key: files
+      src:
+        - /C:/Users/DELL/Downloads/البطاقه.jpeg
+      disabled: true
+    - type: file
+      key: files
+      src:
+        - /C:/Users/DELL/Downloads/ChatGPT Image Aug 22, 2026, 08_20_55 AM.png
+settings: {}
+order: 2000

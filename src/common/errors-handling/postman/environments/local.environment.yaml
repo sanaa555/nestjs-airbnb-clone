@@ -1,0 +1,6 @@
+name: local
+values:
+  - key: token
+    secret: true
+  - key: URL
+    value: ''

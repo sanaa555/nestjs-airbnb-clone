@@ -12,6 +12,7 @@ import { FindAppSettingsUseCase } from './use-cases/find-app-settings-usecase';
     imports:[MongooseModule.forFeature([{ name: ModelNames.APP_SETTINGS, schema: AppSettingsSchema }])],
   
   providers: [AppSettingsService,ApppSettingsRepository,UpsertAppSettingsUseCase,FindAppSettingsUseCase],
-  controllers: [AppSettingsController]
+  controllers: [AppSettingsController],
+  exports:[AppSettingsService]
 })
 export class AppSettingsModule {}

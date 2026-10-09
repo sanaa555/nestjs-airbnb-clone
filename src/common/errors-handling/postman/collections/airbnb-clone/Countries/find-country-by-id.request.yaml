@@ -1,0 +1,7 @@
+$kind: http-request
+url: "{{URL}}/countries/6a8e19cb39fe7e35469c5b43"
+method: GET
+headers:
+  Authorization: Bearer {{token}}
+settings: {}
+order: 2000

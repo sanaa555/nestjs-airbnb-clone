@@ -1,0 +1,30 @@
+$kind: http-request
+url: "{{URL}}/auth/login"
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \r
+
+    \    \"email\":\"admin@gmail.com\",\r
+
+    \    \"password\":\"admin123\",\r
+
+    \    \"role\":\"system-admin\"\r
+
+    }"
+scripts:
+  - type: afterResponse
+    code: "let jsonData = pm.response.json();\r
+
+      \r
+
+      pm.environment.set(\"token\", jsonData.data.accessToken);\r
+
+      \r
+
+      console.log(pm.environment.get(\"token\"));"
+    language: text/javascript
+settings: {}
+order: 1000

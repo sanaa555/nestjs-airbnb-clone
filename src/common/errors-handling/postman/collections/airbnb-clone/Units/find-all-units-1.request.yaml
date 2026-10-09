@@ -1,0 +1,8 @@
+$kind: http-request
+name: find-all-units
+url: "{{URL}}/units"
+method: GET
+body:
+  type: json
+  content: ""
+order: 8000

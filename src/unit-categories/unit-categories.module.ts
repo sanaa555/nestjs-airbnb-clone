@@ -10,11 +10,13 @@ import {  FindUnitCategoryByIdUsecase } from './use-cases/find-unit-category-by-
 import {  DeleteUnitCategoryUsecase } from './use-cases/soft-delete-unit-category-usecase';
 import {  UpdateUnitCategoryUsecase } from './use-cases/update-unit-category-usecase';
 import {  UnitCategoriesRepository } from './repository/unit-categories.repository';
+import { FindOneUnitCategoryUsecase } from './use-cases/find-one-unit-category.usecase';
 
 @Module({
       imports: [MongooseModule.forFeature([{ name: ModelNames.UNIT_CATEGORIES, schema: UnitCategoriesSchema }])],
   
   controllers: [UnitCategoriesController],
-  providers: [UnitCategoriesRepository,UnitCategoriesService,CreateUnitCategoryUsecase,FindAllUnitCateoriesUsecase,FindUnitCategoryByIdUsecase,DeleteUnitCategoryUsecase,UpdateUnitCategoryUsecase]
+  providers: [UnitCategoriesRepository,UnitCategoriesService,CreateUnitCategoryUsecase,FindAllUnitCateoriesUsecase,FindUnitCategoryByIdUsecase,DeleteUnitCategoryUsecase,UpdateUnitCategoryUsecase,FindOneUnitCategoryUsecase],
+  exports:[UnitCategoriesService]
 })
 export class UnitCategoriesModule {}

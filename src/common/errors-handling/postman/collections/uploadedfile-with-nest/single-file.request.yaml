@@ -1,0 +1,14 @@
+$kind: http-request
+url: http://localhost:3001/files-upload/single?
+method: POST
+queryParams:
+  "": null
+body:
+  type: formdata
+  content:
+    - type: file
+      key: file
+      src:
+        - /C:/Users/DELL/Desktop/نجرب/image.png
+settings: {}
+order: 1000

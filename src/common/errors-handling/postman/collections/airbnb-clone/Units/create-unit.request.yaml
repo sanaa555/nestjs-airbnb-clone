@@ -1,0 +1,77 @@
+$kind: http-request
+url: "{{URL}}/units"
+method: POST
+headers:
+  Authorization: Bearer {{token}}
+body:
+  type: formdata
+  content:
+    - type: text
+      key: title
+      value: Cozy Beach House
+      disabled: false
+    - type: text
+      key: description
+      value: A spacious modern villa with a private garden, comfortable bedrooms, and a fully equipped kitchen. Perfect for families and small groups
+      disabled: false
+    - type: text
+      key: address
+      value: 15 North Teseen Street, New Cairo, Egypt
+      disabled: false
+    - type: file
+      key: photos
+      src:
+        - /C:/Users/DELL/Desktop/image5.jpg
+      disabled: false
+    - type: text
+      key: costPerDay
+      value: "2500"
+      disabled: false
+    - type: text
+      key: country
+      value: 6aa0a16ad0ba6df7f2db39f3
+      disabled: false
+    - type: text
+      key: city
+      value: 6aa0a34ad0ba6df7f2db3a02
+      disabled: false
+    - type: text
+      key: unitCategory
+      value: 6aa3292b847184ee59310d22
+      disabled: false
+    - type: text
+      key: roomsCount
+      value: "6"
+      disabled: false
+    - type: text
+      key: adultsCount
+      value: "7"
+      disabled: false
+    - type: text
+      key: kidsCount
+      value: "2"
+      disabled: false
+    - type: text
+      key: hasInternetService
+      value: "true"
+      disabled: false
+    - type: text
+      key: hasKitchen
+      value: "true"
+      disabled: false
+    - type: text
+      key: hasPrivateGarage
+      value: "true"
+      disabled: false
+    - type: file
+      key: photos
+      src:
+        - /C:/Users/DELL/Desktop/image4.jpg
+      description: ""
+      disabled: false
+    - type: file
+      key: photos
+      src: []
+      description: ""
+      disabled: true
+order: 10000

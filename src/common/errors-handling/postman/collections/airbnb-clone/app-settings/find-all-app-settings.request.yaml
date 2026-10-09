@@ -1,0 +1,10 @@
+$kind: http-request
+url: "{{URL}}/app-settings"
+method: GET
+headers:
+  Authorization: Bearer {{token}}
+body:
+  type: json
+  content: ""
+settings: {}
+order: 2000

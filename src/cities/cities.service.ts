@@ -9,6 +9,9 @@ import { FindCityByIdUseCase } from './use-cases/find-city-by-id.usecase';
 import { UpdateCityUseCase } from './use-cases/update-city.usecase';
 import { DeleteCityUseCase } from './use-cases/soft-delete-city.usecase';
 import { UpdateCityDto } from './dtos/update-city.dto';
+import { FindOneCityUsecase } from './use-cases/find-one-city.usecase';
+import { QueryFilter } from 'mongoose';
+import { City } from './schema/city.schema';
 
 @Injectable()
 export class CitiesService {
@@ -20,6 +23,7 @@ export class CitiesService {
                 private readonly findCityByIdUseCase:FindCityByIdUseCase,
                 private readonly updateCityUseCase:UpdateCityUseCase,
                 private readonly deleteCityUseCase:DeleteCityUseCase,
+                private readonly findOneCityUsecase:FindOneCityUsecase
     ){
     }
 
@@ -38,6 +42,12 @@ export class CitiesService {
 
     async findById(cityId:string): Promise<CityResponseDto>{
         return this.findCityByIdUseCase.excute(cityId)
+
+    }
+
+
+    async findOne(query : QueryFilter<City>): Promise<CityResponseDto>{
+        return this.findOneCityUsecase.excute(query)
 
     }
 

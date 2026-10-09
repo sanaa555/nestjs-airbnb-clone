@@ -1,0 +1,86 @@
+import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
+import { ModelNames } from "src/common/data-access";
+import { PhotoHash, PhotoHashSchema } from './photo-hash.schema';
+
+@Schema({timestamps:true})
+export class Unit{
+
+    @Prop({required:true,minLength:5,maxLength:100})
+    title:string;
+
+
+    @Prop({required:true})
+    description:string;
+
+
+    @Prop({required:true})
+    address:string;
+
+
+    @Prop({required:true})
+    photos:string[];
+
+
+    @Prop({required:true})
+    costPerDay:number;
+
+    @Prop({required:true,default:true})
+    availability:boolean
+
+    @Prop({required:true,ref:ModelNames.COUNTRIES})
+    country:string
+
+    
+    @Prop({required:true,ref:ModelNames.CITIES})
+    city:string
+
+    
+    @Prop({required:true,ref:ModelNames.UNIT_CATEGORIES})
+    unitCategory:string
+
+    
+    @Prop({required:true,ref:ModelNames.USERS})
+    user:string
+
+
+    
+    @Prop({required:true})
+    roomsCount:number;
+
+
+    
+    @Prop({required:true})
+    adultsCount:number;
+    
+    @Prop({required:true})
+    kidsCount:number;
+
+
+    
+    @Prop({required:true,default:false})
+    hasInternetService:boolean;
+
+    
+    @Prop({required:true,default:false})
+    hasKitchen:boolean;
+    
+    @Prop({required:true,default:false})
+    hasPrivateGarage:boolean;
+
+    
+    @Prop({required:true,default:true})
+    isActive:boolean;
+
+    
+    @Prop({default:false})
+    isDeleted:boolean;
+
+    
+    @Prop()
+    deletedAt:Date;
+
+    @Prop({ type: [PhotoHashSchema], default: [] })
+      photoHashes: PhotoHash[];
+} 
+
+export const UnitSchema= SchemaFactory.createForClass(Unit)

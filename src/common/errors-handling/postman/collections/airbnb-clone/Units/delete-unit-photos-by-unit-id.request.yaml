@@ -1,0 +1,14 @@
+$kind: http-request
+url: "{{URL}}/units/6ac791aa53ed3422445bc86e/photos"
+method: DELETE
+headers:
+  Authorization: Bearer {{token}}
+body:
+  type: json
+  content: "{\r
+
+    \    \"photos\":[\"https://airbnb-api-files-clone.s3.eu-north-1.amazonaws.c\
+    om/1791463845672-image1.jpg\"]\r
+
+    }"
+order: 6000

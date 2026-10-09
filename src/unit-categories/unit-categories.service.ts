@@ -9,6 +9,9 @@ import { UnitCategoryResponseDto } from './dtos/unit-category-response.dto';
 import { CreateUnitCategoryDto } from './dtos/create-unit-category.dto';
 import { FindAllUnitCategories } from './dtos/find-all.dto';
 import { UpdateUnitCategoryDto } from './dtos/update-unit-category.dto';
+import { QueryFilter } from 'mongoose';
+import { UnitCategories } from './schema/unit-categories.schema';
+import { FindOneUnitCategoryUsecase } from './use-cases/find-one-unit-category.usecase';
 
 @Injectable()
 export class UnitCategoriesService {
@@ -18,6 +21,8 @@ export class UnitCategoriesService {
                  private readonly findAllUnitCateoriesUsecase:FindAllUnitCateoriesUsecase,
                 private readonly deleteUnitCategoryUsecase:DeleteUnitCategoryUsecase,
                 private readonly updateUnitCategoryUsecase:UpdateUnitCategoryUsecase,
+                 private readonly findOneUnitCategoryUsecase:FindOneUnitCategoryUsecase,
+
     ){}
 
     async create(body:CreateUnitCategoryDto):Promise<UnitCategoryResponseDto>{
@@ -41,6 +46,10 @@ export class UnitCategoriesService {
     
         async updateById(id:string,body:UpdateUnitCategoryDto):Promise<UnitCategoryResponseDto>{
             return  this.updateUnitCategoryUsecase.excute(id,body)
+        }
+
+        async findone(query: QueryFilter<UnitCategories>):Promise<UnitCategoryResponseDto>{
+            return  this.findOneUnitCategoryUsecase.excute(query)
         }
     
 }

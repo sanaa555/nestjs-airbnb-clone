@@ -10,12 +10,13 @@ import { SoftDeleteUseCase } from './usecases/soft-delete-country.usecase';
 import { UpdateCountryUseCase } from './usecases/update-country.usecase';
 import { ModelNames } from 'src/common/data-access';
 import { CountryRepository } from './repository/country.repository';
+import { FindOneUsecase } from './usecases/find-one-country.usecase';
 
 @Module({
     imports: [MongooseModule.forFeature([{ name: ModelNames.COUNTRIES, schema: CountrySchema }])],
 
   controllers: [CountriesController],
-  providers: [CountriesService,CreateCountryUseCase,FindCountryByIdUseCase,FindAllCountriesUseCase,SoftDeleteUseCase,UpdateCountryUseCase,CountryRepository],
+  providers: [CountriesService,CreateCountryUseCase,FindCountryByIdUseCase,FindAllCountriesUseCase,SoftDeleteUseCase,UpdateCountryUseCase,CountryRepository,FindOneUsecase],
   exports:[CountriesService]
 })
 export class CountriesModule {}

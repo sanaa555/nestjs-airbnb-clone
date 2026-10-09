@@ -1,0 +1,19 @@
+workspace:
+  id: 930732ea-5b7a-40ff-8668-74b0dc13e472
+
+# Each entry here maps a local resource to one or more corresponding objects in Postman Cloud
+
+cloudResources:
+  collections:
+    ../postman/collections/uploadedfile-with-nest: 34606070-9ceaeef7-7ba7-4a93-a265-0546d8ee2067
+    ../postman/collections/airbnb-clone: 34606070-a80dcab8-2fd6-4080-92ac-6e4dab208284
+    ../postman/collections/GraphQl: 34606070-b5e9f1b6-1d0a-4939-ab6e-df237c706c76
+    ../postman/collections/Learn node: 34606070-b86809ad-2be4-447f-b55c-0f2a21e9134d
+    ../postman/collections/learning shopp: 34606070-8e112ccd-6736-4e5a-b3e2-eacb1ff70286
+    ../postman/collections/REST API basics- CRUD, test & variable Copy: 34606070-954e3217-f3f6-41a2-85f3-ec1f3ea2d155
+    ../postman/collections/E-commerce API: 34606070-a768f3e2-5021-4396-90a0-38c09e87d33c
+    ../postman/collections/REST API basics- CRUD, test & variable: 34606070-18c43638-d4fb-4ed0-913e-6c82d729bf10
+  environments:
+    ../postman/environments/local.environment.yaml: 34606070-8f77d314-e87a-4af3-8b75-cb270dff3e8a
+  globals:
+    ../postman/globals/workspace.globals.yaml: 41c7f5a5-48fd-4cda-8f6d-263eddf07543

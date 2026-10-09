@@ -1,0 +1,23 @@
+$kind: http-request
+url: "{{URL}}/cities"
+method: GET
+headers:
+  Authorization: Bearer {{token}}
+queryParams:
+  - key: name
+    value: c
+    disabled: true
+  - key: country
+    value: 6a9e686dd0540ab933e1e565
+    disabled: true
+  - key: limit
+    value: "1"
+    disabled: true
+  - key: page
+    value: "3"
+    disabled: true
+  - key: ignoreLimit
+    value: "true"
+    disabled: true
+settings: {}
+order: 2000

@@ -1,0 +1,9 @@
+$kind: http-request
+url: "{{URL}}/units/6aba89cf2029e97383ccccf9/active"
+method: PATCH
+headers:
+  Authorization: Bearer {{token}}
+body:
+  type: json
+  content: ""
+order: 3000
