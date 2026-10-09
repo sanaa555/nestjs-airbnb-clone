@@ -21,7 +21,8 @@ export class FilesUploadService {
     return this.uploadMultipleFilesUsecase.excute(files)
 
     }
-    DeleteFileByUrl(){
+    DeleteFileByUrl(urls:string | string[]):Promise<void>{
+        return this.deleteFileByUrlUsecase.excute(urls)
         
     }
 }

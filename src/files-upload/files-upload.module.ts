@@ -6,7 +6,7 @@ import { DeleteFileByUrlUsecase } from './usecases/delete-file-by-url.usecase';
 import { S3FileStorageService } from './storage/s3/s3-file-storage.service';
 
 @Module({
-  providers: [FilesUploadService,UploadSingleFileUsecase,UploadMultipleFilesUsecase,DeleteFileByUrlUsecase,S3FileStorageService],
+  providers: [FilesUploadService,UploadSingleFileUsecase,UploadMultipleFilesUsecase,DeleteFileByUrlUsecase,S3FileStorageService,DeleteFileByUrlUsecase],
   exports:[FilesUploadService]
 })
 export class FilesUploadModule {}

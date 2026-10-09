@@ -13,6 +13,7 @@ import { FindAllUnitsByUserUsacase } from './usecases/find-all-units-by-user].us
 import { DeleteUnitUseCase } from './usecases/soft-delete-unit.usecase';
 import { ActivateUnitUseCase } from './usecases/activate-unit.usecase ';
 import { DeActivateUnitUseCase } from './usecases/deactivate-unit.usecase ';
+import { DeleteUnitPhotoUsecase } from './usecases/delete-unit-photo.usecase';
 
 @Injectable()
 export class UnitsService {
@@ -26,6 +27,7 @@ export class UnitsService {
         private readonly deleteUnitUseCase:DeleteUnitUseCase,
         private readonly activateUnitUseCase:ActivateUnitUseCase,
         private readonly deActivateUnitUseCase:DeActivateUnitUseCase,
+        private readonly deleteUnitPhotoUsecase:DeleteUnitPhotoUsecase
 
     ){}
 
@@ -66,11 +68,16 @@ export class UnitsService {
 
             }
 
-                        async deactivate(unitId:string,currentUser:currentUserData):Promise<UnitResponseDto>{
+          async deactivate(unitId:string,currentUser:currentUserData):Promise<UnitResponseDto>{
 
                 return this.deActivateUnitUseCase.excute(unitId,currentUser)
 
             }
+            async deleteUnitPhotos(unitId:string,currentUser:currentUserData,body):Promise<void>{
+                 await this.deleteUnitPhotoUsecase.excute(unitId,currentUser,body)
+            }
+
+
 
 
     

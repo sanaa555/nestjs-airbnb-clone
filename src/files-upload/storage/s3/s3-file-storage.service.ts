@@ -1,4 +1,4 @@
-import {  S3 } from "@aws-sdk/client-s3";
+import {  DeleteObjectsCommand, S3 } from "@aws-sdk/client-s3";
 import { Upload } from "@aws-sdk/lib-storage";
 import { Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
@@ -63,7 +63,27 @@ export class S3FileStorageService{
       }
     }
 
-    
+async DeleteFilesByUrl(urls: string | string[]): Promise<void> {
+  try {
+    const urlsArray = Array.isArray(urls) ? urls : [urls];
+
+    await this.s3Client.send(
+      new DeleteObjectsCommand({
+        Bucket: this.bucketName,
+        Delete: {
+          Objects: urlsArray.map((url) => ({
+            Key: new URL(url).pathname.substring(1),
+          })),
+        },
+      }),
+    );
+  } catch (error) {
+    console.log(error);
+    throw new BadRequestException('failed to delete files from S3');
+  }
+}
+
+  
    private generateUniqueFileName(file:MulterFile):string{
       
         const fileName=`${Date.now()}-${file.originalname??file.filename}`

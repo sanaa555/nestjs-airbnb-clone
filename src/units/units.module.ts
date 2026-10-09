@@ -22,12 +22,13 @@ import { DeleteUnitUseCase } from './usecases/soft-delete-unit.usecase';
 import { DeActivateUnitUseCase } from './usecases/deactivate-unit.usecase ';
 import { ActivateUnitUseCase } from './usecases/activate-unit.usecase ';
 import { FilesUploadModule } from 'src/files-upload/files-upload.module';
+import { DeleteUnitPhotoUsecase } from './usecases/delete-unit-photo.usecase';
 
 @Module({
 
     imports:[MongooseModule.forFeature([{ name: ModelNames.UNITS, schema: UnitSchema }]),SystemAdminsModule,CitiesModule,CountriesModule,UnitCategoriesModule,AppSettingsModule,FilesUploadModule],
   
   controllers: [UnitsController],
-  providers: [UnitsService,UnitRepository,UnitValidationUsecase,CreateUnitUsecase,CheckUnitAuthUsecase,UpdateUnitUsecase,FindoneUnitUsecase,FindAllUnitsUsacase,FindUnitByIdUsecase,FindAllUnitsByUserUsacase,DeleteUnitUseCase,DeActivateUnitUseCase,ActivateUnitUseCase]
+  providers: [UnitsService,UnitRepository,UnitValidationUsecase,CreateUnitUsecase,CheckUnitAuthUsecase,UpdateUnitUsecase,FindoneUnitUsecase,FindAllUnitsUsacase,FindUnitByIdUsecase,FindAllUnitsByUserUsacase,DeleteUnitUseCase,DeActivateUnitUseCase,ActivateUnitUseCase,DeleteUnitPhotoUsecase]
 })
 export class UnitsModule {}

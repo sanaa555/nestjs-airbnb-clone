@@ -15,6 +15,7 @@ import { maxFileSize } from 'src/common/files/constants/file-count.constant';
 import { createParseFilePipe } from 'src/common/files/validators/files-validation-factory';
 import { FilesUploadService } from 'src/files-upload/files-upload.service';
 import { MulterFile } from 'src/files-upload/types/multer-file.type';
+import { DeleteUnitPhotosDto } from './dtos/delete-unit-photos.dto';
 
 
 @Controller('units')
@@ -92,6 +93,16 @@ export class UnitsController {
         return this.unitsService.deactivate(param.id,principale.user)
 
      }
+        @Authorize(Roles.USER)
+        @Delete('/:id/photos')
+        async DeleteBucketOwnershipControls$(@Param() param:UnitIdDto,
+        @CurrentAccount() principale:Principale,
+      @Body() body:DeleteUnitPhotosDto):Promise<void>{
+         
+         return this.unitsService.deleteUnitPhotos(param.id,principale.user,body)
+        }
+
+
 
 
      

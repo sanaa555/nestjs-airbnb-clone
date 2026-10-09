@@ -7,9 +7,9 @@ export class DeleteFileByUrlUsecase{
             private readonly s3FileStorageService:S3FileStorageService
         ){}
     
-        async excute(){
+        async excute(urls:string|string[]):Promise<void>{
             
-            // return await this.s3FileStorageService.DeleteFileByUrl()
+            return  this.s3FileStorageService.DeleteFilesByUrl(urls)
         }
     
 }
