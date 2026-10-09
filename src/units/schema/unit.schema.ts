@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { ModelNames } from "src/common/data-access";
+import { PhotoHash, PhotoHashSchema } from './photo-hash.schema';
 
 @Schema({timestamps:true})
 export class Unit{
@@ -77,6 +78,9 @@ export class Unit{
     
     @Prop()
     deletedAt:Date;
+
+    @Prop({ type: [PhotoHashSchema], default: [] })
+      photoHashes: PhotoHash[];
 } 
 
 export const UnitSchema= SchemaFactory.createForClass(Unit)

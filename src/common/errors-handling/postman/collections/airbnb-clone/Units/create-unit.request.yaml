@@ -12,16 +12,16 @@ body:
       disabled: false
     - type: text
       key: description
-      value: A cozy house near the beach with a beautiful sea view.
+      value: A spacious modern villa with a private garden, comfortable bedrooms, and a fully equipped kitchen. Perfect for families and small groups
       disabled: false
     - type: text
       key: address
-      value: 10 Pyramids Road, Arabi
+      value: 15 North Teseen Street, New Cairo, Egypt
       disabled: false
     - type: file
       key: photos
       src:
-        - /C:/Users/DELL/Desktop/image1.jpg
+        - /C:/Users/DELL/Desktop/image5.jpg
       disabled: false
     - type: text
       key: costPerDay
@@ -66,13 +66,12 @@ body:
     - type: file
       key: photos
       src:
-        - /C:/Users/DELL/Desktop/image2.jpg
+        - /C:/Users/DELL/Desktop/image4.jpg
       description: ""
       disabled: false
     - type: file
       key: photos
-      src:
-        - /C:/Users/DELL/Desktop/image3.jpg
+      src: []
       description: ""
-      disabled: false
-order: 9000
+      disabled: true
+order: 10000

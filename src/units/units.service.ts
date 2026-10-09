@@ -14,6 +14,8 @@ import { DeleteUnitUseCase } from './usecases/soft-delete-unit.usecase';
 import { ActivateUnitUseCase } from './usecases/activate-unit.usecase ';
 import { DeActivateUnitUseCase } from './usecases/deactivate-unit.usecase ';
 import { DeleteUnitPhotoUsecase } from './usecases/delete-unit-photo.usecase';
+import { UpdateUnitPhotoUsease } from './usecases/update-unit-photo.usecase';
+import { MulterFile } from 'src/files-upload/types/multer-file.type';
 
 @Injectable()
 export class UnitsService {
@@ -27,7 +29,8 @@ export class UnitsService {
         private readonly deleteUnitUseCase:DeleteUnitUseCase,
         private readonly activateUnitUseCase:ActivateUnitUseCase,
         private readonly deActivateUnitUseCase:DeActivateUnitUseCase,
-        private readonly deleteUnitPhotoUsecase:DeleteUnitPhotoUsecase
+        private readonly deleteUnitPhotoUsecase:DeleteUnitPhotoUsecase,
+        private readonly updateUnitPhotoUsease:UpdateUnitPhotoUsease
 
     ){}
 
@@ -75,6 +78,10 @@ export class UnitsService {
             }
             async deleteUnitPhotos(unitId:string,currentUser:currentUserData,body):Promise<void>{
                  await this.deleteUnitPhotoUsecase.excute(unitId,currentUser,body)
+            }
+            
+                        async updateUnitPhotos(unitId:string,currentUser:currentUserData,photos:MulterFile[]):Promise<UnitResponseDto>{
+                 return this.updateUnitPhotoUsease.excute(unitId,currentUser,photos)
             }
 
 

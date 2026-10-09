@@ -16,6 +16,7 @@ import { createParseFilePipe } from 'src/common/files/validators/files-validatio
 import { FilesUploadService } from 'src/files-upload/files-upload.service';
 import { MulterFile } from 'src/files-upload/types/multer-file.type';
 import { DeleteUnitPhotosDto } from './dtos/delete-unit-photos.dto';
+import { UpdateUnitPhotosDto } from './dtos/update-unit-photos.dto ';
 
 
 @Controller('units')
@@ -31,7 +32,8 @@ export class UnitsController {
     @Post()
         @UseInterceptors(FilesInterceptor('photos',maxFileSize.UNITS_IMAGES))
 
-    async create( @UploadedFiles( createParseFilePipe('2MB',['jpg','png']))    photos: MulterFile[],
+    async create(
+       @UploadedFiles( createParseFilePipe('2MB',['jpg','png']))    photos: MulterFile[],
       @Body() body:CreateUnitDto,
       @CurrentAccount() principale: Principale, ): Promise<UnitResponseDto>{
        // upload images s3- return list [url,url,url]
@@ -93,14 +95,34 @@ export class UnitsController {
         return this.unitsService.deactivate(param.id,principale.user)
 
      }
+
+
         @Authorize(Roles.USER)
+       @HttpCode(HttpStatus.NO_CONTENT)
         @Delete('/:id/photos')
-        async DeleteBucketOwnershipControls$(@Param() param:UnitIdDto,
+        async deletePhoto(@Param() param:UnitIdDto,
         @CurrentAccount() principale:Principale,
       @Body() body:DeleteUnitPhotosDto):Promise<void>{
          
          return this.unitsService.deleteUnitPhotos(param.id,principale.user,body)
         }
+
+         @Authorize(Roles.USER)
+        @Patch('/:id/photos')
+          @UseInterceptors(FilesInterceptor('photos',maxFileSize.UNITS_IMAGES))
+        async updatePhoto(
+         @UploadedFiles( createParseFilePipe('2MB',['jpg','png']))    photos: MulterFile[],
+         @Param() param:UnitIdDto,
+        @CurrentAccount() principale:Principale):Promise<UnitResponseDto>{
+           //upload photos
+         // body.photos= await this.filesUploadService.uploadMultipleFile(photos)
+
+         return this.unitsService.updateUnitPhotos(param.id,principale.user,photos)
+        }
+
+
+
+        
 
 
 

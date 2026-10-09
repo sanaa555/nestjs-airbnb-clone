@@ -1,3 +1,9 @@
+import {
+  
+  GetObjectCommand,
+  
+} from "@aws-sdk/client-s3";
+import { createHash } from 'crypto';
 import {  DeleteObjectsCommand, S3 } from "@aws-sdk/client-s3";
 import { Upload } from "@aws-sdk/lib-storage";
 import { Injectable } from "@nestjs/common";
@@ -33,6 +39,8 @@ export class S3FileStorageService{
          } )}
 
    async uploadFile(file:MulterFile):Promise<string>{
+
+
       //1-generate unique file name
       const uniqueFileName =  this.generateUniqueFileName(file)
       ///2-upload file to s3
@@ -89,5 +97,40 @@ async DeleteFilesByUrl(urls: string | string[]): Promise<void> {
         const fileName=`${Date.now()}-${file.originalname??file.filename}`
         return fileName
     }
+
+
+     generateFileHash(file: MulterFile): string {
+  return createHash('sha256')
+    .update(file.buffer)
+    .digest('hex');
+}
+
+
+async generateFileHashFromUrl(url: string): Promise<string> {
+  try {
+    const parsedUrl = new URL(url);
+    const key = decodeURIComponent(parsedUrl.pathname.substring(1));
+
+    const response = await this.s3Client.send(
+      new GetObjectCommand({
+        Bucket: this.bucketName,
+        Key: key,
+      }),
+    );
+
+    if (!response.Body) {
+      throw new Error("Image body is empty");
+    }
+
+    const imageBuffer = await response.Body.transformToByteArray();
+
+    return createHash("sha256")
+      .update(imageBuffer)
+      .digest("hex");
+  } catch (error) {
+    console.error("Failed to calculate hash from S3 image:", error);
+    throw new BadRequestException("failed to calculate image hash from S3");
+  }
+}
 
 }
