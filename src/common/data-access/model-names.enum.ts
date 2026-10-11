@@ -9,5 +9,6 @@ export enum ModelNames {
     UNIT_CATEGORIES='unit-categories',
     APP_SETTINGS='app-settings',
     SYSTEM_ADMINS='system-admins',
-    UNITS='units'
+    UNITS='units',
+    BOOKINGS='bookings'
 }

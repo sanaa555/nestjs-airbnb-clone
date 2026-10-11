@@ -14,10 +14,10 @@ export class Booking{
      @Prop({required:true,ref:ModelNames.USERS})
     host:string;
 
-    @Prop({required:true})
+    @Prop({required:true,type:Date()})
     checkIn:Date|number;
     
-    @Prop({required:true})
+    @Prop({required:true,type:Date()})
     checkOut:Date|number;
 
     @Prop({required:true})
@@ -50,8 +50,11 @@ export class Booking{
     @Prop()
     notes?:string;
 
-    @Prop({type:string,enum:BookingStatus,default:BookingStatus.PENDING})
-    status:BookingStatus
+    @Prop({type:String,enum:BookingStatus,default:BookingStatus.PENDING})
+    status:BookingStatus;
+
+    @Prop()
+    cancellationReason?:string;
 }
 
 export const BookingSchema=SchemaFactory.createForClass(Booking)
