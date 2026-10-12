@@ -14,11 +14,11 @@ export class Booking{
      @Prop({required:true,ref:ModelNames.USERS})
     host:string;
 
-    @Prop({required:true,type:Date()})
+    @Prop({required:true,type:Date})
     checkIn:Date|number;
     
-    @Prop({required:true,type:Date()})
-    checkOut:Date|number;
+    @Prop({required:true,type:Date})
+    checkOut:Date |number;
 
     @Prop({required:true})
     daysCount:number;

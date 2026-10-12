@@ -31,6 +31,7 @@ import { S3FileStorageService } from 'src/files-upload/storage/s3/s3-file-storag
     imports:[MongooseModule.forFeature([{ name: ModelNames.UNITS, schema: UnitSchema }]),SystemAdminsModule,CitiesModule,CountriesModule,UnitCategoriesModule,AppSettingsModule,FilesUploadModule],
   
   controllers: [UnitsController],
-  providers: [UnitsService,UnitRepository,UnitValidationUsecase,CreateUnitUsecase,CheckUnitAuthUsecase,UpdateUnitUsecase,FindoneUnitUsecase,FindAllUnitsUsacase,FindUnitByIdUsecase,FindAllUnitsByUserUsacase,DeleteUnitUseCase,DeActivateUnitUseCase,ActivateUnitUseCase,DeleteUnitPhotoUsecase,UpdateUnitPhotoUsease,S3FileStorageService]
+  providers: [UnitsService,UnitRepository,UnitValidationUsecase,CreateUnitUsecase,CheckUnitAuthUsecase,UpdateUnitUsecase,FindoneUnitUsecase,FindAllUnitsUsacase,FindUnitByIdUsecase,FindAllUnitsByUserUsacase,DeleteUnitUseCase,DeActivateUnitUseCase,ActivateUnitUseCase,DeleteUnitPhotoUsecase,UpdateUnitPhotoUsease,S3FileStorageService],
+  exports:[UnitsService]
 })
 export class UnitsModule {}
