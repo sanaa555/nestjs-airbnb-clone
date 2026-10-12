@@ -10,13 +10,14 @@ import { BookingValidationUsecase } from './usecases/booking(availability)-valid
 import { BookingCalculationUsecase } from './usecases/booking-calculation.usecase';
 import { CheckAvailabilityUsecase } from './usecases/check-availability.usecase';
 import { AppSettingsModule } from 'src/app-settings/app-settings.module';
+import { BookingRequestUsecase } from './usecases/booking-request.usecase';
 
 @Module({
   imports:[MongooseModule.forFeature([{
     name:ModelNames.BOOKINGS,
     schema:BookingSchema
   }]),UnitsModule,AppSettingsModule],
-  providers: [BookingsService,BookingRepository,BookingValidationUsecase,BookingCalculationUsecase,CheckAvailabilityUsecase],
+  providers: [BookingsService,BookingRepository,BookingValidationUsecase,BookingCalculationUsecase,CheckAvailabilityUsecase,BookingRequestUsecase],
   controllers: [BookingsController]
 })
 export class BookingsModule {}

@@ -31,8 +31,11 @@ export class Booking{
     @Prop({required:true})
     bookingAmount:number;
 
+     
+    @Prop({required:true,default:0})
+    vat:number;
     
-    @Prop({required:true})
+    @Prop({required:true,default:0})
     vatAmount:number;
     
     @Prop({required:true})

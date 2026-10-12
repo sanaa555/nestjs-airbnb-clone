@@ -1,0 +1,27 @@
+$kind: http-request
+url: "{{URL}}/bookings"
+method: POST
+headers:
+  Authorization: Bearer {{token}}
+body:
+  type: json
+  content: "{\r
+
+    \    \"unit\":\"6ac92f0906c7321fc47f74dc\",\r
+
+    \    \"checkIn\":\"2026-10-21T00:00:00.000Z\",\r
+
+    \    \"checkOut\":\"2026-10-25T00:00:00.000Z\",\r
+
+    \    \"adultsCount\":\"5\",\r
+
+    \    \"kidsCount\":\"2\",\r
+
+    \    \"notes\":\"i need internet services\"\r
+
+    \r
+
+    \r
+
+    }"
+order: 3594024665422091
