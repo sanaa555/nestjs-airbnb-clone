@@ -1,0 +1,11 @@
+$kind: http-request
+url: "{{URL}}/bookings/me?userType=host"
+method: GET
+headers:
+  Authorization: Bearer {{token}}
+queryParams:
+  - key: userType
+    value: host
+    disabled: false
+    description: ""
+order: 3796557457679635

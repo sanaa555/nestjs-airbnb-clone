@@ -7,17 +7,17 @@ body:
   type: json
   content: "{\r
 
-    \    \"unit\":\"6ac92f0906c7321fc47f74dc\",\r
+    \    \"unit\":\"6ace3922ff79d146cde86c83\",\r
 
-    \    \"checkIn\":\"2026-10-21T00:00:00.000Z\",\r
+    \    \"checkIn\":\"2026-10-23T00:00:00.000Z\",\r
 
-    \    \"checkOut\":\"2026-10-25T00:00:00.000Z\",\r
+    \    \"checkOut\":\"2026-10-31T00:00:00.000Z\",\r
 
     \    \"adultsCount\":\"5\",\r
 
     \    \"kidsCount\":\"2\",\r
 
-    \    \"notes\":\"i need internet services\"\r
+    \    \"notes\":\"i need  wifi\"\r
 
     \r
 

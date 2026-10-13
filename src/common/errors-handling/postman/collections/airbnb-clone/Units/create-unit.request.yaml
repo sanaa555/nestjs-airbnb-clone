@@ -8,24 +8,24 @@ body:
   content:
     - type: text
       key: title
-      value: Cozy Beach House
+      value: Luxury Mountain Chalet
       disabled: false
     - type: text
       key: description
-      value: A spacious modern villa with a private garden, comfortable bedrooms, and a fully equipped kitchen. Perfect for families and small groups
+      value: A beautiful chalet with mountain views, a private garden, and modern facilities.
       disabled: false
     - type: text
       key: address
-      value: 15 North Teseen Street, New Cairo, Egypt
+      value: 12 El Gabal Street
       disabled: false
     - type: file
       key: photos
       src:
-        - /C:/Users/DELL/Desktop/image5.jpg
+        - /C:/Users/DELL/Desktop/images6.png
       disabled: false
     - type: text
       key: costPerDay
-      value: "2500"
+      value: "3000"
       disabled: false
     - type: text
       key: country
@@ -49,7 +49,7 @@ body:
       disabled: false
     - type: text
       key: kidsCount
-      value: "2"
+      value: "4"
       disabled: false
     - type: text
       key: hasInternetService
@@ -66,7 +66,7 @@ body:
     - type: file
       key: photos
       src:
-        - /C:/Users/DELL/Desktop/image4.jpg
+        - /C:/Users/DELL/Desktop/image7.jpg
       description: ""
       disabled: false
     - type: file

@@ -1,6 +1,6 @@
 $kind: http-request
 name: delete-by-id
-url: "{{URL}}/units/6aba061c891439bbf62732a8"
+url: "{{URL}}/units/6ac78ae4b7ce198f0c8bcbee"
 method: DELETE
 headers:
   Authorization: Bearer {{token}}

@@ -8,6 +8,8 @@ import { Roles } from 'src/common/constants';
 import { BookingRequestDto } from './dtos/booking-request.dto';
 import { BookingResponseDto } from './dtos/booking-response.dto';
 import { CurrentAccount, Principale } from 'src/auth/decorators/current-account.decorator';
+import { PaginatedResult } from 'src/common/data-access';
+import { FindAllBookingsDto } from './dtos/find-all-bookings.dto';
 
 @Controller('bookings')
 export class BookingsController {
@@ -28,4 +30,19 @@ export class BookingsController {
          return this.BookingsService.createBooking(body,principale.user)
 
     }
+
+        @Authorize(Roles.SYETEM_ADMIN)
+        @Get()
+        async findAll(@Query() query:FindAllBookingsDto):Promise<PaginatedResult< BookingResponseDto>>{
+            return this.BookingsService.findAll(query)
+
+        }
+
+        @Authorize(Roles.USER)
+        @Get('/me')
+        async findMine(@Query() query:FindAllBookingsDto,@CurrentAccount() principale:Principale):Promise<PaginatedResult< BookingResponseDto>>{
+            return this.BookingsService.findMine(query,principale.user)
+
+        }
+
 }
