@@ -21,6 +21,7 @@ export class BookingRequestDto{
         kidsCount?:number
         
         @IsString()
+       @IsOptional()
         notes?:string
     
 }

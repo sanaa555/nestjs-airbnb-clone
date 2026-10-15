@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Query } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Post, Query } from '@nestjs/common';
 import { BookingsService } from './bookings.service';
 import { Public } from 'src/auth/decorators/public.decorator';
 import { AvailabilityResponseDto } from './dtos/availability-response.dto';
@@ -10,6 +10,8 @@ import { BookingResponseDto } from './dtos/booking-response.dto';
 import { CurrentAccount, Principale } from 'src/auth/decorators/current-account.decorator';
 import { PaginatedResult } from 'src/common/data-access';
 import { FindAllBookingsDto } from './dtos/find-all-bookings.dto';
+import { BookingIdDto } from './dtos/booking-id-dto'
+import { UpdateBookingRequestDto } from './dtos/update-booking-request.dto';
 
 @Controller('bookings')
 export class BookingsController {
@@ -43,6 +45,21 @@ export class BookingsController {
         async findMine(@Query() query:FindAllBookingsDto,@CurrentAccount() principale:Principale):Promise<PaginatedResult< BookingResponseDto>>{
             return this.BookingsService.findMine(query,principale.user)
 
+        }
+
+        @Get('/:id')
+        async findById(@Param()  param:BookingIdDto,@CurrentAccount() principale:Principale):Promise<BookingResponseDto>{
+            return this.BookingsService.findById(param.id,principale)
+        }
+        @Authorize(Roles.USER)
+        @Patch('/:id')
+        async updateByGuest(
+            @Param() param:BookingIdDto,
+             @Body() body :UpdateBookingRequestDto,
+             @CurrentAccount() principale :Principale
+        ):Promise<BookingResponseDto>{
+
+              return this.BookingsService.updateByGuest(param.id,body,principale.user)
         }
 
 }

@@ -14,13 +14,16 @@ import { BookingRequestUsecase } from './usecases/booking-request.usecase';
 import { FindAllBookingsUsecase } from './usecases/find-all-bookings.usecase';
 import { FindMyBookingUsecase } from './usecases/find-my-booking.usecase';
 import { FindAllQueryBuilder } from './query-builder/find-all-query-builder';
+import {CheckBookingAuthUsecase} from './usecases/check-booking-auth.usecase';
+import { FindByIdUsecase } from './usecases/find-by-id.usecase';
+import { UpdateBookingByGuest } from './usecases/update-booking-by-guest.usecase';
 
 @Module({
   imports:[MongooseModule.forFeature([{
     name:ModelNames.BOOKINGS,
     schema:BookingSchema
   }]),UnitsModule,AppSettingsModule],
-  providers: [BookingsService,BookingRepository,BookingValidationUsecase,BookingCalculationUsecase,CheckAvailabilityUsecase,BookingRequestUsecase,FindAllBookingsUsecase,FindMyBookingUsecase,FindAllQueryBuilder],
+  providers: [BookingsService,BookingRepository,BookingValidationUsecase,BookingCalculationUsecase,CheckAvailabilityUsecase,BookingRequestUsecase,FindAllBookingsUsecase,FindMyBookingUsecase,FindAllQueryBuilder,CheckBookingAuthUsecase,FindByIdUsecase,UpdateBookingByGuest],
   controllers: [BookingsController]
 })
 export class BookingsModule {}
