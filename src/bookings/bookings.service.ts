@@ -14,6 +14,8 @@ import { FindByIdUsecase } from './usecases/find-by-id.usecase';
 import { Principale } from 'src/auth/decorators/current-account.decorator';
 import { UpdateBookingRequestDto } from './dtos/update-booking-request.dto';
 import { UpdateBookingByGuest } from './usecases/update-booking-by-guest.usecase';
+import { CancelBookingByGuestUsecse } from './usecases/cancel-booking-by-guest.usecase';
+import { CancelBookingByGuestDto } from './dtos/cancel-booking-by-guest.dto';
 
 @Injectable()
 export class BookingsService {
@@ -23,7 +25,8 @@ export class BookingsService {
         private readonly findAllBookingsUsecase:FindAllBookingsUsecase,
         private readonly findMyBookingUsecase:FindMyBookingUsecase,
         private readonly findByIdUsecase:FindByIdUsecase,
-        private readonly updateBookingByGuest:UpdateBookingByGuest
+        private readonly updateBookingByGuest:UpdateBookingByGuest,
+        private readonly cancelBookingByGuestUsecse:CancelBookingByGuestUsecse
     ){}
 
     async checkAvailability(query:CheckAvailabilityDto):Promise<AvailabilityResponseDto>{
@@ -51,6 +54,11 @@ export class BookingsService {
     }
     async updateByGuest(id:string,body:UpdateBookingRequestDto,currentUser:currentUserData):Promise<BookingResponseDto>{
          return this.updateBookingByGuest.excute(id,body,currentUser)
+
+    }
+
+    async cancelByGuest(id:string,body:CancelBookingByGuestDto,currentUser:currentUserData):Promise<BookingResponseDto>{
+         return this.cancelBookingByGuestUsecse.excute(id,body,currentUser)
 
     }
 }

@@ -12,6 +12,7 @@ import { PaginatedResult } from 'src/common/data-access';
 import { FindAllBookingsDto } from './dtos/find-all-bookings.dto';
 import { BookingIdDto } from './dtos/booking-id-dto'
 import { UpdateBookingRequestDto } from './dtos/update-booking-request.dto';
+import { CancelBookingByGuestDto } from './dtos/cancel-booking-by-guest.dto';
 
 @Controller('bookings')
 export class BookingsController {
@@ -60,6 +61,17 @@ export class BookingsController {
         ):Promise<BookingResponseDto>{
 
               return this.BookingsService.updateByGuest(param.id,body,principale.user)
+        }
+
+        @Authorize(Roles.USER)
+        @Patch('/:id/cancel')
+        async cancelByGuest(
+            @Param() param:BookingIdDto,
+             @Body() body :CancelBookingByGuestDto,
+             @CurrentAccount() principale :Principale
+        ):Promise<BookingResponseDto>{
+
+              return this.BookingsService.cancelByGuest(param.id,body,principale.user)
         }
 
 }

@@ -8,7 +8,7 @@ import { BookingCalculationResponseDto } from "../dtos/booking-calculation-respo
 export class BookingCalculationUsecase{
     constructor(
         private readonly unitsService:UnitsService,
-        private readonly  appSettingsService:AppSettingsService
+        private readonly  appSettingsService:AppSettingsService,
     ){}
     async excute(checkIn:number|Date,checkOut:number|Date,unitId:string):Promise<BookingCalculationResponseDto>{
 

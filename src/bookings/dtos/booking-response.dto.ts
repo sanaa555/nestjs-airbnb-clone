@@ -1,7 +1,7 @@
 import { BookingStatus } from "../enums/BookingStatus.enum";
 
 export class BookingResponseDto{
-      
+        _id:string;
        unit:string;
         guest:string;
         host:string;
