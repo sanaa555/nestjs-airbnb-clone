@@ -13,6 +13,7 @@ import { FindAllBookingsDto } from './dtos/find-all-bookings.dto';
 import { BookingIdDto } from './dtos/booking-id-dto'
 import { UpdateBookingRequestDto } from './dtos/update-booking-request.dto';
 import { CancelBookingByGuestDto } from './dtos/cancel-booking-by-guest.dto';
+import { ChangeBookingStatusDto } from './dtos/change-booking-status.dto';
 
 @Controller('bookings')
 export class BookingsController {
@@ -72,6 +73,17 @@ export class BookingsController {
         ):Promise<BookingResponseDto>{
 
               return this.BookingsService.cancelByGuest(param.id,body,principale.user)
+        }
+
+        @Authorize(Roles.USER)
+        @Patch('/:id/status')
+        async changeStatusByHost(
+            @Param() param:BookingIdDto,
+             @Body() body :ChangeBookingStatusDto,
+             @CurrentAccount() principale :Principale
+        ):Promise<BookingResponseDto>{
+
+              return this.BookingsService.changeStatusByHost(param.id,body,principale.user)
         }
 
 }

@@ -20,13 +20,14 @@ import { UpdateBookingByGuest } from './usecases/update-booking-by-guest.usecase
 import { BookingParticipantAuthUsecase } from './usecases/booking-participant-auth.usecase';
 import { FindOneUsecase } from './usecases/find-one.usecase';
 import { CancelBookingByGuestUsecse } from './usecases/cancel-booking-by-guest.usecase';
+import { ChangeBookingStatusByHost } from './usecases/change-booking-status-by-host.usecase';
 
 @Module({
   imports:[MongooseModule.forFeature([{
     name:ModelNames.BOOKINGS,
     schema:BookingSchema
   }]),UnitsModule,AppSettingsModule],
-  providers: [BookingsService,BookingRepository,BookingValidationUsecase,BookingCalculationUsecase,CheckAvailabilityUsecase,BookingRequestUsecase,FindAllBookingsUsecase,FindMyBookingUsecase,FindAllQueryBuilder,CheckBookingAuthUsecase,FindByIdUsecase,UpdateBookingByGuest,BookingParticipantAuthUsecase,FindOneUsecase,CancelBookingByGuestUsecse],
+  providers: [BookingsService,BookingRepository,BookingValidationUsecase,BookingCalculationUsecase,CheckAvailabilityUsecase,BookingRequestUsecase,FindAllBookingsUsecase,FindMyBookingUsecase,FindAllQueryBuilder,CheckBookingAuthUsecase,FindByIdUsecase,UpdateBookingByGuest,BookingParticipantAuthUsecase,FindOneUsecase,CancelBookingByGuestUsecse,ChangeBookingStatusByHost],
   controllers: [BookingsController]
 })
 export class BookingsModule {}
