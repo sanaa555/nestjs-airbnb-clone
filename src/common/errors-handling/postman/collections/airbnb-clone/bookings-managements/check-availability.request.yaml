@@ -1,0 +1,21 @@
+$kind: http-request
+url: "{{URL}}/bookings/check-availability?unit=6ac92f0906c7321fc47f74dc&checkIn=2026-10-13T00:00:00.000Z&checkOut=2026-10-20T00:00:00.000Z&adultsCount=7"
+method: GET
+queryParams:
+  - key: unit
+    value: 6ac92f0906c7321fc47f74dc
+    disabled: false
+    description: ""
+  - key: checkIn
+    value: 2026-10-13T00:00:00.000Z
+    disabled: false
+    description: ""
+  - key: checkOut
+    value: 2026-10-20T00:00:00.000Z
+    disabled: false
+    description: ""
+  - key: adultsCount
+    value: "7"
+    disabled: false
+    description: ""
+order: 1791825937629

@@ -1,0 +1,11 @@
+$kind: http-request
+url: "{{URL}}/bookings?sortByCreatedAt=desc"
+method: GET
+headers:
+  Authorization: Bearer {{token}}
+queryParams:
+  - key: sortByCreatedAt
+    value: desc
+    disabled: false
+    description: ""
+order: 3627210386604108

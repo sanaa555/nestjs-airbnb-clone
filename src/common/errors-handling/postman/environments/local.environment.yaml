@@ -3,4 +3,4 @@ values:
   - key: token
     secret: true
   - key: URL
-    value: ''
+    value: 'http://localhost:3000'
