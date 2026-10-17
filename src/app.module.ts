@@ -16,8 +16,9 @@ import { TransformResponseInterceptor } from './common/interceptors/transform-re
 import { UnitsModule } from './units/units.module';
 import { FilesUploadModule } from './files-upload/files-upload.module';
 import { BookingsModule } from './bookings/bookings.module';
+import { PaymentsModule } from './payments/payments.module';
 @Module({
-  imports: [CoreModule, UsersModule, AuthModule, CountriesModule, CitiesModule, CurrenciesModule,UnitCategoriesModule, AppSettingsModule, SystemAdminsModule, UnitsModule, FilesUploadModule, BookingsModule ],
+  imports: [CoreModule, UsersModule, AuthModule, CountriesModule, CitiesModule, CurrenciesModule,UnitCategoriesModule, AppSettingsModule, SystemAdminsModule, UnitsModule, FilesUploadModule, BookingsModule, PaymentsModule ],
 
   controllers: [],
 
