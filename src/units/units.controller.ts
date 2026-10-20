@@ -17,6 +17,8 @@ import { FilesUploadService } from 'src/files-upload/files-upload.service';
 import { MulterFile } from 'src/files-upload/types/multer-file.type';
 import { DeleteUnitPhotosDto } from './dtos/delete-unit-photos.dto';
 import { UpdateUnitPhotosDto } from './dtos/update-unit-photos.dto ';
+import { UnitReviews } from './dtos/unit-reviews.dto';
+import { PaginationDto } from 'src/common/data-access/dto/pagination.dto';
 
 
 @Controller('units')
@@ -123,7 +125,11 @@ export class UnitsController {
         }
 
 
-
+@Public()
+    @Get('/:id/reviews')
+     async findUnitReviews ( @Param()param:UnitIdDto,@Query() query:PaginationDto):Promise<PaginatedResult<UnitReviews>>{
+         return this.unitsService.findUnitReviews(param.id,query)
+     }
         
 
 

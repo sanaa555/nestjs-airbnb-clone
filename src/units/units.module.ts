@@ -26,13 +26,15 @@ import { DeleteUnitPhotoUsecase } from './usecases/delete-unit-photo.usecase';
 import { UpdateUnitPhotoUsease } from './usecases/update-unit-photo.usecase';
 import { S3FileStorageService } from 'src/files-upload/storage/s3/s3-file-storage.service';
 import { UpdateUnitAvgRateAndCountUsecase } from './usecases/update-unit-avg-rate-and-count.usecase';
+import { UnitReviewsModule } from 'src/unit-reviews/unit-reviews.module';
+import { FindUnitReviewsUsecase } from './usecases/find-unit-reviews.usecase';
 
 @Module({
 
-    imports:[MongooseModule.forFeature([{ name: ModelNames.UNITS, schema: UnitSchema }]),SystemAdminsModule,CitiesModule,CountriesModule,UnitCategoriesModule,AppSettingsModule,FilesUploadModule],
+    imports:[MongooseModule.forFeature([{ name: ModelNames.UNITS, schema: UnitSchema }]),SystemAdminsModule,CitiesModule,CountriesModule,UnitCategoriesModule,AppSettingsModule,FilesUploadModule,UnitReviewsModule],
   
   controllers: [UnitsController],
-  providers: [UnitsService,UnitRepository,UnitValidationUsecase,CreateUnitUsecase,CheckUnitAuthUsecase,UpdateUnitUsecase,FindoneUnitUsecase,FindAllUnitsUsacase,FindUnitByIdUsecase,FindAllUnitsByUserUsacase,DeleteUnitUseCase,DeActivateUnitUseCase,ActivateUnitUseCase,DeleteUnitPhotoUsecase,UpdateUnitPhotoUsease,S3FileStorageService,UpdateUnitAvgRateAndCountUsecase],
+  providers: [UnitsService,UnitRepository,UnitValidationUsecase,CreateUnitUsecase,CheckUnitAuthUsecase,UpdateUnitUsecase,FindoneUnitUsecase,FindAllUnitsUsacase,FindUnitByIdUsecase,FindAllUnitsByUserUsacase,DeleteUnitUseCase,DeActivateUnitUseCase,ActivateUnitUseCase,DeleteUnitPhotoUsecase,UpdateUnitPhotoUsease,S3FileStorageService,UpdateUnitAvgRateAndCountUsecase,FindUnitReviewsUsecase],
   exports:[UnitsService]
 })
 export class UnitsModule {}
