@@ -1,4 +1,5 @@
 import { BookingStatus } from "../enums/BookingStatus.enum";
+import { GuestReview } from "../schemas/subdocument/guest-review.schema";
 
 export class BookingResponseDto{
         _id:string;
@@ -17,6 +18,8 @@ export class BookingResponseDto{
         notes?:string;
         status:BookingStatus;
         cancellationReason?:string;
+        guestReview?:GuestReview
+        
     
 
 }

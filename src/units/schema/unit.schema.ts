@@ -67,6 +67,14 @@ export class Unit{
     @Prop({required:true,default:false})
     hasPrivateGarage:boolean;
 
+
+    @Prop()
+     ratingCount?:number
+
+    @Prop()
+    ratingAvg:number
+
+
     
     @Prop({required:true,default:true})
     isActive:boolean;
