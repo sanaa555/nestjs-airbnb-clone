@@ -16,6 +16,9 @@ import { DeActivateUnitUseCase } from './usecases/deactivate-unit.usecase ';
 import { DeleteUnitPhotoUsecase } from './usecases/delete-unit-photo.usecase';
 import { UpdateUnitPhotoUsease } from './usecases/update-unit-photo.usecase';
 import { MulterFile } from 'src/files-upload/types/multer-file.type';
+import { UpdateUnitAvgRateAndCountUsecase } from './usecases/update-unit-avg-rate-and-count.usecase';
+import { UpdateUnitAvgAndCountDto } from './dtos/update-unit-avg-rate-and-count.dto';
+import { ClientSession } from 'mongoose';
 
 @Injectable()
 export class UnitsService {
@@ -30,7 +33,8 @@ export class UnitsService {
         private readonly activateUnitUseCase:ActivateUnitUseCase,
         private readonly deActivateUnitUseCase:DeActivateUnitUseCase,
         private readonly deleteUnitPhotoUsecase:DeleteUnitPhotoUsecase,
-        private readonly updateUnitPhotoUsease:UpdateUnitPhotoUsease
+        private readonly updateUnitPhotoUsease:UpdateUnitPhotoUsease,
+        private readonly updateUnitAvgRateAndCountUsecase:UpdateUnitAvgRateAndCountUsecase
 
     ){}
 
@@ -82,6 +86,9 @@ export class UnitsService {
             
                         async updateUnitPhotos(unitId:string,currentUser:currentUserData,photos:MulterFile[]):Promise<UnitResponseDto>{
                  return this.updateUnitPhotoUsease.excute(unitId,currentUser,photos)
+            }
+            async updateUnitAvgAndCount(body:UpdateUnitAvgAndCountDto,session?:ClientSession):Promise<void>{
+                await this.updateUnitAvgRateAndCountUsecase.excute(body,session)
             }
 
 
