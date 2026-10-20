@@ -1,22 +1,23 @@
-import { Expose, Type } from "class-transformer";
-export class GuestReviewResponseDto{
+// import { Expose, Type } from "class-transformer";
+// export class GuestReviewResponseDto{
 
-     @Expose()
-    _id:string;
-    @Expose()
-    name:string
-}
+//      @Expose()
+//     _id:string;
+//     @Expose()
+//     name:string
+// }
 export class UnitReviews{
-    @Expose()
-    @Type(()=>GuestReviewResponseDto)
-    guest:GuestReviewResponseDto;
+    // @Expose()
+    // @Type(()=>GuestReviewResponseDto)
+    // guest:GuestReviewResponseDto;
+     guest:string
      
-    @Expose()
+    // @Expose()
     rating:number;
 
-    @Expose()
+    // @Expose()
     comment:string
     
-     @Expose()
+    //  @Expose()
     createdAt:Date
 }

@@ -13,6 +13,8 @@ export class FindUnitReviewsUsecase{
     const result= await this.unitReviewsRepository.findPaginated({
             unit:query.unit
         },{
+            // projection : database query level(more performance)
+            select:'guest rating comment createdAt',//== select:'-booking,-unit'
             page:query?.page,
             limit:query?.limit,
             ignoreLimit:query?.ignoreLimit,

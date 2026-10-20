@@ -15,17 +15,17 @@ export class FindUnitReviewsUsecase{
          
        const result= await this.unitReviewsService.findUnitReviews({unit:unitId,...query})
          
-          // return plainToInstance(PaginatedResult<UnitReviews>,result)
+          return plainToInstance(PaginatedResult<UnitReviews>,result)
+         // projection:application code level ==> usecase :when you want to transform the data that coming from database in the application code
+    //    const transformedData= plainToInstance(UnitReviews,result.data,{
+    //       excludeExtraneousValues:true
+    //    })
 
-       const transformedData= plainToInstance(UnitReviews,result.data,{
-          excludeExtraneousValues:true
-       })
-
-        return new PaginatedResult<UnitReviews>(
-            transformedData,
-            result.limit,
-            result.totalCount,
-            result.pageCount
-        )
+    //     return new PaginatedResult<UnitReviews>(
+    //         transformedData,
+    //         result.limit,
+    //         result.totalCount,
+    //         result.pageCount
+    //     )
     }
 }
