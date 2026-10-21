@@ -5,13 +5,15 @@ import { UnitFavouriteRepository } from './repositories/unit-favourite.repositor
 import { MongooseModule } from '@nestjs/mongoose';
 import { ModelNames } from 'src/common/data-access';
 import { UnitFavouriteSchema } from './schemas/unit-favourite.schema';
+import { AddUnitFavouriteUsecase } from './usecases/add-unit-favourite.usecase';
+import { UnitsModule } from 'src/units/units.module';
 
 @Module({
   imports:[MongooseModule.forFeature([{
     name:ModelNames.UNITFAVOURITIES,
     schema:UnitFavouriteSchema
-  }])],
-  providers: [UnitFavouritesService,UnitFavouriteRepository],
+  }]),UnitsModule],
+  providers: [UnitFavouritesService,UnitFavouriteRepository,AddUnitFavouriteUsecase],
   controllers: [UnitFavouritesController]
 })
 export class UnitFavouritesModule {}

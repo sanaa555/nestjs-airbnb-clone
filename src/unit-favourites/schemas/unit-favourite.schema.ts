@@ -12,3 +12,5 @@ export class UnitFavourite{
 }
 
 export const UnitFavouriteSchema= SchemaFactory.createForClass(UnitFavourite)
+
+UnitFavouriteSchema.index({unit:1,user:1},{unique:true})
