@@ -11,5 +11,6 @@ export enum ModelNames {
     SYSTEM_ADMINS='system-admins',
     UNITS='units',
     BOOKINGS='bookings',
-    UNITREVIEWS='unit-reviews'
+    UNITREVIEWS='unit-reviews',
+    UNITFAVOURITIES='unit_favourite'
 }

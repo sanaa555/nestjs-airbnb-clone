@@ -18,10 +18,12 @@ import { UpdateUnitPhotoUsease } from './usecases/update-unit-photo.usecase';
 import { MulterFile } from 'src/files-upload/types/multer-file.type';
 import { UpdateUnitAvgRateAndCountUsecase } from './usecases/update-unit-avg-rate-and-count.usecase';
 import { UpdateUnitAvgAndCountDto } from './dtos/update-unit-avg-rate-and-count.dto';
-import { ClientSession } from 'mongoose';
+import { ClientSession, QueryFilter } from 'mongoose';
 import { UnitReviews } from './dtos/unit-reviews.dto';
 import { PaginationDto } from 'src/common/data-access/dto/pagination.dto';
 import { FindUnitReviewsUsecase } from './usecases/find-unit-reviews.usecase';
+import { FindoneUnitUsecase } from './usecases/find-one.usecase';
+import { Unit } from 'bytes';
 
 @Injectable()
 export class UnitsService {
@@ -38,7 +40,8 @@ export class UnitsService {
         private readonly deleteUnitPhotoUsecase:DeleteUnitPhotoUsecase,
         private readonly updateUnitPhotoUsease:UpdateUnitPhotoUsease,
         private readonly updateUnitAvgRateAndCountUsecase:UpdateUnitAvgRateAndCountUsecase,
-        private readonly findUnitReviewsUsecase:FindUnitReviewsUsecase
+        private readonly findUnitReviewsUsecase:FindUnitReviewsUsecase,
+        private readonly findoneUnitUsecase:FindoneUnitUsecase
     ){}
 
 
@@ -95,6 +98,10 @@ export class UnitsService {
             }
             async findUnitReviews(unitId:string,query:PaginationDto):Promise<PaginatedResult<UnitReviews>>{
                return this.findUnitReviewsUsecase.excute(unitId,query)
+            }
+
+            async findOne(query:QueryFilter<Unit>):Promise<UnitResponseDto>{
+               return this.findoneUnitUsecase.excute(query)
             }
 
 
