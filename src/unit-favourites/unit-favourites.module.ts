@@ -7,13 +7,15 @@ import { ModelNames } from 'src/common/data-access';
 import { UnitFavouriteSchema } from './schemas/unit-favourite.schema';
 import { AddUnitFavouriteUsecase } from './usecases/add-unit-favourite.usecase';
 import { UnitsModule } from 'src/units/units.module';
+import { RemoveUnitFavouriteUsecase } from './usecases/remove-unit-favourite.usecase';
+import { FindUnitFavouriteUsecase } from './usecases/find-unit-favourite.usecase';
 
 @Module({
   imports:[MongooseModule.forFeature([{
     name:ModelNames.UNITFAVOURITIES,
     schema:UnitFavouriteSchema
   }]),UnitsModule],
-  providers: [UnitFavouritesService,UnitFavouriteRepository,AddUnitFavouriteUsecase],
+  providers: [UnitFavouritesService,UnitFavouriteRepository,AddUnitFavouriteUsecase,RemoveUnitFavouriteUsecase,FindUnitFavouriteUsecase],
   controllers: [UnitFavouritesController]
 })
 export class UnitFavouritesModule {}

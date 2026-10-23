@@ -5,6 +5,8 @@ import { UnitIdDto } from './dtos/unit-id.dto';
 import { CurrentAccount, Principale } from 'src/auth/decorators/current-account.decorator';
 import { UnitFavouritesService } from './unit-favourites.service';
 import { FindUnitFavouriteDto } from './dtos/find-unit-favourite.dto';
+import { PaginatedResult } from 'src/common/data-access';
+import { UnitFavouriteResponseDto } from './dtos/unit-favourite-response.dto';
 
 @Controller('unit-favourites')
 @Authorize(Roles.USER)
@@ -23,10 +25,11 @@ export class UnitFavouritesController {
 
 
     @Delete('/:unitId')
+    @HttpCode(HttpStatus.NO_CONTENT)
     async deleteFavourite(
         @Param() param:UnitIdDto,
         @CurrentAccount() principale :Principale
-    ){
+    ):Promise<void>{
          return this.unitFavouritesService.removeFavourite(param.unitId,principale.user)
 
     }
@@ -34,7 +37,7 @@ export class UnitFavouritesController {
     @Get()
     async getFavourite( @Query() query:FindUnitFavouriteDto,
         @CurrentAccount() principale :Principale
-){
+):Promise<PaginatedResult<UnitFavouriteResponseDto>>{
              return this.unitFavouritesService.getFavourite(query,principale.user)
 
 }
