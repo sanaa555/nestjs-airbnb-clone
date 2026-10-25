@@ -1,0 +1,1 @@
+export const EMAIL_ADAPTER=Symbol('EMAIL_ADAPTER') // token to solve problem that interface can not exist at runtime
