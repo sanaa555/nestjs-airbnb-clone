@@ -1,3 +1,5 @@
+import { boolean } from "joi";
+
 export interface Environment{
     port:number;
     FallbackLanguage:string;
@@ -7,7 +9,8 @@ export interface Environment{
         refreshTokenExpireIn:string,
         type:string,
         systemAdmin:ISystemAdmin,
-        awsS3:IAwsS3
+        awsS3:IAwsS3,
+        smtp:ISmtp
 }
 
 export  interface ISystemAdmin{
@@ -21,5 +24,20 @@ export interface IAwsS3{
     region:string;
     accessKeyId:string;
     secretAccessKey:string
+
+}
+
+export interface ISmtp{
+    host:string;
+    port:number;
+    secure:boolean;
+    service:string;
+    auth:{
+        user:string;
+        pass:string
+    }
+
+
+
 
 }

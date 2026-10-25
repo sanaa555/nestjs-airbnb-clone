@@ -21,6 +21,17 @@ export const defaultEnv=():Environment=>{
             region:process.env.AWS_S3_REGION as string,
             accessKeyId:process.env.AWS_S3_ACCESS_KEY_ID as string,
             secretAccessKey:process.env.AWS_S3_SECRET_KEY as string,
+        },
+        smtp:{
+            host:process.env.SMTP_HOST as string,
+            port:Number(process.env.SMTP_PORT ),
+            secure:process.env.SMTP_SECURE ==='true',
+            service:process.env.SMTP_SERVICE as string,
+            auth:{
+            user:process.env.SMTP_AUTH_USER as string,
+            pass:process.env.SMTP_AUTH_PASSWORD as string
+            }
+
         }
 
    

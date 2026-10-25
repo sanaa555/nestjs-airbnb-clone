@@ -16,6 +16,13 @@ export const envSchema=joi.object({
         AWS_S3_REGION:joi.string().required(),
         AWS_S3_ACCESS_KEY_ID:joi.string().required(),
         AWS_S3_SECRET_KEY:joi.string().required(),
+                
+        SMTP_HOST:joi.string().required(),
+        SMTP_PORT:joi.number().required(),
+        SMTP_SECURE:joi.boolean().required(),
+        SMTP_SERVICE:joi.string().required(),
+        SMTP_AUTH_USER:joi.string().required(),
+        SMTP_AUTH_PASSWORD:joi.string().required(),
 
 
 

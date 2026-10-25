@@ -18,8 +18,9 @@ import { FilesUploadModule } from './files-upload/files-upload.module';
 import { BookingsModule } from './bookings/bookings.module';
 import { UnitReviewsModule } from './unit-reviews/unit-reviews.module';
 import { UnitFavouritesModule } from './unit-favourites/unit-favourites.module';
+import { MailModule } from './mail/mail.module';
 @Module({
-  imports: [CoreModule, UsersModule, AuthModule, CountriesModule, CitiesModule, CurrenciesModule,UnitCategoriesModule, AppSettingsModule, SystemAdminsModule, UnitsModule, FilesUploadModule, BookingsModule, UnitReviewsModule, UnitFavouritesModule ],
+  imports: [CoreModule, UsersModule, AuthModule, CountriesModule, CitiesModule, CurrenciesModule,UnitCategoriesModule, AppSettingsModule, SystemAdminsModule, UnitsModule, FilesUploadModule, BookingsModule, UnitReviewsModule, UnitFavouritesModule, MailModule ],
 
   controllers: [],
 
