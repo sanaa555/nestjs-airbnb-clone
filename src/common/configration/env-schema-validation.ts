@@ -23,6 +23,7 @@ export const envSchema=joi.object({
         SMTP_SERVICE:joi.string().required(),
         SMTP_AUTH_USER:joi.string().required(),
         SMTP_AUTH_PASSWORD:joi.string().required(),
+        SMTP_FROM:joi.string().required(),
 
 
 

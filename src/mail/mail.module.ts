@@ -9,6 +9,7 @@ import { MailController } from './mail.controller';
     provide:EMAIL_ADAPTER,
     useClass:NodeMailerAdapter
   }],
-  controllers: [MailController]
+  controllers: [MailController],
+  exports:[MailService]
 })
 export class MailModule {}

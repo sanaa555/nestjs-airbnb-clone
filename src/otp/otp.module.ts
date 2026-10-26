@@ -5,12 +5,16 @@ import { OTPRepository } from './repositories/otp.repository';
 import { OtpSchema } from './schemas/otp.schema';
 import { OtpController } from './otp.controller';
 import { OtpService } from './otp.service';
+import { SendOtpUsecase } from './usecases/send-otp.usecase';
+import { VerifyOtpUsecase } from './usecases/verify-otp.usecase';
+import { UsersModule } from 'src/users/users.module';
+import { MailModule } from 'src/mail/mail.module';
 
 @Module({
     imports: [
-        MongooseModule.forFeature([{ name: ModelNames.OTP, schema: OtpSchema }])
+        MongooseModule.forFeature([{ name: ModelNames.OTP, schema: OtpSchema }]),UsersModule,MailModule
     ],
   controllers: [OtpController],
-  providers: [OtpService,OTPRepository]
+  providers: [OtpService,OTPRepository,SendOtpUsecase,VerifyOtpUsecase]
 })
 export class OtpModule {}

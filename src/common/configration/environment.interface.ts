@@ -10,7 +10,9 @@ export interface Environment{
         type:string,
         systemAdmin:ISystemAdmin,
         awsS3:IAwsS3,
-        smtp:ISmtp
+        smtp:ISmtp,
+        from:string
+
 }
 
 export  interface ISystemAdmin{

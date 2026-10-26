@@ -30,9 +30,11 @@ export const defaultEnv=():Environment=>{
             auth:{
             user:process.env.SMTP_AUTH_USER as string,
             pass:process.env.SMTP_AUTH_PASSWORD as string
-            }
+            },
 
-        }
+        },
+     from:process.env.SMTP_FROM as string
+
 
    
 
