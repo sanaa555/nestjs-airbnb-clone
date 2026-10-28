@@ -16,6 +16,7 @@ import { FindOtpRawUsecase } from './usecases/find-otp-raw.usecase';
         MongooseModule.forFeature([{ name: ModelNames.OTP, schema: OtpSchema }]),UsersModule,MailModule
     ],
   controllers: [OtpController],
-  providers: [OtpService,OTPRepository,SendOtpUsecase,VerifyOtpUsecase,FindOtpRawUsecase]
+  providers: [OtpService,OTPRepository,SendOtpUsecase,VerifyOtpUsecase,FindOtpRawUsecase],
+  exports:[OtpService]
 })
 export class OtpModule {}

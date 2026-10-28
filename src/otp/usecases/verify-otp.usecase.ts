@@ -16,7 +16,9 @@ constructor(
 
         //1-find otp by email 
           const otp = await this.findOtpRawUsecase.excute({email:body.email})
-          //3-check if otp is correct
+            if(!otp) throw new BadRequestException('Invalid otp') 
+
+          //2-check if otp is correct
           if(body.code !==otp.code) throw new BadRequestException('Invalid code')
 
         //3-check if otp is expired

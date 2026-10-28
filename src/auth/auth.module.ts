@@ -16,9 +16,10 @@ import { RefreshTokenRepository } from './repository/refresh-token.repository';
 import { loginAsUserUseCase } from './use-cases/login-as-user.usecase';
 import { SystemAdminsModule } from 'src/system-admins/system-admins.module';
 import { LoginAsSystemAdminUseCase } from './use-cases/login-as-system-admin.usecase';
+import { OtpModule } from 'src/otp/otp.module';
 
 @Module({
-  imports: [UsersModule,SystemAdminsModule,
+  imports: [UsersModule,SystemAdminsModule,OtpModule,
     JwtModule.registerAsync({
       inject:[ConfigService],
       useFactory:(configService:ConfigService<Environment>)=>({
