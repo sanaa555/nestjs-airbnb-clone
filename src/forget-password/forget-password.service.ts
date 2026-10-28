@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { SendForgetPassworOtpDto } from './dtos/send-forget-password-otp.dto';
 import { VerifyForgetPassworOtpDto } from './dtos/verify-forget-password-otp.dto';
 import { ResetPasswordDto } from './dtos/reset-password.dto';
 import { SendForgetPasswordOtpUsecase } from './usecases/send-forget-password-otp.usecase';
@@ -14,8 +13,8 @@ export class ForgetPasswordService {
         private readonly resetPasswordUsecase:ResetPasswordUsecase
     ){}
 
-    async sendForgetPasswordOtp(dto :SendForgetPassworOtpDto):Promise<void>{
-                return this.sendForgetPasswordOtpUsecase.excute(dto)
+    async sendForgetPasswordOtp(email :string):Promise<void>{
+                return this.sendForgetPasswordOtpUsecase.excute(email)
         }
 
         async verifyForgetPasswordOtp(dto :VerifyForgetPassworOtpDto):Promise<void>{
