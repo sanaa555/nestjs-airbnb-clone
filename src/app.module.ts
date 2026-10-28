@@ -19,8 +19,9 @@ import { BookingsModule } from './bookings/bookings.module';
 import { UnitReviewsModule } from './unit-reviews/unit-reviews.module';
 import { UnitFavouritesModule } from './unit-favourites/unit-favourites.module';
 import { MailModule } from './mail/mail.module';
+import { OtpModule } from './otp/otp.module';
 @Module({
-  imports: [CoreModule, UsersModule, AuthModule, CountriesModule, CitiesModule, CurrenciesModule,UnitCategoriesModule, AppSettingsModule, SystemAdminsModule, UnitsModule, FilesUploadModule, BookingsModule, UnitReviewsModule, UnitFavouritesModule, MailModule ],
+  imports: [CoreModule, UsersModule, AuthModule, CountriesModule, CitiesModule, CurrenciesModule,UnitCategoriesModule, AppSettingsModule, SystemAdminsModule, UnitsModule, FilesUploadModule, BookingsModule, UnitReviewsModule, UnitFavouritesModule, MailModule, OtpModule ],
 
   controllers: [],
 

@@ -18,7 +18,7 @@ constructor(
 
             // actual implementation
          await this.transporter.sendMail({
-            from: dto.from, // sender address
+            from: this.configService.getOrThrow('from'), // sender address
             to: dto.to, // list of recipients
             subject: dto.subject, // subject line
             text: dto.text, // plain text body
