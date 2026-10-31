@@ -22,8 +22,8 @@ export class ForgetPasswordService {
         
             }
 
-            async resetPassword(dto :ResetPasswordDto):Promise<void>{
-                    return this.resetPasswordUsecase.excute(dto)
+            async resetPassword(body :ResetPasswordDto):Promise<void>{
+                    return this.resetPasswordUsecase.excute(body)
             
                 }
 }

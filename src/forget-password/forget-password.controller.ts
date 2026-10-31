@@ -32,8 +32,8 @@ export class ForgetPasswordController {
 
     @Post('/reset')
     @HttpCode(HttpStatus.NO_CONTENT)
-    async resetPassword(@Body() dto :ResetPasswordDto):Promise<void>{
-        return this.forgetPasswordService.resetPassword(dto)
+    async resetPassword(@Body() body :ResetPasswordDto):Promise<void>{
+        return this.forgetPasswordService.resetPassword(body)
 
     }
 

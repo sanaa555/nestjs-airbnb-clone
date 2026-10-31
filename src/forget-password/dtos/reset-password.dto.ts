@@ -1,4 +1,4 @@
-import { IsEmail, IsNotEmpty } from "class-validator";
+import { IsEmail, IsNotEmpty, IsString } from "class-validator";
 
 export class ResetPasswordDto{
 
@@ -8,6 +8,6 @@ export class ResetPasswordDto{
     
     
     @IsNotEmpty()
-    @IsEmail()
+    @IsString()
     newPassword:string
 }
