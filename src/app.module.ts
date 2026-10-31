@@ -20,8 +20,9 @@ import { UnitReviewsModule } from './unit-reviews/unit-reviews.module';
 import { UnitFavouritesModule } from './unit-favourites/unit-favourites.module';
 import { MailModule } from './mail/mail.module';
 import { OtpModule } from './otp/otp.module';
+import { ForgetPasswordModule } from './forget-password/forget-password.module';
 @Module({
-  imports: [CoreModule, UsersModule, AuthModule, CountriesModule, CitiesModule, CurrenciesModule,UnitCategoriesModule, AppSettingsModule, SystemAdminsModule, UnitsModule, FilesUploadModule, BookingsModule, UnitReviewsModule, UnitFavouritesModule, MailModule, OtpModule ],
+  imports: [CoreModule, UsersModule, AuthModule, CountriesModule, CitiesModule, CurrenciesModule,UnitCategoriesModule, AppSettingsModule, SystemAdminsModule, UnitsModule, FilesUploadModule, BookingsModule, UnitReviewsModule, UnitFavouritesModule, MailModule, OtpModule, ForgetPasswordModule ],
 
   controllers: [],
 

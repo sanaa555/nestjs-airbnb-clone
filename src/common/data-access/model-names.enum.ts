@@ -14,4 +14,5 @@ export enum ModelNames {
     UNITREVIEWS='unit-reviews',
     UNITFAVOURITIES='unit_favourite',
     OTP='otps',
+    FORGET_PASSWORD='forget_password'
 }
