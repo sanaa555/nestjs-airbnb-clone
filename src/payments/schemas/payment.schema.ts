@@ -25,16 +25,17 @@ export class Payment{
  @Prop({required:true,enum:PaymentStatus,default:PaymentStatus.PENDING})
  status:PaymentStatus;
   
-
- //This is the transaction number at the payment gateway, not the card number
-   @Prop()
-   providerPaymentId?: string;
    
    @Prop()
-   paiedAt?:Date
+   paidAt?:Date;
    
     @Prop()
     refundedAt?: Date;
+    @Prop()
+    stripeSessionId?: string;
+
+    @Prop()
+    stripePaymentIntentId?: string;
 }
 
   export const PaymentSchema= SchemaFactory.createForClass(Payment)

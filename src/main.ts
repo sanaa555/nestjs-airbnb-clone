@@ -12,6 +12,7 @@ async function bootstrap() {
     json: process.env.NODE_ENV==='production'
 ,
   }),
+      rawBody: true,
 });
 
   // to use i18n in your Dto validation

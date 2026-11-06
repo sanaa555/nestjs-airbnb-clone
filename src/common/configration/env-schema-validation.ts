@@ -16,6 +16,9 @@ export const envSchema=joi.object({
         AWS_S3_REGION:joi.string().required(),
         AWS_S3_ACCESS_KEY_ID:joi.string().required(),
         AWS_S3_SECRET_KEY:joi.string().required(),
+        STRIPE_SECRET_KEY:joi.string().required(),
+        BASE_URL:joi.string().required(),
+        STRIPE_WEBHOOK_SECRET: joi.string().required(),
 
 
 

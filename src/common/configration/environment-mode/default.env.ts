@@ -21,7 +21,10 @@ export const defaultEnv=():Environment=>{
             region:process.env.AWS_S3_REGION as string,
             accessKeyId:process.env.AWS_S3_ACCESS_KEY_ID as string,
             secretAccessKey:process.env.AWS_S3_SECRET_KEY as string,
-        }
+        },
+        stripeSecretKey:process.env.STRIPE_SECRET_KEY as string,
+        baseUrl:process.env.BASE_URL as string,
+        stripeWebhookSecret: process.env.STRIPE_WEBHOOK_SECRET as string,
 
    
 

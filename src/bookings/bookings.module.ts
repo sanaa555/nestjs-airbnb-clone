@@ -28,6 +28,7 @@ import { ChangeBookingStatusByHost } from './usecases/change-booking-status-by-h
     schema:BookingSchema
   }]),UnitsModule,AppSettingsModule],
   providers: [BookingsService,BookingRepository,BookingValidationUsecase,BookingCalculationUsecase,CheckAvailabilityUsecase,BookingRequestUsecase,FindAllBookingsUsecase,FindMyBookingUsecase,FindAllQueryBuilder,CheckBookingAuthUsecase,FindByIdUsecase,UpdateBookingByGuest,BookingParticipantAuthUsecase,FindOneUsecase,CancelBookingByGuestUsecse,ChangeBookingStatusByHost],
-  controllers: [BookingsController]
+  controllers: [BookingsController],
+  exports:[BookingsService]
 })
 export class BookingsModule {}
