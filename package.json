@@ -19,8 +19,9 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "docker:up": "docker compose up -d",
+    "docker:rs:init:local": "docker exec -it airbnb_mongodb mongosh --eval \"try { rs.status(); cfg=rs.conf(); cfg.members[0].host='localhost:27017'; rs.reconfig(cfg,{force:true}); } catch (e) { rs.initiate({_id: 'rs0', members: [{_id: 0, host: 'localhost:27017'}]}); }\"",
     "docker:down": "docker compose down",
-    "docker:down:rm": "docker compose down --v",
+    "docker:down:rm": "docker compose down -v",
     "docker:logs": "docker compose logs -f"
   },
   "dependencies": {
@@ -33,6 +34,7 @@
     "@nestjs/mongoose": "^11.0.4",
     "@nestjs/platform-express": "^11.0.1",
     "@nestjs/swagger": "^11.4.7",
+    "@nestjs/throttler": "^6.7.1",
     "bcrypt": "^6.0.0",
     "bytes": "^3.1.2",
     "class-transformer": "^0.5.1",
@@ -42,6 +44,7 @@
     "mime-types": "^3.0.2",
     "mongoose": "^9.9.2",
     "nestjs-i18n": "^10.8.5",
+    "nodemailer": "^10.3.1",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1",
     "stripe": "^23.1.0"
@@ -61,6 +64,7 @@
     "@types/mongoose": "^5.11.96",
     "@types/multer": "^2.2.0",
     "@types/node": "^24.0.0",
+    "@types/nodemailer": "^8.0.2",
     "@types/supertest": "^7.0.0",
     "eslint": "^9.18.0",
     "eslint-config-prettier": "^10.0.1",

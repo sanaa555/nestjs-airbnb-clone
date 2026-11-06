@@ -19,7 +19,7 @@ export interface FindPaginatedOptions extends QueryOptions {
 }
 
 export interface PaginatedAggregationOptions {
-  page: number;
+  page?: number;
   limit?: number;
   ignoreLimit?: boolean;
   session?: ClientSession;

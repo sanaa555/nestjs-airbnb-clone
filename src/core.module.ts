@@ -10,7 +10,7 @@ import { CustomExceptionFilter } from './common/errors-handling/filters/custom-e
 import { APP_FILTER, APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { MongooseModule } from '@nestjs/mongoose';
 import { LoggerInterceptor } from './common/interceptors';
-import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
+import {  ThrottlerModule } from '@nestjs/throttler';
 @Global()
 @Module({
     imports: [
@@ -53,6 +53,11 @@ import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
    return {uri} 
   },
 }),
+    ThrottlerModule.forRoot([{
+       name: 'default',
+    ttl: 600000,
+    limit: 3,
+    }])
   ],
     providers: [
     {

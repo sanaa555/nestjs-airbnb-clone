@@ -14,6 +14,7 @@ import { BookingIdDto } from './dtos/booking-id-dto'
 import { UpdateBookingRequestDto } from './dtos/update-booking-request.dto';
 import { CancelBookingByGuestDto } from './dtos/cancel-booking-by-guest.dto';
 import { ChangeBookingStatusDto } from './dtos/change-booking-status.dto';
+import { GuestReviewDto } from './dtos/guest-review.dto';
 
 @Controller('bookings')
 export class BookingsController {
@@ -85,5 +86,17 @@ export class BookingsController {
 
               return this.BookingsService.changeStatusByHost(param.id,body,principale.user)
         }
+
+    @Authorize(Roles.USER)
+    @Patch('/:id/submit-review')
+    async reviewBooking(
+        @Param() param:BookingIdDto,
+         @Body() body :GuestReviewDto,
+        @CurrentAccount() principale :Principale
+
+    ):Promise<BookingResponseDto>{
+      return this.BookingsService.reviewBooking(param.id,body,principale.user)
+    }
+
 
 }

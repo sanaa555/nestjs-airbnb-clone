@@ -11,5 +11,9 @@ export enum ModelNames {
     SYSTEM_ADMINS='system-admins',
     UNITS='units',
     BOOKINGS='bookings',
-    PAYMENTS='payments'
+    PAYMENTS='payments',
+    UNITREVIEWS='unit-reviews',
+    UNITFAVOURITIES='unit_favourite',
+    OTP='otps',
+    FORGET_PASSWORD='forget_password'
 }
