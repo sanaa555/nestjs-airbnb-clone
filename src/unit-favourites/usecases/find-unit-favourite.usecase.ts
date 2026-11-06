@@ -8,74 +8,78 @@ import { UnitFavouriteResponseDto } from "../dtos/unit-favourite-response.dto";
 import { plainToInstance } from "class-transformer";
 
 @Injectable()
-export class FindUnitFavouriteUsecase{
+export class FindUnitFavouriteUsecase {
     constructor(
-        private readonly unitFavouriteRepository:UnitFavouriteRepository
-    ){}
+        private readonly unitFavouriteRepository: UnitFavouriteRepository
+    ) {}
 
-    async  excute(query:FindUnitFavouriteDto,currentUser:currentUserData):Promise<PaginatedResult<UnitFavouriteResponseDto>>{
-    
-       const pipline:PipelineStage[]=[
-        {
-            $match:{user:currentUser._id.toString()}
-        },
-        {$sort:{createdAt:-1}},
+    async excute(
+        query: FindUnitFavouriteDto,
+        currentUser: currentUserData
+    ): Promise<PaginatedResult<UnitFavouriteResponseDto>> {
+        const pipline: PipelineStage[] = [
+            {
+                $match: { user: currentUser._id.toString() }
+            },
+            { $sort: { createdAt: -1 } },
+            { $addFields: { unitObjectId: { $toObjectId: "$unit" } } },
+            {
+                $lookup: {
+                    from: ModelNames.UNITS,
+                    localField: "unitObjectId",
+                    foreignField: "_id",
+                    as: "unit"
+                }
+            },
+            { $unwind: "$unit" },
+            { $replaceRoot: { newRoot: "$unit" } },
+            { $match: { isDeleted: { $ne: true }, isActive: { $ne: false } } },
+            // {
+            //     $project: {
+            //         _id: 1,
+            //         title: 1,
+            //         description: 1,
+            //         photos: 1,
+            //         costPerDay: 1
+            //     }
+            // }
+        ];
 
-        {$addFields:{unitObjectId:{$toObjectId:'$unit'}}},
-        {
-            $lookup:{
-                from:ModelNames.UNITS,
-                localField:'unitObjectId',
-                foreignField:'_id',
-                as:'unit'
+        const result =
+            await this.unitFavouriteRepository.paginatedAggregation<UnitFavouriteResponseDto>(
+                pipline,
+                {
+                    page: query?.page,
+                    limit: query.limit,
+                    ignoreLimit: query?.ignoreLimit
+                }
+            );
+
+        const transformedData = plainToInstance(
+            UnitFavouriteResponseDto,
+            result.data,
+            {
+                excludeExtraneousValues: true
             }
-        },
+        );
 
-       {$unwind:'$unit'},
-       {$replaceRoot:{newRoot:'$unit'}},
-       {$match:{isDeleted:{$ne:true},isActive:{$ne:false}}},
-    //    {
-    //     $project:{
-    //         _id:1,
-    //         title:1,
-    //         description:1,
-    //         photos:1,
-    //         costPerDay:1
-    //     }
-    //    }
-       ]
-
-      const result= await this.unitFavouriteRepository.paginatedAggregation<UnitFavouriteResponseDto>(pipline,{
-              page:query?.page,
-               limit:query.limit,
-            ignoreLimit:query?.ignoreLimit,
-       }
-
-       )
-       
-       const transformedData=plainToInstance(UnitFavouriteResponseDto,result.data,{
-                  excludeExtraneousValues:true
-       })
-  
         return new PaginatedResult<UnitFavouriteResponseDto>(
             transformedData,
             result.totalCount,
             result.pageCount,
-           result.limit,
+            result.limit
+        );
 
-        )
+        // return plainToInstance(PaginatedResult<UnitFavouriteResponseDto>, result);
 
-        //  return plainToInstance(PaginatedResult<UnitFavouriteResponseDto>,result)
-
-
-    //   return   await this.unitFavouriteRepository.findPaginated(
-    //            {user:currentUser._id.toString()},{
-    //             page:query?.page,
-    //             limit:query.limit,
-    //             ignoreLimit:query?.ignoreLimit,
-    //             populate:[{path:'unit' , select:'_id title description costPerDay'}]
-    //         }
-    //      )
-
+        // return await this.unitFavouriteRepository.findPaginated(
+        //     { user: currentUser._id.toString() },
+        //     {
+        //         page: query?.page,
+        //         limit: query.limit,
+        //         ignoreLimit: query?.ignoreLimit,
+        //         populate: [{ path: "unit", select: "_id title description costPerDay" }]
+        //     }
+        // );
     }
 }

@@ -6,12 +6,14 @@ import { OtpResponseDto } from "../dtos/otp-raw-response.dto";
 import { plainToInstance } from "class-transformer";
 
 @Injectable()
-export class FindOtpRawUsecase{
-    constructor(        private readonly otpRepository:OTPRepository){}
+export class FindOtpRawUsecase {
+    constructor(
+        private readonly otpRepository: OTPRepository
+    ) {}
 
-    async excute(query:QueryFilter<Otp>):Promise<OtpResponseDto>{
-        const otp = await this.otpRepository.findOne(query)
-        
-        return plainToInstance(OtpResponseDto,otp)
+    async excute(query: QueryFilter<Otp>): Promise<OtpResponseDto> {
+        const otp = await this.otpRepository.findOne(query);
+
+        return plainToInstance(OtpResponseDto, otp);
     }
 }

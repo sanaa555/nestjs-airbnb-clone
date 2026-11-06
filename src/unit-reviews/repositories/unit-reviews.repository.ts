@@ -5,22 +5,12 @@ import { ModelNames } from "src/common/data-access/model-names.enum";
 import { InjectModel } from "@nestjs/mongoose";
 import { UnitReviews } from "../schemas/unit-reviews.schema";
 
-
 @Injectable()
-
 export class UnitReviewsRepository extends BaseRepository<UnitReviews> {
-
     constructor(
-        
-                @InjectModel(ModelNames.UNITREVIEWS)
-                private readonly unitReviewsModel:Model< HydratedDocument<UnitReviews>>
-
-
+        @InjectModel(ModelNames.UNITREVIEWS)
+        private readonly unitReviewsModel: Model<HydratedDocument<UnitReviews>>
     ) {
         super(unitReviewsModel);
     }
-
-
-
-
 }

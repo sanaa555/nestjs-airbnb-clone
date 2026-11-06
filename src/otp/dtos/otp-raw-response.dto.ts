@@ -1,6 +1,5 @@
-export class OtpResponseDto{
-    
-        code:string;
-        expiresAt:Date;
-       isVerified:boolean
+export class OtpResponseDto {
+    code: string;
+    expiresAt: Date;
+    isVerified: boolean;
 }

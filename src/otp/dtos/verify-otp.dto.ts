@@ -1,13 +1,11 @@
 import { IsEmail, IsNotEmpty, IsString } from "class-validator";
 
-export class VerifyOtpDto{
+export class VerifyOtpDto {
     @IsNotEmpty()
     @IsEmail()
-    email:string;
+    email: string;
 
-    
     @IsNotEmpty()
     @IsString()
-    code:string
-
+    code: string;
 }

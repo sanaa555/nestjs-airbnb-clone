@@ -1,3 +1,4 @@
+
 import { Module } from '@nestjs/common';
 
 import { CoreModule } from './core.module';
@@ -16,32 +17,48 @@ import { TransformResponseInterceptor } from './common/interceptors/transform-re
 import { UnitsModule } from './units/units.module';
 import { FilesUploadModule } from './files-upload/files-upload.module';
 import { BookingsModule } from './bookings/bookings.module';
+import { PaymentsModule } from './payments/payments.module';
 import { UnitReviewsModule } from './unit-reviews/unit-reviews.module';
 import { UnitFavouritesModule } from './unit-favourites/unit-favourites.module';
 import { MailModule } from './mail/mail.module';
 import { OtpModule } from './otp/otp.module';
 import { ForgetPasswordModule } from './forget-password/forget-password.module';
+
 @Module({
-  imports: [CoreModule, UsersModule, AuthModule, CountriesModule, CitiesModule, CurrenciesModule,UnitCategoriesModule, AppSettingsModule, SystemAdminsModule, UnitsModule, FilesUploadModule, BookingsModule, UnitReviewsModule, UnitFavouritesModule, MailModule, OtpModule, ForgetPasswordModule ],
-
+  imports: [
+    CoreModule,
+    UsersModule,
+    AuthModule,
+    CountriesModule,
+    CitiesModule,
+    CurrenciesModule,
+    UnitCategoriesModule,
+    AppSettingsModule,
+    SystemAdminsModule,
+    UnitsModule,
+    FilesUploadModule,
+    BookingsModule,
+    PaymentsModule,
+    UnitReviewsModule,
+    UnitFavouritesModule,
+    MailModule,
+    OtpModule,
+    ForgetPasswordModule,
+  ],
   controllers: [],
-
-providers: [
-    
+  providers: [
     {
-      provide:APP_GUARD,
-      useClass:JwtAuthGuard
+      provide: APP_GUARD,
+      useClass: JwtAuthGuard,
     },
-  
-  {
-      provide:APP_GUARD,
-      useClass:RolesGuard
+    {
+      provide: APP_GUARD,
+      useClass: RolesGuard,
     },
-  {
-    provide:APP_INTERCEPTOR,
-    useClass:TransformResponseInterceptor
-  },
-]
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: TransformResponseInterceptor,
+    },
+  ],
 })
-
 export class AppModule {}

@@ -1,12 +1,10 @@
 import { IsEmail, IsNotEmpty, IsString } from "class-validator";
 
-export class VerifyForgetPassworOtpDto{
-
+export class VerifyForgetPassworOtpDto {
     @IsNotEmpty()
     @IsEmail()
-    email:string
+    email: string;
 
-    
     @IsString()
-    code:string
+    code: string;
 }

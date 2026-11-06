@@ -1,26 +1,29 @@
-import { IsNotEmpty, IsOptional, Max, MaxLength, Min, MinLength } from "class-validator"
+import {
+    IsNotEmpty,
+    IsOptional,
+    Max,
+    MaxLength,
+    Min,
+    MinLength
+} from "class-validator";
 
-export class CreateUnitReviewDto{
+export class CreateUnitReviewDto {
+    @IsNotEmpty()
+    booking: string;
 
     @IsNotEmpty()
-    booking:string
+    guest: string;
 
-    
     @IsNotEmpty()
-    guest:string
-
-    
-    @IsNotEmpty()
-    unit:string
-     
+    unit: string;
 
     @Min(1)
     @Max(5)
     @IsNotEmpty()
-    rating:number
-     
+    rating: number;
+
     @MinLength(5)
     @MaxLength(1000)
     @IsOptional()
-    comment?:string
+    comment?: string;
 }

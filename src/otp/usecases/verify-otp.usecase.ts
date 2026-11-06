@@ -5,30 +5,36 @@ import { BadRequestException } from "src/common/errors-handling/custom-exception
 import { FindOtpRawUsecase } from "./find-otp-raw.usecase";
 
 @Injectable()
-export class VerifyOtpUsecase{
+export class VerifyOtpUsecase {
+    constructor(
+        private readonly findOtpRawUsecase: FindOtpRawUsecase,
+        private readonly otpRepository: OTPRepository
+    ) {}
 
-constructor(
-        private readonly findOtpRawUsecase:FindOtpRawUsecase,
-        private readonly otpRepository:OTPRepository
-    ){}
+    async excute(body: VerifyOtpDto): Promise<void> {
+        // 1-find otp by email
+        const otp = await this.findOtpRawUsecase.excute({
+            email: body.email,
+        });
 
-    async excute(body:VerifyOtpDto):Promise<void>{
+        if (!otp) throw new BadRequestException("Invalid otp");
 
-        //1-find otp by email 
-          const otp = await this.findOtpRawUsecase.excute({email:body.email})
-            if(!otp) throw new BadRequestException('Invalid otp') 
+        // 2-check if otp is correct
+        if (body.code !== otp.code)
+            throw new BadRequestException("Invalid code");
 
-          //2-check if otp is correct
-          if(body.code !==otp.code) throw new BadRequestException('Invalid code')
+        // 3-check if otp is expired
+        if (new Date() > otp.expiresAt)
+            throw new BadRequestException(" Otp expired");
 
-        //3-check if otp is expired
-        if( new Date()> otp.expiresAt) throw new BadRequestException(' Otp expired' )
-        //4- check if otp is verified
-        if(otp.isVerified===true) throw new BadRequestException(' Otp already verified' )
+        // 4-check if otp is verified
+        if (otp.isVerified === true)
+            throw new BadRequestException(" Otp already verified");
 
-        //5- update otp isVerified to true
-     await this.otpRepository.findOneAndUpdate({email:body.email},
-         {isVerified:true})
-
+        // 5-update otp isVerified to true
+        await this.otpRepository.findOneAndUpdate(
+            { email: body.email },
+            { isVerified: true }
+        );
     }
 }
