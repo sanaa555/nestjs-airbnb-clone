@@ -35,6 +35,8 @@ export class BookingsService {
         private readonly reviewBookingUseCase: ReviewBookingUseCase
     ) {}
 
+
+    
     async checkAvailability(
         query: CheckAvailabilityDto
     ): Promise<AvailabilityResponseDto> {

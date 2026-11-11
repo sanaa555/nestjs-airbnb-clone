@@ -19,9 +19,23 @@ import { DeleteUnitPhotosDto } from './dtos/delete-unit-photos.dto';
 import { UpdateUnitPhotosDto } from './dtos/update-unit-photos.dto ';
 import { UnitReviews } from './dtos/unit-reviews.dto';
 import { PaginationDto } from 'src/common/data-access/dto/pagination.dto';
+import { ApiTags } from 'node_modules/@nestjs/swagger/dist/decorators/api-use-tags.decorator';
+import { API_TAGS } from 'src/common/swagger';
+import { CreateUnitSwagger } from './swagger/create.swagger';
+import { UpdateUnitSwagger } from './swagger/update.swagger';
+import { FindAllUnitsSwagger } from './swagger/findAll.swagger';
+import { FindUserUnitsSwagger } from './swagger/findAllByUser.swagger';
+import { FindUnitByIdSwagger } from './swagger/findById.swagger';
+import { SoftDeleteSwagger } from './swagger/softdelete.swagger';
+import { ActivateUnitSwagger } from './swagger/activate.swagger';
+import { DeActivateUnitSwagger } from './swagger/deactivate.swagger';
+import { DeleteUnitPhotosSwagger } from './swagger/deletePhoto.swagger';
+import { UpdateUnitPhotosSwagger } from './swagger/updatePhoto.swagger';
+import { FindUnitReviewsSwagger } from './swagger/findUnitReviews.swagger';
 
 
 @Controller('units')
+@ApiTags(API_TAGS.UNITS)
 export class UnitsController {
 
     constructor(
@@ -32,6 +46,7 @@ export class UnitsController {
  
      @Authorize(Roles.USER)
     @Post()
+   @CreateUnitSwagger()
         @UseInterceptors(FilesInterceptor('photos',maxFileSize.UNITS_IMAGES))
 
     async create(
@@ -49,13 +64,16 @@ export class UnitsController {
     
          @Authorize(Roles.USER)
          @Patch('/:id')
+         @UpdateUnitSwagger()
          async update(@Param() Param:UnitIdDto,@Body() body:UpdateUnitDto,@CurrentAccount() principale: Principale): Promise<UnitResponseDto>{
 
             return this.unitsService.update(Param.id,body,principale.user)
 
          }
+         
     @Public()
     @Get()
+   @FindAllUnitsSwagger()
     async findAll(@Query() query:FindAllDto):Promise<PaginatedResult<UnitResponseDto>>{
         return this.unitsService.findAll(query)
 
@@ -63,6 +81,7 @@ export class UnitsController {
 
     @Authorize(Roles.USER)
      @Get('/my-units')
+      @FindUserUnitsSwagger()
      async findAllByUser(@Query() query:FindAllDto,@CurrentAccount() principale:Principale):Promise<PaginatedResult<UnitResponseDto>>{
 
         return this.unitsService.findAllByUser(query,principale.user)
@@ -70,6 +89,7 @@ export class UnitsController {
 
      @Public()
     @Get('/:id')
+   @FindUnitByIdSwagger()
      async findById ( @Param()param:UnitIdDto):Promise<UnitResponseDto>{
          return this.unitsService.findById(param.id)
      }
@@ -77,6 +97,7 @@ export class UnitsController {
      @Authorize(Roles.USER)
      @HttpCode(HttpStatus.NO_CONTENT)
      @Delete("/:id")
+   @SoftDeleteSwagger()
      async softdelete(@Param() param:UnitIdDto,@CurrentAccount() principale:Principale):Promise<void>{
          
         return this.unitsService.softDelete(param.id,principale.user)
@@ -85,6 +106,7 @@ export class UnitsController {
     
       @Authorize(Roles.USER)
         @Patch('/:id/active')
+       @ActivateUnitSwagger()
      async activate(@Param() param:UnitIdDto,@CurrentAccount() principale:Principale):Promise<UnitResponseDto>{
 
         return this.unitsService.activate(param.id,principale.user)
@@ -94,6 +116,7 @@ export class UnitsController {
      
         @Authorize(Roles.USER)
         @Patch('/:id/deactive')
+      @DeActivateUnitSwagger()
      async deactivate(@Param() param:UnitIdDto,@CurrentAccount() principale:Principale):Promise<UnitResponseDto>{
 
         return this.unitsService.deactivate(param.id,principale.user)
@@ -104,6 +127,7 @@ export class UnitsController {
         @Authorize(Roles.USER)
        @HttpCode(HttpStatus.NO_CONTENT)
         @Delete('/:id/photos')
+      @DeleteUnitPhotosSwagger()
         async deletePhoto(@Param() param:UnitIdDto,
         @CurrentAccount() principale:Principale,
       @Body() body:DeleteUnitPhotosDto):Promise<void>{
@@ -113,6 +137,7 @@ export class UnitsController {
 
          @Authorize(Roles.USER)
         @Patch('/:id/photos')
+            @UpdateUnitPhotosSwagger()
           @UseInterceptors(FilesInterceptor('photos',maxFileSize.UNITS_IMAGES))
         async updatePhoto(
          @UploadedFiles( createParseFilePipe('2MB',['jpg','png']))    photos: MulterFile[],
@@ -127,6 +152,7 @@ export class UnitsController {
 
 @Public()
     @Get('/:id/reviews')
+   @FindUnitReviewsSwagger()
      async findUnitReviews ( @Param()param:UnitIdDto,@Query() query:PaginationDto):Promise<PaginatedResult<UnitReviews>>{
          return this.unitsService.findUnitReviews(param.id,query)
      }

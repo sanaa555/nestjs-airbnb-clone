@@ -11,6 +11,7 @@ import { RefreshTokenSwagger } from './swagger/refresh-token.swagger';
 import { AuthResponseDto } from './dtos/auth-response.dto';
 import { Public } from './decorators/public.decorator';
 import { CurrentAccount, Principale } from './decorators/current-account.decorator';
+import { GetCurrentUserSwagger } from './swagger/get-current-user.swagger';
 @ApiTags(API_TAGS.AUTH)
 @Controller('auth')
 export class AuthController {
@@ -48,8 +49,9 @@ export class AuthController {
 
     }
 
+   @GetCurrentUserSwagger()
    @Get('me')
-async getMe(@CurrentAccount() principale: Principale) {
+async getMe(@CurrentAccount() principale: Principale): Promise<Principale> {
   return principale
 }
     
