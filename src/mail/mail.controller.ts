@@ -9,11 +9,11 @@ export class MailController {
         private readonly mailService:MailService
     ){}
 
-    @Public()
-    @Post('/send')
-    async sendEmail(@Body() dto:SendEmailDto):Promise<void>{
+    // @Public()
+    // @Post('/send')
+    // async sendEmail(@Body() dto:SendEmailDto):Promise<void>{
 
-        return this.mailService.sendEmail(dto)
+    //     return this.mailService.sendEmail(dto)
 
-    }
+    // }
 }

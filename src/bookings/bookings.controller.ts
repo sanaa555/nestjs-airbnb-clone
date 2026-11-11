@@ -15,8 +15,21 @@ import { UpdateBookingRequestDto } from './dtos/update-booking-request.dto';
 import { CancelBookingByGuestDto } from './dtos/cancel-booking-by-guest.dto';
 import { ChangeBookingStatusDto } from './dtos/change-booking-status.dto';
 import { GuestReviewDto } from './dtos/guest-review.dto';
+import { ApiTags } from 'node_modules/@nestjs/swagger/dist/decorators/api-use-tags.decorator';
+import { API_TAGS } from 'src/common/swagger/constant';
+import { CheckAvailabilitySwagger } from './swagger/checkAvailability.swagger';
+import { CreateBookingSwagger } from './swagger/createBooking.swagger';
+import { FindAllSwagger } from './swagger/findAll.swagger';
+import { FindMineSwagger } from './swagger/findMine.swagger';
+import { FindByIdSwagger } from './swagger/findById.swagger';
+import { UpdateByGuestSwagger } from './swagger/updateByGuest.swagger';
+import { CancelByGuestSwagger } from './swagger/cancelByGuest.swagger';
+import { ChangeStatusByHostSwagger } from './swagger/changeStatusByHost.swagger';
+import { ReviewBookingSwagger } from './swagger/reviewBooking.swagger';
 
 @Controller('bookings')
+@ApiTags(API_TAGS.BOOKINGS)
+
 export class BookingsController {
     constructor(
         private readonly BookingsService:BookingsService
@@ -24,11 +37,13 @@ export class BookingsController {
 
     @Public()
     @Get('/check-availability')
+    @CheckAvailabilitySwagger()
     async checkAvailability(@Query() query:CheckAvailabilityDto):Promise<AvailabilityResponseDto>{
         return this.BookingsService.checkAvailability(query)
     }
     @Authorize(Roles.USER)
     @Post()
+    @CreateBookingSwagger()
     async createBooking( @Body()body:BookingRequestDto,
                           @CurrentAccount() principale:Principale
     ):Promise< BookingResponseDto>{
@@ -38,6 +53,7 @@ export class BookingsController {
 
         @Authorize(Roles.SYETEM_ADMIN)
         @Get()
+        @FindAllSwagger()
         async findAll(@Query() query:FindAllBookingsDto):Promise<PaginatedResult< BookingResponseDto>>{
             return this.BookingsService.findAll(query)
 
@@ -45,17 +61,20 @@ export class BookingsController {
 
         @Authorize(Roles.USER)
         @Get('/me')
+        @FindMineSwagger()
         async findMine(@Query() query:FindAllBookingsDto,@CurrentAccount() principale:Principale):Promise<PaginatedResult< BookingResponseDto>>{
             return this.BookingsService.findMine(query,principale.user)
 
         }
 
         @Get('/:id')
+        @FindByIdSwagger()
         async findById(@Param()  param:BookingIdDto,@CurrentAccount() principale:Principale):Promise<BookingResponseDto>{
             return this.BookingsService.findById(param.id,principale)
         }
         @Authorize(Roles.USER)
         @Patch('/:id')
+        @UpdateByGuestSwagger()
         async updateByGuest(
             @Param() param:BookingIdDto,
              @Body() body :UpdateBookingRequestDto,
@@ -67,6 +86,7 @@ export class BookingsController {
 
         @Authorize(Roles.USER)
         @Patch('/:id/cancel')
+        @CancelByGuestSwagger()
         async cancelByGuest(
             @Param() param:BookingIdDto,
              @Body() body :CancelBookingByGuestDto,
@@ -78,6 +98,7 @@ export class BookingsController {
 
         @Authorize(Roles.USER)
         @Patch('/:id/status')
+        @ChangeStatusByHostSwagger()
         async changeStatusByHost(
             @Param() param:BookingIdDto,
              @Body() body :ChangeBookingStatusDto,
@@ -89,6 +110,7 @@ export class BookingsController {
 
     @Authorize(Roles.USER)
     @Patch('/:id/submit-review')
+    @ReviewBookingSwagger()
     async reviewBooking(
         @Param() param:BookingIdDto,
          @Body() body :GuestReviewDto,

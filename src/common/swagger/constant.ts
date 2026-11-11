@@ -7,6 +7,10 @@ export enum API_TAGS   {
     CURRENCIES='Currencies',
     UNIT_CATEGORIES='Unit Categories',
     APP_SETTINGS='App Settings',
-    SYSTEM_ADMINS='System Admins',
-    USERS='Users'
+    UNITS='Units',
+    BOOKINGS='Bookings',
+    UNIT_FAVORITES='Unit Favorites',
+    OTP='OTP',
+    FORGET_PASSWORD='Forget Password',
+    PAYMENTS='Payments',
 }

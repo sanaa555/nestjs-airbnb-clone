@@ -38,10 +38,12 @@ export class UpdateBookingByGuest{
             await this.bookingValidationUsecase.validateUnitAvailability(booking.unit.toString(),body.checkIn,body.checkOut,id)
         }
           //4- if the guest want to update adultsCount and kidsCount ,check availability
-          if(body?.adultsCount ){
-            await this.bookingValidationUsecase.validateCapacity(booking.unit.toString(),body?.adultsCount)
-          } else{
-            await this.bookingValidationUsecase.validateCapacity(booking.unit.toString(),body?.kidsCount)
+          if (body.adultsCount !== undefined || body.kidsCount !== undefined) {
+            await this.bookingValidationUsecase.validateCapacity(
+                booking.unit.toString(),
+                body.adultsCount,
+                body.kidsCount,
+            )
           }
 
           //5- update booking

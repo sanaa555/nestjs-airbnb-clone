@@ -11,14 +11,20 @@ export class SwaggerConfig{
          const config = new DocumentBuilder()
             .setTitle('Airbnb clone API')
             .setDescription('Airbnb clone API description')
+            .addTag(API_TAGS.OTP)
+            .addTag(API_TAGS.FORGET_PASSWORD)
             .addTag(API_TAGS.AUTH)
             .addTag(API_TAGS.COUNTRIES)
             .addTag(API_TAGS.CITIES)
             .addTag(API_TAGS.CURRENCIES)
             .addTag(API_TAGS.UNIT_CATEGORIES)
             .addTag(API_TAGS.APP_SETTINGS)
-            .addTag(API_TAGS.SYSTEM_ADMINS)
-            .addTag(API_TAGS.USERS)
+            .addTag(API_TAGS.UNITS)
+            .addTag(API_TAGS.UNIT_FAVORITES)
+            .addTag(API_TAGS.BOOKINGS)
+            .addTag(API_TAGS.PAYMENTS)
+            .addBearerAuth()
+            
             .setVersion('1.0')
             .build();
           const documentFactory = () => SwaggerModule.createDocument(app, config);
